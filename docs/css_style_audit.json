@@ -1,0 +1,5 @@
+{
+  "placeholder": true,
+  "report": "npm run report:css-style",
+  "policy": "docs/QUALITY_GUARDRAILS.md"
+}

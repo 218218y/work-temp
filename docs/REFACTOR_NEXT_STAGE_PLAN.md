@@ -1,7 +1,7 @@
 # Refactor Next-Stage Plan
 
 Date: 2026-05-03  
-Baseline: Stage 75 complete; sketch-box door visual ownership split completed after the Stage 74 planning gate.  
+Baseline: Stage 76 complete; drawer shared render contract ownership split completed after the Stage 74 planning gate.  
 Purpose: keep the remaining modernization work professional, useful, and bounded. This document is intentionally not a wish list of large files. It is the decision gate for deciding whether the next stage should split code, improve tests, harden contracts, or stop.
 
 ## Stage 74 decision
@@ -31,12 +31,12 @@ The recent Builder sketch/render ownership work is coherent:
 - preview sketch placement is behind a public facade;
 - interior sketch orchestration is behind a public facade;
 - external drawers, sketch-box shell, external drawer fronts, static contents, and sketch-box door visual routes each have focused owners;
-- stage guards now protect the facades, route/material/core visual seams, and private-owner boundaries;
+- stage guards now protect the facades, route/material/core visual seams, drawer shared contract seams, and private-owner boundaries;
 - the next work should be selected by coupling and responsibility mix, not by size.
 
 ## Next qualified implementation stages
 
-These are the next useful candidates, ordered by expected value and risk control. Stage 75 is complete; the exact next stage should still be re-checked against the current ZIP before editing.
+These are the next useful candidates, ordered by expected value and risk control. Stages 75 and 76 are complete; the exact next stage should still be re-checked against the current ZIP before editing.
 
 ### Stage 75 — Sketch box fronts/doors ownership review — completed
 
@@ -46,13 +46,13 @@ Outcome: the review did not split all fronts files. It split only the proven mix
 
 Validation focus retained: front visual route guards, sketch box hover/manual dimension guards, mirror/glass route guards, and builder typecheck.
 
-### Stage 76 — Drawer/shared render contract review
+### Stage 76 — Drawer/shared render contract review — completed
 
-Candidate area: `esm/native/builder/render_drawer_ops_shared.ts` and adjacent drawer pipeline owners.
+Completed area: `esm/native/builder/render_drawer_ops_shared.ts`.
 
-Why it may be worthwhile: drawer rendering often combines geometry, materials, handle placement, side connectors, and metadata. Split only if there is a clear boundary between planning and scene mutation.
+Outcome: the review did not split external/internal drawer scene mutation again. It split only the shared seam that had proven mixed ownership: contracts now live in `render_drawer_ops_shared_types.ts`, runtime guards/numeric readers in `render_drawer_ops_shared_guards.ts`, argument/callback adapters in `render_drawer_ops_shared_readers.ts`, drawer-op parsing in `render_drawer_ops_shared_ops.ts`, and mirror/glass/curtain state policy in `render_drawer_ops_shared_visual_state.ts`. The public `render_drawer_ops_shared.ts` module remains the stable facade used by drawer render consumers.
 
-Validation focus: drawer render tests, external drawer visual route guards, motion-entry tests, and builder typecheck.
+Validation focus retained: drawer render guards, external drawer visual route guards, motion-entry tests, and builder typecheck.
 
 ### Stage 77 — UI sketch-box controls controller/view review
 

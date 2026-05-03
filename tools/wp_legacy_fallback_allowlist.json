@@ -287,7 +287,7 @@
         "runtime-default": 6
       }
     },
-    "esm/native/builder/render_drawer_ops_shared.ts": {
+    "esm/native/builder/render_drawer_ops_shared_guards.ts": {
       "total": 2,
       "categories": {
         "runtime-default": 2

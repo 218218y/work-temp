@@ -1,5 +1,5 @@
 export const REFACTOR_COMPLETED_STAGE_LABELS = Object.freeze(
-  Array.from({ length: 76 }, (_, index) => `Stage ${index}`)
+  Array.from({ length: 77 }, (_, index) => `Stage ${index}`)
 );
 
 export const REFACTOR_STAGE_PROGRESS_MARKER = Object.freeze({
@@ -194,6 +194,11 @@ export const REFACTOR_INTEGRATION_ANCHORS = Object.freeze([
     file: 'tests/refactor_stage75_sketch_box_door_visual_ownership_guard.test.js',
     needle: 'stage 75 sketch box door visual ownership split is anchored',
     message: 'stage 75 sketch box door visual ownership split must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage76_drawer_shared_contract_ownership_guard.test.js',
+    needle: 'stage 76 drawer shared render contract ownership split is anchored',
+    message: 'stage 76 drawer shared render contract ownership split must stay anchored',
   },
 
   {

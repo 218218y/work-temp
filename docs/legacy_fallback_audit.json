@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-03T09:46:43.259Z",
+  "generatedAt": "2026-05-03T12:36:41.756Z",
   "sourceRoot": "esm",
   "summary": {
     "totalOccurrences": 919,
@@ -297,7 +297,7 @@
           "runtime-default": 6
         }
       },
-      "esm/native/builder/render_drawer_ops_shared.ts": {
+      "esm/native/builder/render_drawer_ops_shared_guards.ts": {
         "total": 2,
         "categories": {
           "runtime-default": 2
@@ -2745,15 +2745,15 @@
       "text": "return typeof value === 'string' && value ? value : fallback;"
     },
     {
-      "file": "esm/native/builder/render_drawer_ops_shared.ts",
-      "line": 88,
+      "file": "esm/native/builder/render_drawer_ops_shared_guards.ts",
+      "line": 12,
       "term": "fallback",
       "category": "runtime-default",
       "text": "export function readFinite(value: unknown, fallback = 0): number {"
     },
     {
-      "file": "esm/native/builder/render_drawer_ops_shared.ts",
-      "line": 89,
+      "file": "esm/native/builder/render_drawer_ops_shared_guards.ts",
+      "line": 13,
       "term": "fallback",
       "category": "runtime-default",
       "text": "return typeof value === 'number' && Number.isFinite(value) ? value : fallback;"

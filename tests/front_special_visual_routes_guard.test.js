@@ -13,7 +13,10 @@ test('corner and sketch external drawer fronts forward glass/mirror state throug
     read('esm/native/builder/render_interior_sketch_drawers_external.ts'),
     read('esm/native/builder/render_interior_sketch_drawers_external_visual.ts'),
   ].join('\n');
-  const sketchBoxDrawers = read('esm/native/builder/render_interior_sketch_boxes_fronts_drawers.ts');
+  const sketchBoxDrawers = [
+    read('esm/native/builder/render_interior_sketch_boxes_fronts_drawers.ts'),
+    read('esm/native/builder/render_interior_sketch_boxes_fronts_drawers_visual.ts'),
+  ].join('\n');
   const sketchState = read('esm/native/builder/render_interior_sketch_visuals_door_state.ts');
 
   assert.match(sketchState, /export function resolveSketchFrontVisualState\(/);
@@ -33,7 +36,7 @@ test('corner and sketch external drawer fronts forward glass/mirror state throug
   assert.match(sketchExternal, /frontVisualState\.isMirror/);
   assert.match(sketchExternal, /frontVisualState\.mirrorLayout/);
 
-  assert.match(sketchBoxDrawers, /resolveSketchFrontVisualState\(input, partId\)/);
+  assert.match(sketchBoxDrawers, /resolveSketchFrontVisualState\(context\.input, opPlan\.partId\)/);
   assert.match(
     sketchBoxDrawers,
     /frontVisualState\.isGlass[\s\S]*\? 'glass'[\s\S]*: resolveEffectiveDoorStyle/

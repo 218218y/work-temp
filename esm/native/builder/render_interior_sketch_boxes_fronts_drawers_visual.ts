@@ -16,7 +16,7 @@ export function addSketchBoxExternalDrawerFrontVisual(
   groupNode: InteriorGroupLike
 ): void {
   const { shell } = context;
-  const { boxId: bid, boxMat, isFreePlacement } = shell;
+  const { boxId: bid, isFreePlacement } = shell;
   const frontVisualState = resolveSketchFrontVisualState(context.input, opPlan.partId);
   const materialSet = resolveSketchBoxExternalDrawerFrontMaterials(
     context,

@@ -28,7 +28,7 @@ export function createSketchBoxExternalDrawerStackPlan(
   if (!item) return null;
 
   const { shell } = context;
-  const { boxPid, height: hM, halfH, centerY: cy, geometry: boxGeo, innerBottomY, innerTopY } = shell;
+  const { boxPid, height: hM, halfH, centerY: cy, innerBottomY, innerTopY } = shell;
   const countRaw = toFiniteNumber(item.count);
   const drawerCount = countRaw != null ? Math.max(1, Math.min(5, Math.floor(countRaw))) : 1;
   const metrics = resolveSketchExternalDrawerMetrics({

@@ -17,6 +17,7 @@ test('[sketch free box] dimension overlay is rendered from sketch box geometry a
   const boxes = [
     read('esm/native/builder/render_interior_sketch_boxes.ts'),
     read('esm/native/builder/render_interior_sketch_boxes_shell.ts'),
+    read('esm/native/builder/render_interior_sketch_boxes_shell_frame.ts'),
   ].join('\n');
   const layout = [
     read('esm/native/builder/render_interior_sketch_layout.ts'),

@@ -1,10 +1,6 @@
 import { useCallback } from 'react';
 
-import type {
-  OrderPdfDraft,
-  OrderPdfSketchPreviewEntry,
-  PdfJsLibLike,
-} from './order_pdf_overlay_contracts.js';
+import type { OrderPdfDraft, OrderPdfSketchPreviewEntry, PdfJsLibLike } from './order_pdf_overlay_contracts.js';
 import type { RuntimeApi } from './order_pdf_overlay_controller_shared.js';
 import type { OrderPdfOverlayInteractivePdfBlobBuilder } from './order_pdf_overlay_export_actions_types.js';
 import {

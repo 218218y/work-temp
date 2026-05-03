@@ -101,6 +101,8 @@ const requiredStageGuardTests = [
   'tests/refactor_stage57_order_pdf_text_box_runtime_ownership_guard.test.js',
   'tests/refactor_stage58_order_pdf_sketch_preview_controller_ownership_guard.test.js',
   'tests/refactor_stage59_order_pdf_sketch_canvas_runtime_ownership_guard.test.js',
+  'tests/refactor_stage60_order_pdf_sketch_panel_controller_ownership_guard.test.js',
+  'tests/refactor_stage61_order_pdf_card_text_layer_ownership_guard.test.js',
 ];
 const stageGuardCommand = requireScript('test:refactor-stage-guards');
 for (const testFile of requiredStageGuardTests)

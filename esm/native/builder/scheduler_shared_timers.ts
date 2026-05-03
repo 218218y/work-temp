@@ -1,4 +1,7 @@
-import type { AppContainer, TimeoutHandleLike } from '../../../types/index.js';
+import type {
+  AppContainer,
+  TimeoutHandleLike,
+} from '../../../types/index.js';
 
 import { getBrowserTimers, reportError } from '../runtime/api.js';
 import { readDebounceDep } from './scheduler_shared_deps.js';

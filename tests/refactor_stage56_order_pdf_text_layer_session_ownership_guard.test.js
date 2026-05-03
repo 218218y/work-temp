@@ -11,27 +11,17 @@ function lineCount(source) {
 }
 
 test('stage 56 order pdf text layer session ownership split is anchored', () => {
-  const facade = read(
-    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks.ts'
-  );
-  const types = read(
-    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks_types.ts'
-  );
+  const facade = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks.ts');
+  const types = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks_types.ts');
   const interaction = read(
     'esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_interaction_session_hooks.ts'
   );
   const create = read(
     'esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_create_session_hooks.ts'
   );
-  const pointerHooks = read(
-    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_hooks.ts'
-  );
-  const boxHooks = read(
-    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_box_hooks.ts'
-  );
-  const canvasHooks = read(
-    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_canvas_hooks.ts'
-  );
+  const pointerHooks = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_hooks.ts');
+  const boxHooks = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_box_hooks.ts');
+  const canvasHooks = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_canvas_hooks.ts');
 
   assert.ok(
     lineCount(facade) <= 8,
@@ -70,10 +60,7 @@ test('stage 56 order pdf text layer session ownership split is anchored', () => 
   assert.match(create, /requestAnimationFrame/);
   assert.doesNotMatch(create, /installDomEventListener|updateOrderPdfSketchTextBoxInteractionPreview/);
 
-  assert.match(
-    pointerHooks,
-    /from '\.\/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks\.js';/
-  );
+  assert.match(pointerHooks, /from '\.\/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks\.js';/);
   assert.doesNotMatch(
     pointerHooks,
     /order_pdf_overlay_sketch_card_text_layer_pointer_(interaction_session_hooks|create_session_hooks|session_hooks_types)\.js/,

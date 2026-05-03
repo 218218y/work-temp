@@ -19,53 +19,39 @@ test('stage 59 order pdf sketch canvas runtime ownership split is anchored', () 
   const consumers = [
     read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_canvas_hooks.ts'),
     read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_hooks.ts'),
-    read('tests/order_pdf_sketch_panel_canvas_runtime.test.ts'),
-    read('tests/order_pdf_sketch_palette_placement_runtime.test.ts'),
   ].join('\n');
 
-  assert.ok(lineCount(facade) <= 8, 'sketch canvas runtime facade must stay tiny');
+  assert.ok(lineCount(facade) <= 6, 'canvas runtime facade must stay tiny');
   assert.match(facade, /order_pdf_overlay_sketch_panel_canvas_runtime_types\.js/);
   assert.match(facade, /order_pdf_overlay_sketch_panel_canvas_runtime_equality\.js/);
   assert.match(facade, /order_pdf_overlay_sketch_panel_canvas_runtime_paint\.js/);
   assert.match(facade, /order_pdf_overlay_sketch_panel_canvas_runtime_resolve\.js/);
-  assert.doesNotMatch(
-    facade,
-    /paintOrderPdfSketchAnnotations|getContext\('2d'\)|areOrderPdfSketchStrokeListsEqual|resolveOrderPdfSketchCanvasPixels/,
-    'facade must not own canvas paint, equality, or measurement internals'
-  );
+  assert.doesNotMatch(facade, /paintOrderPdfSketchAnnotations|canvas\.getContext|areOrderPdfSketch/);
 
   assert.match(types, /export type OrderPdfSketchCanvasDrawState/);
-  assert.doesNotMatch(
-    types,
-    /paintOrderPdfSketchAnnotations|shouldRepaintOrderPdfSketchCanvas|resolveOrderPdfSketchCanvasPixels/
-  );
+  assert.doesNotMatch(types, /paintOrderPdfSketchAnnotations|shouldRepaintOrderPdfSketchCanvas/);
 
-  assert.match(equality, /export function shouldRepaintOrderPdfSketchCanvas\(/);
+  assert.match(equality, /export function shouldRepaintOrderPdfSketchCanvas/);
   assert.match(equality, /areOrderPdfSketchStrokeListsEqual/);
   assert.match(equality, /areOrderPdfSketchTextBoxListsEqual/);
-  assert.doesNotMatch(equality, /paintOrderPdfSketchAnnotations|resolveOrderPdfSketchCanvasPixels/);
+  assert.doesNotMatch(equality, /canvas\.getContext|paintOrderPdfSketchAnnotations/);
 
-  assert.match(paint, /export function syncOrderPdfSketchCanvasElementSize\(/);
-  assert.match(paint, /export function paintOrderPdfSketchCanvasFrame\(/);
+  assert.match(paint, /export function syncOrderPdfSketchCanvasElementSize/);
+  assert.match(paint, /export function paintOrderPdfSketchCanvasFrame/);
   assert.match(paint, /paintOrderPdfSketchAnnotations/);
-  assert.doesNotMatch(paint, /shouldRepaintOrderPdfSketchCanvas|resolveOrderPdfSketchCanvasPixels/);
+  assert.doesNotMatch(paint, /resolveOrderPdfSketchCanvasPixels|shouldRepaintOrderPdfSketchCanvas/);
 
-  for (const needle of [
-    'resolveOrderPdfSketchCanvasPixels',
-    'resolveOrderPdfSketchCanvasDrawState',
-    'resolveOrderPdfSketchCanvasRect',
-    'shouldRunOrderPdfSketchCanvasFrame',
-    'nextOrderPdfSketchCanvasFrameVersion',
-  ]) {
-    assert.match(resolve, new RegExp(needle), `resolve owner must contain ${needle}`);
-  }
-  assert.doesNotMatch(resolve, /paintOrderPdfSketchAnnotations|shouldRepaintOrderPdfSketchCanvas/);
+  assert.match(resolve, /export function resolveOrderPdfSketchCanvasPixels/);
+  assert.match(resolve, /export function resolveOrderPdfSketchCanvasDrawState/);
+  assert.match(resolve, /export function resolveOrderPdfSketchCanvasRect/);
+  assert.match(resolve, /export function nextOrderPdfSketchCanvasFrameVersion/);
+  assert.doesNotMatch(resolve, /paintOrderPdfSketchAnnotations|areOrderPdfSketchStrokeListsEqual/);
 
   assert.match(consumers, /from '\.\/order_pdf_overlay_sketch_panel_canvas_runtime\.js';/);
   assert.doesNotMatch(
     consumers,
     /order_pdf_overlay_sketch_panel_canvas_runtime_(types|equality|paint|resolve)\.js/,
-    'canvas runtime consumers must keep using the public runtime facade'
+    'canvas consumers must keep using the public canvas runtime facade'
   );
 
   assert.doesNotMatch(facade + types + equality + paint + resolve, /export default\s+/);

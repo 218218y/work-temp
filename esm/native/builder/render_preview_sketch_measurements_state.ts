@@ -34,10 +34,7 @@ export function ensureMeasurementUserData(
   return next;
 }
 
-export function setMeasurementObjectVisible(
-  obj: PreviewObject3DLike | null | undefined,
-  visible: boolean
-): void {
+export function setMeasurementObjectVisible(obj: PreviewObject3DLike | null | undefined, visible: boolean): void {
   if (!obj) return;
   obj.visible = visible;
 }

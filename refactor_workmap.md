@@ -32,6 +32,7 @@
 > עדכון Stage 50 — 2 במאי 2026:
 > ה־hotspot `esm/native/ui/react/pdf/order_pdf_overlay_export_actions.ts` פורק ל־facade hook קטן ולבעלויות ממוקדות: callbacks/commands, interactive blob cache, export/Gmail operation adapters, PDF.js loader, sketch-preview action, וטיפוסי החוזה. ה־controller ממשיך לצרוך את ה־facade הציבורי בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
 
+
 > עדכון Stage 51 — 3 במאי 2026:
 > ה־hotspot `esm/native/builder/scheduler_shared.ts` פורק ל־facade ציבורי קטן ולבעלויות ממוקדות: record/plan helpers, scheduler state, dependency normalization, environment probes, build-plan seams, ו־timer/wait policy. `scheduler_runtime.ts` ו־`scheduler_install.ts` ממשיכים לצרוך את ה־facade הציבורי בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי כדי שה־shared לא יחזור להיות מחסן כללי.
 
@@ -49,12 +50,6 @@
 
 > עדכון Stage 56 — 3 במאי 2026:
 > ה־hotspot `esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks.ts` פורק ל־facade ציבורי זעיר ולבעלויות ממוקדות: session contracts/types, interaction pointer-event lifecycle, ו־create-session frame scheduling. צרכני text-layer pointer ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי כדי שה־session hook לא יחזור להיות קובץ מעורבב.
-
-> עדכון Stage 57–58 — 3 במאי 2026:
-> מסלולי Order PDF sketch המשיכו להתפרק לבעלויות נקיות: `order_pdf_overlay_sketch_text_box_runtime.ts` נשאר facade זעיר סביב types/geometry/interaction/equality, ו־`order_pdf_overlay_sketch_preview_controller.ts` נשאר facade זעיר סביב hook orchestration, viewport adapters, session snapshot/restore, ו־refresh/build. שני השלבים מעוגנים ב־guards ייעודיים.
-
-> עדכון Stage 59 — 3 במאי 2026:
-> ה־hotspot `esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_canvas_runtime.ts` פורק ל־facade ציבורי זעיר ולבעלויות ממוקדות: draw-state contracts, repaint equality, paint/size sync, ו־canvas pixel/rect/frame resolution. צרכני sketch panel ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
 
 ## 1. תקציר מנהלים
 
@@ -136,22 +131,21 @@ Expected 0 exact duplicate script command group(s), found 2.
 
 קבצים גדולים במיוחד שכדאי להמשיך לדקק בזהירות:
 
-| קובץ                                                                                        | שורות בקירוב | הערה                                                              |
-| ------------------------------------------------------------------------------------------- | -----------: | ----------------------------------------------------------------- |
-| `esm/native/runtime/perf_runtime_surface.ts`                                                |          812 | surface רחב מאוד; לבדוק אם אפשר לפצל reader/writer/reporting      |
-| `esm/native/builder/scheduler_debug_stats.ts`                                               |          530 | לוגיקת debug/stats יכולה להפוך לבעלים פנימיים קטנים               |
-| `esm/native/builder/corner_connector_interior_special.ts`                                   |          525 | סכנת ערבוב geometry, material, policy, emit                       |
-| `esm/native/kernel/domain_api_surface_sections_shared.ts`                                   |          473 | surface/shared כבד - לבדוק ownership                              |
-| `esm/native/data/preset_models.ts`                                                          |          457 | data גדול; לשקול data partition או generator                      |
-| `esm/native/runtime/slice_write_access_dispatch.ts`                                         |          155 | Stage 49 facade; ordering/targets split                           |
-| `esm/native/ui/react/pdf/order_pdf_overlay_export_actions.ts`                               |          116 | Stage 50 facade; export action owners split                       |
-| `esm/native/services/models.ts`                                                             |          402 | service surface רחב                                               |
-| `esm/native/builder/scheduler_shared.ts`                                                    |           51 | Stage 51 facade; shared scheduler owners split                    |
-| `esm/native/ui/react/tabs/interior_tab_helpers.tsx`                                         |            4 | Stage 52 facade; core/buttons/sketch/types owners split           |
-| `esm/native/builder/room.ts`                                                                |           33 | Stage 53 facade; active/lifecycle/install owners split            |
-| `esm/native/builder/render_preview_sketch_measurements.ts`                                  |            2 | Stage 54 facade; input/state/labels/apply/types owners split      |
-| `esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks.ts` |            3 | Stage 56 facade; session types/interaction/create owners split    |
-| `esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_canvas_runtime.ts`                  |            4 | Stage 59 facade; canvas types/equality/paint/resolve owners split |
+| קובץ                                                          | שורות בקירוב | הערה                                                         |
+| ------------------------------------------------------------- | -----------: | ------------------------------------------------------------ |
+| `esm/native/runtime/perf_runtime_surface.ts`                  |          812 | surface רחב מאוד; לבדוק אם אפשר לפצל reader/writer/reporting |
+| `esm/native/builder/scheduler_debug_stats.ts`                 |          530 | לוגיקת debug/stats יכולה להפוך לבעלים פנימיים קטנים          |
+| `esm/native/builder/corner_connector_interior_special.ts`     |          525 | סכנת ערבוב geometry, material, policy, emit                  |
+| `esm/native/kernel/domain_api_surface_sections_shared.ts`     |          473 | surface/shared כבד - לבדוק ownership                         |
+| `esm/native/data/preset_models.ts`                            |          457 | data גדול; לשקול data partition או generator                 |
+| `esm/native/runtime/slice_write_access_dispatch.ts`           |          155 | Stage 49 facade; ordering/targets split           |
+| `esm/native/ui/react/pdf/order_pdf_overlay_export_actions.ts` |          116 | Stage 50 facade; export action owners split                            |
+| `esm/native/services/models.ts`                               |          402 | service surface רחב                                          |
+| `esm/native/builder/scheduler_shared.ts`                      |           51 | Stage 51 facade; shared scheduler owners split                                       |
+| `esm/native/ui/react/tabs/interior_tab_helpers.tsx`           |            4 | Stage 52 facade; core/buttons/sketch/types owners split       |
+| `esm/native/builder/room.ts`                                  |           33 | Stage 53 facade; active/lifecycle/install owners split        |
+| `esm/native/builder/render_preview_sketch_measurements.ts`    |            2 | Stage 54 facade; input/state/labels/apply/types owners split |
+| `esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks.ts` |            3 | Stage 56 facade; session types/interaction/create owners split |
 
 ### 2.4 CSS/UI style debt
 
@@ -1127,5 +1121,6 @@ Cloud Sync הוא אזור עצום ומכוסה בהרבה בדיקות:
 - Stage 57 — Order PDF text box runtime ownership split retained: `order_pdf_overlay_sketch_text_box_runtime.ts` must stay a tiny public facade while text-box constants/types, geometry, pointer interaction, and equality/text helpers live in focused owner modules guarded by `tests/refactor_stage57_order_pdf_text_box_runtime_ownership_guard.test.js`.
 
 - Stage 58 — Order PDF sketch preview controller ownership split retained: `order_pdf_overlay_sketch_preview_controller.ts` must stay a tiny public facade while hook orchestration, viewport state adapters, preview session capture/restore, async refresh/build ownership, and hook contracts live in focused `order_pdf_overlay_sketch_preview_controller_*` owner modules; `tests/refactor_stage58_order_pdf_sketch_preview_controller_ownership_guard.test.js` guards the split and keeps `OrderPdfInPlaceEditorOverlay.tsx` on the public facade.
-
-- Stage 59 — Order PDF sketch canvas runtime ownership split retained: `order_pdf_overlay_sketch_panel_canvas_runtime.ts` must stay a tiny public facade while draw-state contracts, repaint equality, canvas painting/size sync, and pixel/rect/frame resolution live in focused `order_pdf_overlay_sketch_panel_canvas_runtime_*` owners; `tests/refactor_stage59_order_pdf_sketch_canvas_runtime_ownership_guard.test.js` guards the split and keeps sketch panel consumers on the public facade.
+- Stage 59 — Order PDF sketch canvas runtime ownership split retained: `order_pdf_overlay_sketch_panel_canvas_runtime.ts` must stay a tiny public facade while draw-state contracts, payload equality/repaint decisions, canvas painting/size sync, and pixel/rect/frame resolution live in focused `order_pdf_overlay_sketch_panel_canvas_runtime_*` owner modules; `tests/refactor_stage59_order_pdf_sketch_canvas_runtime_ownership_guard.test.js` guards the split and keeps sketch panel consumers on the public canvas runtime facade.
+- Stage 60 — Order PDF sketch panel controller ownership split retained: `order_pdf_overlay_sketch_panel_controller.ts` must stay a tiny public facade while controller hook orchestration, argument contracts, annotation map/active-state resolution, state transitions, and annotation action ownership live in focused `order_pdf_overlay_sketch_panel_controller_*` owner modules; `tests/refactor_stage60_order_pdf_sketch_panel_controller_ownership_guard.test.js` guards the split and keeps sketch panel/toolbar consumers on the public controller facade.
+- Stage 61 — Order PDF card text layer ownership split retained: `order_pdf_overlay_sketch_card_text_layer_hooks.ts` must stay a tiny public facade while hook contracts, editor ref/focus ownership, active/palette state, rendered-box/patch controls, and hook orchestration live in focused `order_pdf_overlay_sketch_card_text_layer_*` owner modules; `tests/refactor_stage61_order_pdf_card_text_layer_ownership_guard.test.js` guards the split and keeps the sketch card on the public text-layer facade.

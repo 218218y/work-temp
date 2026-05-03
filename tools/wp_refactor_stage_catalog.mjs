@@ -1,5 +1,5 @@
 export const REFACTOR_COMPLETED_STAGE_LABELS = Object.freeze(
-  Array.from({ length: 60 }, (_, index) => `Stage ${index}`)
+  Array.from({ length: 62 }, (_, index) => `Stage ${index}`)
 );
 
 export const REFACTOR_STAGE_PROGRESS_MARKER = Object.freeze({
@@ -116,10 +116,21 @@ export const REFACTOR_INTEGRATION_ANCHORS = Object.freeze([
     message: 'stage 59 order pdf sketch canvas runtime ownership split guard must stay anchored',
   },
   {
+    file: 'tests/refactor_stage60_order_pdf_sketch_panel_controller_ownership_guard.test.js',
+    needle: 'stage 60 order pdf sketch panel controller ownership split is anchored',
+    message: 'stage 60 order pdf sketch panel controller ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage61_order_pdf_card_text_layer_ownership_guard.test.js',
+    needle: 'stage 61 order pdf card text layer ownership split is anchored',
+    message: 'stage 61 order pdf card text layer ownership split guard must stay anchored',
+  },
+  {
     file: 'tests/project_config_migration_replace_keys_runtime.test.ts',
     needle: 'materializes every replace-owned branch',
     message: 'project config migration must prove replace-owned branch materialization',
   },
+
 
   {
     file: 'tests/project_config_migration_replace_keys_runtime.test.ts',

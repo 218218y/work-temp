@@ -1566,10 +1566,16 @@
         "runtime-default": 1
       }
     },
-    "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_hooks.ts": {
-      "total": 2,
+    "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_active_hooks.ts": {
+      "total": 1,
       "categories": {
-        "runtime-default": 2
+        "runtime-default": 1
+      }
+    },
+    "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_editor_hooks.ts": {
+      "total": 3,
+      "categories": {
+        "runtime-default": 3
       }
     },
     "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_interactions_hooks.ts": {

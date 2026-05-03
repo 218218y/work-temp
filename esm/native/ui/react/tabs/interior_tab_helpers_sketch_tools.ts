@@ -23,12 +23,7 @@ import {
   parseSketchInternalDrawersTool,
 } from '../../../features/sketch_drawer_sizing.js';
 
-import type {
-  SketchBoxBaseType,
-  SketchBoxCorniceType,
-  SketchBoxLegColor,
-  SketchBoxLegStyle,
-} from './interior_tab_helpers_types.js';
+import type { SketchBoxBaseType, SketchBoxCorniceType, SketchBoxLegColor, SketchBoxLegStyle } from './interior_tab_helpers_types.js';
 
 // ---------------------------------------------------------------------------
 // Sketch tools (previously a dedicated "סקיצה" tab).
@@ -260,3 +255,4 @@ export function mkSketchShelfTool(variant: string, depthCm: number | null): stri
   }
   return base;
 }
+

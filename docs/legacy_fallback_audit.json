@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-05-02T22:27:50.292Z",
+  "generatedAt": "2026-05-03T03:12:38.019Z",
   "sourceRoot": "esm",
   "summary": {
-    "totalOccurrences": 922,
-    "totalFiles": 288,
+    "totalOccurrences": 924,
+    "totalFiles": 289,
     "byCategory": {
-      "runtime-default": 731,
+      "runtime-default": 733,
       "browser-adapter": 18,
       "project-migration": 21,
       "test-fixture": 7,
@@ -1576,10 +1576,16 @@
           "runtime-default": 1
         }
       },
-      "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_hooks.ts": {
-        "total": 2,
+      "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_active_hooks.ts": {
+        "total": 1,
         "categories": {
-          "runtime-default": 2
+          "runtime-default": 1
+        }
+      },
+      "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_editor_hooks.ts": {
+        "total": 3,
+        "categories": {
+          "runtime-default": 3
         }
       },
       "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_interactions_hooks.ts": {
@@ -7683,15 +7689,29 @@
       "text": "fallback: source,"
     },
     {
-      "file": "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_hooks.ts",
-      "line": 79,
+      "file": "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_active_hooks.ts",
+      "line": 26,
+      "term": "fallback",
+      "category": "runtime-default",
+      "text": "readEditorText: (id: string, fallback: string) => string;"
+    },
+    {
+      "file": "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_editor_hooks.ts",
+      "line": 14,
+      "term": "fallback",
+      "category": "runtime-default",
+      "text": "readEditorText: (id: string, fallback: string) => string;"
+    },
+    {
+      "file": "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_editor_hooks.ts",
+      "line": 30,
       "term": "fallback",
       "category": "runtime-default",
       "text": "(id: string, fallback: string) =>"
     },
     {
-      "file": "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_hooks.ts",
-      "line": 80,
+      "file": "esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_editor_hooks.ts",
+      "line": 31,
       "term": "fallback",
       "category": "runtime-default",
       "text": "readOrderPdfSketchEditorTextValue(editorRefs.current[id] || null, fallback),"

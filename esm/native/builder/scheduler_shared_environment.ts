@@ -1,7 +1,14 @@
-import type { AppContainer, BuildStateLike, BuilderServiceLike } from '../../../types/index.js';
+import type {
+  AppContainer,
+  BuildStateLike,
+  BuilderServiceLike,
+} from '../../../types/index.js';
 
 import { isBootReady as isAppBootReady, isLifecycleBootReady } from '../runtime/app_roots_access.js';
-import { getBuilderBuildWardrobe, hasBuilderBuildWardrobe } from '../runtime/builder_service_access.js';
+import {
+  getBuilderBuildWardrobe,
+  hasBuilderBuildWardrobe,
+} from '../runtime/builder_service_access.js';
 
 export type BuilderCoreLike = BuilderServiceLike & {
   buildWardrobe?: (state: BuildStateLike) => unknown;

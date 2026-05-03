@@ -94,11 +94,7 @@ test('stage 49 slice write dispatch ownership split is anchored', () => {
     /resolveSliceDispatchTargets|resolveMetaTouchDispatchTargets/,
     'dispatch target owner must not own target ordering policy'
   );
-  assert.doesNotMatch(
-    orderOwner + targetsOwner + facade,
-    /export default\s+/,
-    'slice dispatch owners must stay named-export only'
-  );
+  assert.doesNotMatch(orderOwner + targetsOwner + facade, /export default\s+/, 'slice dispatch owners must stay named-export only');
 
   assert.match(
     plan,

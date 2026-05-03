@@ -103,6 +103,14 @@ test('stage 10 refactor integration audit is wired into guardrails and verify la
     pkg.scripts['test:refactor-stage-guards'],
     /tests\/refactor_stage59_order_pdf_sketch_canvas_runtime_ownership_guard\.test\.js/
   );
+  assert.match(
+    pkg.scripts['test:refactor-stage-guards'],
+    /tests\/refactor_stage60_order_pdf_sketch_panel_controller_ownership_guard\.test\.js/
+  );
+  assert.match(
+    pkg.scripts['test:refactor-stage-guards'],
+    /tests\/refactor_stage61_order_pdf_card_text_layer_ownership_guard\.test\.js/
+  );
 
   const verifyFlow = fs.readFileSync('tools/wp_verify_flow.js', 'utf8');
   const guardIndex = verifyFlow.indexOf("scriptName: 'check:refactor-guardrails'");
@@ -132,7 +140,7 @@ test('stage 10 refactor integration audit covers guardrails, stage tests, verify
 test('stage 39 to 41 refactor control-plane stage catalog is anchored', () => {
   assert.equal(assertRefactorStageCatalogIsWellFormed(), true);
   assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(0), 'Stage 0');
-  assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(-1), 'Stage 59');
+  assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(-1), 'Stage 61');
   assert.equal(new Set(REFACTOR_COMPLETED_STAGE_LABELS).size, REFACTOR_COMPLETED_STAGE_LABELS.length);
 
   const progress = fs.readFileSync(REFACTOR_STAGE_PROGRESS_MARKER.file, 'utf8');
@@ -237,6 +245,16 @@ test('stage 39 to 41 refactor control-plane stage catalog is anchored', () => {
   assert.ok(
     REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
       anchor.needle.includes('stage 59 order pdf sketch canvas runtime ownership split is anchored')
+    )
+  );
+  assert.ok(
+    REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
+      anchor.needle.includes('stage 60 order pdf sketch panel controller ownership split is anchored')
+    )
+  );
+  assert.ok(
+    REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
+      anchor.needle.includes('stage 61 order pdf card text layer ownership split is anchored')
     )
   );
 

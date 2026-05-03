@@ -20,6 +20,7 @@ test('order-pdf sketch panel measurement stays decomposed into dedicated runtime
   );
   const card = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_card.tsx');
   const controller = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_controller.ts');
+  const controllerHook = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_controller_hook.ts');
   const toolbar = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar.tsx');
   const toolbarFloatingPalette = read(
     'esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_floating_palette.tsx'
@@ -33,7 +34,7 @@ test('order-pdf sketch panel measurement stays decomposed into dedicated runtime
   assert.match(measurementHooks, /generationRef/);
   assert.match(measurementRuntime, /DEFAULT_TOOLBAR_PLACEMENT/);
   assert.match(card, /from '\.\/order_pdf_overlay_sketch_panel_measurement_hooks\.js';/);
-  assert.match(controller, /from '\.\/order_pdf_overlay_sketch_panel_measurement_hooks\.js';/);
+  assert.match(controllerHook, /from '\.\/order_pdf_overlay_sketch_panel_measurement_hooks\.js';/);
   assert.match(controller, /from '\.\/order_pdf_overlay_sketch_panel_controller_runtime\.js';/);
   assert.match(toolbar, /from '\.\/order_pdf_overlay_sketch_toolbar_view\.js';/);
   assert.match(toolbarFloatingPalette, /from '\.\/order_pdf_overlay_sketch_panel_measurement_hooks\.js';/);

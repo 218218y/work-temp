@@ -46,3 +46,4 @@ export function hasInternalDrawersDataInCfg(cfg: unknown): boolean {
   }
   return false;
 }
+

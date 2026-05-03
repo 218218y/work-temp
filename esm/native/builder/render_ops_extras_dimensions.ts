@@ -25,6 +25,8 @@ import {
   touchRenderOpsMeta,
 } from './render_ops_extras_shared.js';
 
+const MIRROR_RENDER_EXCLUDE_USER_DATA_KEY = '__wpExcludeMirrorRender';
+
 type ThreeLabelSurface = ThreeLike & {
   CanvasTexture: new (canvas: CanvasLike) => TextureLike;
   SpriteMaterial: new (opts: Record<string, unknown>) => MaterialLike;
@@ -37,6 +39,17 @@ type ThreeLineSurface = ThreeLike & {
   Vector3: new (x?: number, y?: number, z?: number) => import('./render_ops_extras_shared.js').VectorLike;
   LineBasicMaterial: new (opts: Record<string, unknown>) => MaterialLike;
 };
+
+type DimensionOverlayObject = {
+  userData?: Record<string, unknown>;
+};
+
+function markDimensionOverlayObject(obj: DimensionOverlayObject | null | undefined): void {
+  if (!obj) return;
+  obj.userData = obj.userData || {};
+  obj.userData.__wpExcludeWardrobeBounds = true;
+  obj.userData[MIRROR_RENDER_EXCLUDE_USER_DATA_KEY] = true;
+}
 
 function isThreeLabelSurface(value: unknown): value is ThreeLabelSurface {
   return !!value && typeof value === 'object' && 'CanvasTexture' in value && 'SpriteMaterial' in value;
@@ -143,14 +156,12 @@ export function addDimensionLine(
   const geoBase = new THREE.BufferGeometry();
   const geometry = typeof geoBase.setFromPoints === 'function' ? geoBase.setFromPoints(points) : geoBase;
   const line = new THREE.Line(geometry, material);
-  line.userData = line.userData || {};
-  line.userData.__wpExcludeWardrobeBounds = true;
+  markDimensionOverlayObject(line);
   wardrobeGroup.add(line);
 
   const entry = getDimLabelEntry(textStr, ctx, isCell ? 'cell' : 'default');
   const sprite = new THREE.Sprite(entry.mat);
-  sprite.userData = sprite.userData || {};
-  sprite.userData.__wpExcludeWardrobeBounds = true;
+  markDimensionOverlayObject(sprite);
   let midPoint = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5).add(offset);
 
   if (labelShift && typeof labelShift === 'object') {

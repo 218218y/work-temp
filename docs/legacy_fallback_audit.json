@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-04-30T19:21:42.428Z",
+  "generatedAt": "2026-05-02T22:27:50.292Z",
   "sourceRoot": "esm",
   "summary": {
     "totalOccurrences": 922,
-    "totalFiles": 287,
+    "totalFiles": 288,
     "byCategory": {
       "runtime-default": 731,
       "browser-adapter": 18,
@@ -419,7 +419,7 @@
           "runtime-default": 1
         }
       },
-      "esm/native/builder/scheduler_shared.ts": {
+      "esm/native/builder/scheduler_shared_deps.ts": {
         "total": 2,
         "categories": {
           "runtime-default": 2
@@ -1020,11 +1020,16 @@
           "runtime-default": 1
         }
       },
-      "esm/native/runtime/slice_write_access_dispatch.ts": {
-        "total": 5,
+      "esm/native/runtime/slice_write_access_dispatch_order.ts": {
+        "total": 4,
         "categories": {
-          "project-migration": 1,
           "runtime-default": 4
+        }
+      },
+      "esm/native/runtime/slice_write_access_dispatch.ts": {
+        "total": 1,
+        "categories": {
+          "project-migration": 1
         }
       },
       "esm/native/runtime/slice_write_access.ts": {
@@ -1655,7 +1660,7 @@
           "runtime-default": 2
         }
       },
-      "esm/native/ui/react/tabs/interior_tab_helpers.tsx": {
+      "esm/native/ui/react/tabs/interior_tab_helpers_core.ts": {
         "total": 4,
         "categories": {
           "runtime-default": 4
@@ -3016,15 +3021,15 @@
       "text": "return runPendingBuildRuntime(A, opts?.reason || 'fallback', forceBuild);"
     },
     {
-      "file": "esm/native/builder/scheduler_shared.ts",
-      "line": 131,
+      "file": "esm/native/builder/scheduler_shared_deps.ts",
+      "line": 30,
       "term": "fallback",
       "category": "runtime-default",
       "text": "function wrapBuilderCallable(value: unknown, fallback: BuilderCallable): BuilderCallable {"
     },
     {
-      "file": "esm/native/builder/scheduler_shared.ts",
-      "line": 134,
+      "file": "esm/native/builder/scheduler_shared_deps.ts",
+      "line": 33,
       "term": "fallback",
       "category": "runtime-default",
       "text": ": bindBuilderCallable(fallback);"
@@ -5327,42 +5332,42 @@
     },
     {
       "file": "esm/native/runtime/perf_runtime_core.ts",
-      "line": 34,
+      "line": 48,
       "term": "fallback",
       "category": "runtime-default",
       "text": "function normalizeName(value: unknown, fallback = 'unknown'): string {"
     },
     {
       "file": "esm/native/runtime/perf_runtime_core.ts",
-      "line": 35,
+      "line": 49,
       "term": "fallback",
       "category": "runtime-default",
       "text": "return typeof value === 'string' && value.trim() ? value.trim() : fallback;"
     },
     {
       "file": "esm/native/runtime/perf_runtime_core.ts",
-      "line": 72,
+      "line": 86,
       "term": "fallback",
       "category": "runtime-default",
       "text": "function mergePerfDetail(primary: unknown, fallback: unknown): unknown {"
     },
     {
       "file": "esm/native/runtime/perf_runtime_core.ts",
-      "line": 73,
+      "line": 87,
       "term": "fallback",
       "category": "runtime-default",
       "text": "if (typeof primary === 'undefined') return fallback;"
     },
     {
       "file": "esm/native/runtime/perf_runtime_core.ts",
-      "line": 74,
+      "line": 88,
       "term": "fallback",
       "category": "runtime-default",
       "text": "if (typeof fallback === 'undefined') return primary;"
     },
     {
       "file": "esm/native/runtime/perf_runtime_core.ts",
-      "line": 76,
+      "line": 90,
       "term": "fallback",
       "category": "runtime-default",
       "text": "const fallbackRecord = asRecord<Record<string, unknown>>(fallback);"
@@ -5648,36 +5653,36 @@
       "text": "// - Keep store-backed fallbacks for minimal harnesses."
     },
     {
-      "file": "esm/native/runtime/slice_write_access_dispatch.ts",
-      "line": 123,
+      "file": "esm/native/runtime/slice_write_access_dispatch_order.ts",
+      "line": 68,
       "term": "fallbacks",
       "category": "runtime-default",
       "text": "fallbacks: readonly T[];"
     },
     {
-      "file": "esm/native/runtime/slice_write_access_dispatch.ts",
-      "line": 129,
+      "file": "esm/native/runtime/slice_write_access_dispatch_order.ts",
+      "line": 74,
       "term": "fallbacks",
       "category": "runtime-default",
       "text": "out.push(...args.fallbacks);"
     },
     {
-      "file": "esm/native/runtime/slice_write_access_dispatch.ts",
-      "line": 261,
+      "file": "esm/native/runtime/slice_write_access_dispatch_order.ts",
+      "line": 106,
+      "term": "fallbacks",
+      "category": "runtime-default",
+      "text": "fallbacks: resolveRootFallbackDispatchTargets(opts),"
+    },
+    {
+      "file": "esm/native/runtime/slice_write_access_dispatch_order.ts",
+      "line": 122,
       "term": "fallbacks",
       "category": "runtime-default",
       "text": "fallbacks: resolveRootFallbackDispatchTargets(opts),"
     },
     {
       "file": "esm/native/runtime/slice_write_access_dispatch.ts",
-      "line": 277,
-      "term": "fallbacks",
-      "category": "runtime-default",
-      "text": "fallbacks: resolveRootFallbackDispatchTargets(opts),"
-    },
-    {
-      "file": "esm/native/runtime/slice_write_access_dispatch.ts",
-      "line": 308,
+      "line": 41,
       "term": "fallbacks",
       "category": "project-migration",
       "text": "'[WardrobePro] Unexpected root payload read: dispatch targets do not require root fallbacks'"
@@ -8000,29 +8005,29 @@
       "text": "const base = Number.isFinite(parsed) ? parsed : typeof current === 'number' ? current : fallback;"
     },
     {
-      "file": "esm/native/ui/react/tabs/interior_tab_helpers.tsx",
-      "line": 40,
+      "file": "esm/native/ui/react/tabs/interior_tab_helpers_core.ts",
+      "line": 9,
       "term": "fallback",
       "category": "runtime-default",
       "text": "export function asStr(v: unknown, fallback = ''): string {"
     },
     {
-      "file": "esm/native/ui/react/tabs/interior_tab_helpers.tsx",
-      "line": 42,
+      "file": "esm/native/ui/react/tabs/interior_tab_helpers_core.ts",
+      "line": 11,
       "term": "fallback",
       "category": "runtime-default",
       "text": "if (v === null || v === undefined) return fallback;"
     },
     {
-      "file": "esm/native/ui/react/tabs/interior_tab_helpers.tsx",
-      "line": 46,
+      "file": "esm/native/ui/react/tabs/interior_tab_helpers_core.ts",
+      "line": 15,
       "term": "fallback",
       "category": "runtime-default",
       "text": "export function asNum(v: unknown, fallback = 0): number {"
     },
     {
-      "file": "esm/native/ui/react/tabs/interior_tab_helpers.tsx",
-      "line": 48,
+      "file": "esm/native/ui/react/tabs/interior_tab_helpers_core.ts",
+      "line": 17,
       "term": "fallback",
       "category": "runtime-default",
       "text": "return Number.isFinite(n) ? n : fallback;"

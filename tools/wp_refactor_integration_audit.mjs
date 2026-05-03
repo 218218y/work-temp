@@ -90,6 +90,17 @@ const requiredStageGuardTests = [
   'tests/refactor_stage46_domain_api_shared_ownership_guard.test.js',
   'tests/refactor_stage47_models_service_surface_ownership_guard.test.js',
   'tests/refactor_stage48_preset_models_data_ownership_guard.test.js',
+  'tests/refactor_stage49_slice_write_dispatch_ownership_guard.test.js',
+  'tests/refactor_stage50_order_pdf_export_actions_ownership_guard.test.js',
+  'tests/refactor_stage51_scheduler_shared_ownership_guard.test.js',
+  'tests/refactor_stage52_interior_tab_helpers_ownership_guard.test.js',
+  'tests/refactor_stage53_room_ownership_guard.test.js',
+  'tests/refactor_stage54_render_preview_measurements_ownership_guard.test.js',
+  'tests/refactor_stage55_order_pdf_sketch_toolbar_ownership_guard.test.js',
+  'tests/refactor_stage56_order_pdf_text_layer_session_ownership_guard.test.js',
+  'tests/refactor_stage57_order_pdf_text_box_runtime_ownership_guard.test.js',
+  'tests/refactor_stage58_order_pdf_sketch_preview_controller_ownership_guard.test.js',
+  'tests/refactor_stage59_order_pdf_sketch_canvas_runtime_ownership_guard.test.js',
 ];
 const stageGuardCommand = requireScript('test:refactor-stage-guards');
 for (const testFile of requiredStageGuardTests)

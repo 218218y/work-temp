@@ -8,7 +8,7 @@ function read(path) {
 
 test('[order-pdf] sketch preview builds its background pdf without baked sketch annotations', () => {
   const previewSrc = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_preview.ts');
-  const exportActionsSrc = read('esm/native/ui/react/pdf/order_pdf_overlay_export_actions.ts');
+  const exportActionsSrc = read('esm/native/ui/react/pdf/order_pdf_overlay_export_actions_preview.ts');
 
   assert.match(
     previewSrc,

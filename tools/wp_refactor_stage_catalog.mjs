@@ -1,5 +1,5 @@
 export const REFACTOR_COMPLETED_STAGE_LABELS = Object.freeze(
-  Array.from({ length: 49 }, (_, index) => `Stage ${index}`)
+  Array.from({ length: 60 }, (_, index) => `Stage ${index}`)
 );
 
 export const REFACTOR_STAGE_PROGRESS_MARKER = Object.freeze({
@@ -59,10 +59,69 @@ export const REFACTOR_INTEGRATION_ANCHORS = Object.freeze([
     message: 'stage 48 preset models data ownership split guard must stay anchored',
   },
   {
+    file: 'tests/refactor_stage49_slice_write_dispatch_ownership_guard.test.js',
+    needle: 'stage 49 slice write dispatch ownership split is anchored',
+    message: 'stage 49 slice write dispatch ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage50_order_pdf_export_actions_ownership_guard.test.js',
+    needle: 'stage 50 order pdf export actions ownership split is anchored',
+    message: 'stage 50 order pdf export actions ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage51_scheduler_shared_ownership_guard.test.js',
+    needle: 'stage 51 scheduler shared ownership split is anchored',
+    message: 'stage 51 scheduler shared ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage52_interior_tab_helpers_ownership_guard.test.js',
+    needle: 'stage 52 interior tab helpers ownership split is anchored',
+    message: 'stage 52 interior tab helpers ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage53_room_ownership_guard.test.js',
+    needle: 'stage 53 room ownership split is anchored',
+    message: 'stage 53 room ownership split guard must stay anchored',
+  },
+
+  {
+    file: 'tests/refactor_stage54_render_preview_measurements_ownership_guard.test.js',
+    needle: 'stage 54 render preview sketch measurements ownership split is anchored',
+    message: 'stage 54 render preview sketch measurements ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage55_order_pdf_sketch_toolbar_ownership_guard.test.js',
+    needle: 'stage 55 order pdf sketch toolbar ownership split is anchored',
+    message: 'stage 55 order pdf sketch toolbar ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage56_order_pdf_text_layer_session_ownership_guard.test.js',
+    needle: 'stage 56 order pdf text layer session ownership split is anchored',
+    message: 'stage 56 order pdf text layer session ownership split guard must stay anchored',
+  },
+
+  {
+    file: 'tests/refactor_stage57_order_pdf_text_box_runtime_ownership_guard.test.js',
+    needle: 'stage 57 order pdf text box runtime ownership split is anchored',
+    message: 'stage 57 order pdf text box runtime ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage58_order_pdf_sketch_preview_controller_ownership_guard.test.js',
+    needle: 'stage 58 order pdf sketch preview controller ownership split is anchored',
+    message: 'stage 58 order pdf sketch preview controller ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage59_order_pdf_sketch_canvas_runtime_ownership_guard.test.js',
+    needle: 'stage 59 order pdf sketch canvas runtime ownership split is anchored',
+    message: 'stage 59 order pdf sketch canvas runtime ownership split guard must stay anchored',
+  },
+  {
     file: 'tests/project_config_migration_replace_keys_runtime.test.ts',
     needle: 'materializes every replace-owned branch',
     message: 'project config migration must prove replace-owned branch materialization',
   },
+
+
   {
     file: 'tests/project_config_migration_replace_keys_runtime.test.ts',
     needle: 'deterministic and type-narrowed',

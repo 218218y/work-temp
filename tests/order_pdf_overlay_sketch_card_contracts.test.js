@@ -37,6 +37,12 @@ test('order-pdf sketch card keeps note-box rendering and text-layer ownership de
   const pointerSessionHooks = read(
     'esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks.ts'
   );
+  const pointerInteractionSessionHooks = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_interaction_session_hooks.ts'
+  );
+  const pointerCreateSessionHooks = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_create_session_hooks.ts'
+  );
   const noteBox = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_note_box.tsx');
   const preview = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_text_box_interaction_preview.ts');
   const createInteraction = read(
@@ -78,8 +84,10 @@ test('order-pdf sketch card keeps note-box rendering and text-layer ownership de
   assert.match(pointerRuntime, /createOrderPdfSketchTextLayerInteractionPreview/);
   assert.match(pointerRuntime, /resolveOrderPdfSketchTextLayerCanvasPointerAction/);
   assert.match(pointerRuntime, /resolveOrderPdfSketchTextLayerCreateCommitAction/);
-  assert.match(pointerSessionHooks, /updateOrderPdfSketchTextBoxInteractionPreview/);
-  assert.match(pointerSessionHooks, /updateOrderPdfSketchTextCreateSession/);
+  assert.match(pointerSessionHooks, /order_pdf_overlay_sketch_card_text_layer_pointer_interaction_session_hooks\.js/);
+  assert.match(pointerSessionHooks, /order_pdf_overlay_sketch_card_text_layer_pointer_create_session_hooks\.js/);
+  assert.match(pointerInteractionSessionHooks, /updateOrderPdfSketchTextBoxInteractionPreview/);
+  assert.match(pointerCreateSessionHooks, /updateOrderPdfSketchTextCreateSession/);
   assert.match(noteBox, /OrderPdfSketchNoteToolbar/);
   assert.match(preview, /resolveOrderPdfSketchRenderedTextBoxes/);
   assert.match(preview, /updateOrderPdfSketchTextBoxInteractionPreview/);

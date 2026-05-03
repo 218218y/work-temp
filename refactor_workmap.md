@@ -26,6 +26,36 @@
 
 > עדכון Stage 48 — 2 במאי 2026:
 > ה־hotspot `esm/native/data/preset_models.ts` פורק ל־facade ציבורי קטן ולבעלות דאטה ייעודית ב־`preset_models_data.ts`. ה־facade ממשיך לייצא את `PRESET_MODELS_RAW`, לנרמל דרך `normalizeModelList`, ולשמור את חוזה ה־ESM הקיים; כפילות מפתח `hingeMap` ברשומת preset הוסרה, והבעלות החדשה מעוגנת ב־guard ייעודי.
+> עדכון Stage 49 — 2 במאי 2026:
+> ה־hotspot `esm/native/runtime/slice_write_access_dispatch.ts` פורק ל־facade ציבורי קטן ולבעלויות ממוקדות: target ordering/cache ב־`slice_write_access_dispatch_order.ts`, וביצוע target handlers ב־`slice_write_access_dispatch_targets.ts`. ה־API הציבורי נשמר דרך ה־facade, והבעלות החדשה מעוגנת ב־guard ייעודי כדי שמסלול הכתיבה הקנוני לא יחזור לקובץ כלבו.
+
+> עדכון Stage 50 — 2 במאי 2026:
+> ה־hotspot `esm/native/ui/react/pdf/order_pdf_overlay_export_actions.ts` פורק ל־facade hook קטן ולבעלויות ממוקדות: callbacks/commands, interactive blob cache, export/Gmail operation adapters, PDF.js loader, sketch-preview action, וטיפוסי החוזה. ה־controller ממשיך לצרוך את ה־facade הציבורי בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
+
+
+> עדכון Stage 51 — 3 במאי 2026:
+> ה־hotspot `esm/native/builder/scheduler_shared.ts` פורק ל־facade ציבורי קטן ולבעלויות ממוקדות: record/plan helpers, scheduler state, dependency normalization, environment probes, build-plan seams, ו־timer/wait policy. `scheduler_runtime.ts` ו־`scheduler_install.ts` ממשיכים לצרוך את ה־facade הציבורי בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי כדי שה־shared לא יחזור להיות מחסן כללי.
+
+> עדכון Stage 52 — 3 במאי 2026:
+> ה־hotspot `esm/native/ui/react/tabs/interior_tab_helpers.tsx` פורק ל־facade ציבורי קטן ולבעלויות ממוקדות: primitive helpers/config probes ב־`interior_tab_helpers_core.ts`, כפתורי Interior compact ב־`interior_tab_helpers_buttons.tsx`, כלי sketch ב־`interior_tab_helpers_sketch_tools.ts`, וטיפוסי tab משותפים ב־`interior_tab_helpers_types.ts`. צרכני Interior ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי כדי שה־helper לא יחזור להיות god-helper.
+
+> עדכון Stage 53 — 3 במאי 2026:
+> ה־hotspot `esm/native/builder/room.ts` פורק ל־facade ציבורי קטן ולבעלויות ממוקדות: active-state resolution ב־`room_active_state.ts`, build/update lifecycle ב־`room_lifecycle.ts`, והתקנת stable room-design service surface ב־`room_design_surface.ts`. צרכני Builder ממשיכים לצרוך את `room.ts` בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי כדי שמסלול room design לא יחזור להיות קובץ כלבו רגיש.
+
+> עדכון Stage 54 — 3 במאי 2026:
+> ה־hotspot `esm/native/builder/render_preview_sketch_measurements.ts` פורק ל־facade ציבורי זעיר ולבעלויות ממוקדות: input parsing/face-sign policy ב־`render_preview_sketch_measurements_input.ts`, state/group/slot/material lifecycle ב־`render_preview_sketch_measurements_state.ts`, label material/orientation ב־`render_preview_sketch_measurements_labels.ts`, orchestration ב־`render_preview_sketch_measurements_apply.ts`, וטיפוסי המדידות ב־`render_preview_sketch_measurements_types.ts`. צרכני render preview ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
+
+> עדכון Stage 55 — 3 במאי 2026:
+> ה־hotspot `esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar.tsx` פורק ל־facade ציבורי זעיר ולבעלויות ממוקדות: contracts/types, freehand tool definitions, floating palette placement/portal, palette rendering, ו־toolbar view orchestration. ה־sketch panel ממשיך לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
+
+> עדכון Stage 56 — 3 במאי 2026:
+> ה־hotspot `esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks.ts` פורק ל־facade ציבורי זעיר ולבעלויות ממוקדות: session contracts/types, interaction pointer-event lifecycle, ו־create-session frame scheduling. צרכני text-layer pointer ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי כדי שה־session hook לא יחזור להיות קובץ מעורבב.
+
+> עדכון Stage 57–58 — 3 במאי 2026:
+> מסלולי Order PDF sketch המשיכו להתפרק לבעלויות נקיות: `order_pdf_overlay_sketch_text_box_runtime.ts` נשאר facade זעיר סביב types/geometry/interaction/equality, ו־`order_pdf_overlay_sketch_preview_controller.ts` נשאר facade זעיר סביב hook orchestration, viewport adapters, session snapshot/restore, ו־refresh/build. שני השלבים מעוגנים ב־guards ייעודיים.
+
+> עדכון Stage 59 — 3 במאי 2026:
+> ה־hotspot `esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_canvas_runtime.ts` פורק ל־facade ציבורי זעיר ולבעלויות ממוקדות: draw-state contracts, repaint equality, paint/size sync, ו־canvas pixel/rect/frame resolution. צרכני sketch panel ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
 
 ## 1. תקציר מנהלים
 
@@ -114,13 +144,15 @@ Expected 0 exact duplicate script command group(s), found 2.
 | `esm/native/builder/corner_connector_interior_special.ts`     |          525 | סכנת ערבוב geometry, material, policy, emit                  |
 | `esm/native/kernel/domain_api_surface_sections_shared.ts`     |          473 | surface/shared כבד - לבדוק ownership                         |
 | `esm/native/data/preset_models.ts`                            |          457 | data גדול; לשקול data partition או generator                 |
-| `esm/native/runtime/slice_write_access_dispatch.ts`           |          439 | write dispatch hotpath - לא לגעת בלי tests ממוקדים           |
-| `esm/native/ui/react/pdf/order_pdf_overlay_export_actions.ts` |          415 | UI + export orchestration hotspot                            |
+| `esm/native/runtime/slice_write_access_dispatch.ts`           |          155 | Stage 49 facade; ordering/targets split           |
+| `esm/native/ui/react/pdf/order_pdf_overlay_export_actions.ts` |          116 | Stage 50 facade; export action owners split                            |
 | `esm/native/services/models.ts`                               |          402 | service surface רחב                                          |
-| `esm/native/builder/scheduler_shared.ts`                      |          398 | core scheduling policy                                       |
-| `esm/native/ui/react/tabs/interior_tab_helpers.tsx`           |          388 | UI helpers עם סיכון להפוך ל־god-helper                       |
-| `esm/native/builder/room.ts`                                  |          387 | visual update/healing sensitive                              |
-| `esm/native/builder/render_preview_sketch_measurements.ts`    |          373 | sketch/render measurement hotspot                            |
+| `esm/native/builder/scheduler_shared.ts`                      |           51 | Stage 51 facade; shared scheduler owners split                                       |
+| `esm/native/ui/react/tabs/interior_tab_helpers.tsx`           |            4 | Stage 52 facade; core/buttons/sketch/types owners split       |
+| `esm/native/builder/room.ts`                                  |           33 | Stage 53 facade; active/lifecycle/install owners split        |
+| `esm/native/builder/render_preview_sketch_measurements.ts`    |            2 | Stage 54 facade; input/state/labels/apply/types owners split |
+| `esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks.ts` |            3 | Stage 56 facade; session types/interaction/create owners split |
+| `esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_canvas_runtime.ts` |            4 | Stage 59 facade; canvas types/equality/paint/resolve owners split |
 
 ### 2.4 CSS/UI style debt
 
@@ -1089,3 +1121,12 @@ Cloud Sync הוא אזור עצום ומכוסה בהרבה בדיקות:
 5. לבסוף לסגור ביצועים ו־E2E.
 
 בצורה הזאת אפשר לעשות התקדמות גדולה מאוד בלי להרוס תיקונים שכבר נעשו ובלי להחזיר את הקוד לתקופת legacy. זה גם ישאיר בסיס נקי, מהיר ויציב להוספת פיצ'רים עתידיים.
+
+- Stage 55 — Order PDF sketch toolbar ownership split retained: `order_pdf_overlay_sketch_toolbar.tsx` must stay a tiny public facade while toolbar contracts, freehand definitions, floating palette placement, palette rendering, and toolbar view orchestration live in focused owner modules guarded by `tests/refactor_stage55_order_pdf_sketch_toolbar_ownership_guard.test.js`.
+- Stage 56 — Order PDF text layer pointer session ownership split retained: `order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks.ts` must stay a tiny public facade while shared session contracts, interaction pointer-event lifecycle, and create-session frame scheduling live in focused owner modules guarded by `tests/refactor_stage56_order_pdf_text_layer_session_ownership_guard.test.js`.
+
+- Stage 57 — Order PDF text box runtime ownership split retained: `order_pdf_overlay_sketch_text_box_runtime.ts` must stay a tiny public facade while text-box constants/types, geometry, pointer interaction, and equality/text helpers live in focused owner modules guarded by `tests/refactor_stage57_order_pdf_text_box_runtime_ownership_guard.test.js`.
+
+- Stage 58 — Order PDF sketch preview controller ownership split retained: `order_pdf_overlay_sketch_preview_controller.ts` must stay a tiny public facade while hook orchestration, viewport state adapters, preview session capture/restore, async refresh/build ownership, and hook contracts live in focused `order_pdf_overlay_sketch_preview_controller_*` owner modules; `tests/refactor_stage58_order_pdf_sketch_preview_controller_ownership_guard.test.js` guards the split and keeps `OrderPdfInPlaceEditorOverlay.tsx` on the public facade.
+
+- Stage 59 — Order PDF sketch canvas runtime ownership split retained: `order_pdf_overlay_sketch_panel_canvas_runtime.ts` must stay a tiny public facade while draw-state contracts, repaint equality, canvas painting/size sync, and pixel/rect/frame resolution live in focused `order_pdf_overlay_sketch_panel_canvas_runtime_*` owners; `tests/refactor_stage59_order_pdf_sketch_canvas_runtime_ownership_guard.test.js` guards the split and keeps sketch panel consumers on the public facade.

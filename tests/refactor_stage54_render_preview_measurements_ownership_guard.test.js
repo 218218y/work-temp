@@ -18,7 +18,10 @@ test('stage 54 render preview sketch measurements ownership split is anchored', 
   const state = read('esm/native/builder/render_preview_sketch_measurements_state.ts');
   const types = read('esm/native/builder/render_preview_sketch_measurements_types.ts');
   const pipeline = read('esm/native/builder/render_preview_sketch_pipeline.ts');
-  const ops = read('esm/native/builder/render_preview_sketch_ops.ts');
+  const ops = [
+    read('esm/native/builder/render_preview_sketch_ops_state.ts'),
+    read('esm/native/builder/render_preview_sketch_ops_apply.ts'),
+  ].join('\n');
   const runtimeTest = read('tests/render_preview_sketch_measurements_runtime.test.ts');
 
   assert.ok(

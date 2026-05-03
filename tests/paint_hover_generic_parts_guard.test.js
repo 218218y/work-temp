@@ -60,7 +60,15 @@ const materialsApply = [
   readFileSync('esm/native/builder/materials_apply_color_policy.ts', 'utf8'),
   readFileSync('esm/native/builder/materials_apply_traversal.ts', 'utf8'),
 ].join('\n');
-const renderPreviewSketchOps = readFileSync('esm/native/builder/render_preview_sketch_ops.ts', 'utf8');
+const renderPreviewSketchOps = [
+  'esm/native/builder/render_preview_sketch_ops.ts',
+  'esm/native/builder/render_preview_sketch_ops_factory.ts',
+  'esm/native/builder/render_preview_sketch_ops_context.ts',
+  'esm/native/builder/render_preview_sketch_ops_state.ts',
+  'esm/native/builder/render_preview_sketch_ops_materials.ts',
+  'esm/native/builder/render_preview_sketch_ops_meshes.ts',
+  'esm/native/builder/render_preview_sketch_ops_apply.ts',
+].map(file => readFileSync(file, 'utf8')).join('\n');
 const renderPreviewSketchPipeline = readFileSync(
   'esm/native/builder/render_preview_sketch_pipeline.ts',
   'utf8'

@@ -1138,3 +1138,7 @@ Cloud Sync הוא אזור עצום ומכוסה בהרבה בדיקות:
 
 > עדכון Stage 67 — 3 במאי 2026:
 > ה־hotspot `esm/native/builder/render_preview_marker_ops.ts` פורק ל־facade ציבורי קטן ולבעלויות ממוקדות: חוזי marker ב־`render_preview_marker_ops_types.ts`, shared cache/THREE/wardrobe attachment helpers ב־`render_preview_marker_ops_shared.ts`, יצירת material אחידה ב־`render_preview_marker_ops_materials.ts`, split hover marker ב־`render_preview_marker_ops_split.ts`, door action marker ב־`render_preview_marker_ops_door_action.ts`, door cut marker ב־`render_preview_marker_ops_door_cut.ts`, ו־factory orchestration ב־`render_preview_marker_ops_factory.ts`. צרכני preview ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
+
+
+> עדכון Stage 68 — 3 במאי 2026:
+> ה־hotspot `esm/native/builder/render_preview_sketch_ops.ts` פורק ל־facade ציבורי קטן ולבעלויות ממוקדות: factory wiring ב־`render_preview_sketch_ops_factory.ts`, יצירת context/shared ownership ב־`render_preview_sketch_ops_context.ts`, cache/reuse/hide lifecycle ב־`render_preview_sketch_ops_state.ts`, בניית materials ב־`render_preview_sketch_ops_materials.ts`, יצירת meshes/group וקריאת slots ב־`render_preview_sketch_ops_meshes.ts`, והפעלת pipeline/reparenting ב־`render_preview_sketch_ops_apply.ts`. צרכני preview ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.

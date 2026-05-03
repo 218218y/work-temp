@@ -111,6 +111,12 @@ const previewRender = bundleSources(
   [
     '../esm/native/builder/render_preview_ops.ts',
     '../esm/native/builder/render_preview_sketch_ops.ts',
+    '../esm/native/builder/render_preview_sketch_ops_factory.ts',
+    '../esm/native/builder/render_preview_sketch_ops_context.ts',
+    '../esm/native/builder/render_preview_sketch_ops_state.ts',
+    '../esm/native/builder/render_preview_sketch_ops_materials.ts',
+    '../esm/native/builder/render_preview_sketch_ops_meshes.ts',
+    '../esm/native/builder/render_preview_sketch_ops_apply.ts',
     '../esm/native/builder/render_preview_sketch_shared.ts',
     '../esm/native/builder/render_preview_sketch_pipeline.ts',
     '../esm/native/builder/render_preview_sketch_pipeline_shared.ts',

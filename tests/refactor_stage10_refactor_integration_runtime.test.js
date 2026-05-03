@@ -164,7 +164,7 @@ test('stage 10 refactor integration audit covers guardrails, stage tests, verify
 test('stage 39 to 41 refactor control-plane stage catalog is anchored', () => {
   assert.equal(assertRefactorStageCatalogIsWellFormed(), true);
   assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(0), 'Stage 0');
-  assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(-1), 'Stage 67');
+  assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(-1), `Stage ${REFACTOR_COMPLETED_STAGE_LABELS.length - 1}`);
   assert.equal(new Set(REFACTOR_COMPLETED_STAGE_LABELS).size, REFACTOR_COMPLETED_STAGE_LABELS.length);
 
   const progress = fs.readFileSync(REFACTOR_STAGE_PROGRESS_MARKER.file, 'utf8');
@@ -309,6 +309,11 @@ test('stage 39 to 41 refactor control-plane stage catalog is anchored', () => {
   assert.ok(
     REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
       anchor.needle.includes('stage 67 render preview marker ownership split is anchored')
+    )
+  );
+  assert.ok(
+    REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
+      anchor.needle.includes('stage 68 render preview sketch placement ops ownership split is anchored')
     )
   );
 

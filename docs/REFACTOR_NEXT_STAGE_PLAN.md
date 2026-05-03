@@ -1,7 +1,7 @@
 # Refactor Next-Stage Plan
 
 Date: 2026-05-03  
-Baseline: Stage 76 complete; drawer shared render contract ownership split completed after the Stage 74 planning gate.  
+Baseline: Stage 77 complete; UI sketch-box controls runtime ownership split completed after the Stage 74 planning gate.  
 Purpose: keep the remaining modernization work professional, useful, and bounded. This document is intentionally not a wish list of large files. It is the decision gate for deciding whether the next stage should split code, improve tests, harden contracts, or stop.
 
 ## Stage 74 decision
@@ -54,13 +54,13 @@ Outcome: the review did not split external/internal drawer scene mutation again.
 
 Validation focus retained: drawer render guards, external drawer visual route guards, motion-entry tests, and builder typecheck.
 
-### Stage 77 — UI sketch-box controls controller/view review
+### Stage 77 — UI sketch-box controls controller/view review — completed
 
-Candidate area: `esm/native/ui/react/tabs/interior_layout_sketch_box_controls_*.ts(x)`.
+Completed area: `esm/native/ui/react/tabs/interior_layout_sketch_box_controls_*.ts(x)`.
 
-Why it may be worthwhile: UI controls are valuable to split only when state derivation, action wiring, and JSX presentation are tangled. A useful split should improve testability and avoid moving JSX fragments around without ownership gain.
+Outcome: the review did not move JSX fragments around for line-count reasons. It split only the proven mixed runtime/control seam: the public `interior_layout_sketch_box_controls_runtime.ts` module now remains a stable facade, while shared types, sync helpers, dimension draft commits, panel/tool toggles, base/leg controls, and cornice selection live in focused runtime owners. View-state derivation moved to `interior_layout_sketch_box_controls_state.ts`, and declarative option data moved to `interior_layout_sketch_box_controls_options.ts`, leaving the section component focused on rendering and public runtime calls.
 
-Validation focus: UI action surface tests, option button/design-system guards, and targeted React/controller tests.
+Validation focus retained: UI action surface/source guards, option button/design-system guards, sketch-box UI regression guards, and targeted TypeScript checks for the changed UI owners.
 
 ### Stage 78 — Runtime access surfaces closeout review
 

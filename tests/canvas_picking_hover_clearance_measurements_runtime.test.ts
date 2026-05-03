@@ -105,4 +105,3 @@ test('vertical clearance builder keeps front-facing labels even when drawn behin
   assert.equal(entries[0].labelFaceSign, 1);
   assert.equal(entries[1].labelFaceSign, 1);
 });
-

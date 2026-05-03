@@ -4,6 +4,46 @@ Date: 2026-05-03
 Baseline: Stage 80 complete; measurement/performance closeout completed after the Stage 74 planning gate.  
 Purpose: keep the remaining modernization work professional, useful, and bounded. This document is intentionally not a wish list of large files. It is the decision gate for deciding whether the next stage should split code, improve tests, harden contracts, or stop.
 
+## Repository alignment update
+
+The root `new refactor_workmap` draft was reviewed against the live codebase on 2026-05-03. Its direction is useful, but two assumptions are now stale:
+
+- `node tools/wp_cycles.js esm --json` reports 0 cycle groups across 2491 files and 7558 edges.
+- `node tools/wp_cycles.js types --json` reports 0 cycle groups across 72 files and 174 edges.
+
+So import-cycle work is now a guardrail, not an immediate decomposition target. The active lane wires `npm run check:import-cycles` into `check:refactor-guardrails` and `verify:refactor-modernization` so future Order PDF, export, React overlay, or type changes cannot reintroduce cycles silently.
+
+The same baseline check confirmed that `check:legacy-fallbacks`, `check:refactor-closeout`, and `check:docs-control-plane` pass. Future work should therefore start from measured product risk, behavior coverage, or a newly proven ownership seam, not from the older draft's cycle-removal phase.
+
+## Post-Stage-80 boundary hardening
+
+The first post-closeout hardening slice is complete: `npm run check:private-owner-imports` now protects the recent facade/owner splits with a single import-boundary audit instead of isolated regex checks only.
+
+The audit covers six high-risk public facade families:
+
+- Builder sketch-box door visuals.
+- Builder drawer shared render contracts.
+- UI sketch-box controls runtime.
+- Runtime `ui.raw` selectors.
+- Runtime selector facades.
+- Order PDF export commands.
+
+Each registered private owner may be imported by its public facade and sibling owners in the same family. Cross-family consumers must import the public facade. This keeps the Stage 75-79 split work stable without creating Stage 81 or splitting more code.
+
+## Control-plane metadata closeout
+
+The stage catalog now carries explicit metadata for completed Stages 74-80:
+
+- stage id and label;
+- stable slug;
+- stage kind;
+- public facade or primary surface;
+- guard file;
+- verification lane;
+- completion status.
+
+The catalog also records post-closeout guardrails such as `check:import-cycles` and `check:private-owner-imports`. `check:refactor-integration` validates that this metadata matches package scripts and guard files. This keeps future work honest: a stage is not just a number in prose, it has an owner, a guard, and a lane.
+
 ## Stage 74 decision
 
 Stage 74 is a planning and control-plane stage, not another automatic file split.
@@ -106,6 +146,8 @@ Do not create Stage 81 just to continue the numbering. If no fresh ownership sea
 | React UI split               | targeted UI tests, design-system/option-button guards, lint on changed files        |
 | Order PDF split              | targeted PDF/editor guards, text-layer/sketch-preview guards, lint on changed files |
 | Planning/control-plane stage | docs-control-plane audit, refactor integration audit, stage guard suite             |
+| Refactor baseline audit      | `check:import-cycles`, `check:legacy-fallbacks`, `check:refactor-closeout`          |
+| Facade/import-boundary guard | `check:private-owner-imports`, `check:refactor-integration`                         |
 
 ## Stop conditions
 

@@ -1172,5 +1172,13 @@ Cloud Sync הוא אזור עצום ומכוסה בהרבה בדיקות:
 > עדכון Stage 79 — 3 במאי 2026:
 > בוצע review מקצועי לאזור Order PDF export/editor לפי שער Stage 74. לא פורק כל עורך ה־PDF ולא הוזזו callbacks של React סתם; פוצל רק seam מוכח סביב async export commands. `order_pdf_overlay_export_commands.ts` נשאר facade ציבורי יציב, בעוד חוזי command עברו ל־`order_pdf_overlay_export_commands_types.ts`, עיצוב תוצאות שגיאה ל־`order_pdf_overlay_export_commands_errors.ts`, טעינת PDF מיובא ל־`order_pdf_overlay_export_commands_load_pdf.ts`, הורדות דפדפן ל־`order_pdf_overlay_export_commands_downloads.ts`, פעולות Gmail ל־`order_pdf_overlay_export_commands_gmail.ts`, וטעינת pdf.js ל־`order_pdf_overlay_export_commands_pdfjs.ts`. React export callbacks ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
 
-
 - Stage 80 — Measurement and performance guard closeout retained: this stage deliberately did not split more production code. The active closeout keeps performance/hotpath ownership on `check:perf-hotpaths`, `perf:smoke`, `perf:browser`, `docs/PERF_AND_STABILITY_BASELINE.md`, and `docs/BROWSER_PERF_AND_E2E_BASELINE.md`; `tests/refactor_stage80_measurement_perf_closeout_guard.test.js` guards the closeout policy and prevents continuing the refactor track by numbering alone.
+
+> עדכון התאמה לתכנית החדשה מהשורש — 3 במאי 2026:
+> התכנית החדשה נבדקה מול הקוד בפועל. ממצא מחזורי ה־imports שבה אינו יעד פירוק מיידי כרגע: `wp_cycles` מדווח 0 מחזורים גם ב־`esm` וגם ב־`types`. לכן הכיוון המקצועי הוא לעגן זאת כ־guard קבוע (`check:import-cycles`) בתוך `check:refactor-guardrails` ו־`verify:refactor-modernization`, ולהמשיך רק לפי באג אמיתי, מדידת ביצועים, כיסוי התנהגותי חסר, או seam חדש שמוכח לפי שער Stage 74. אין לפתוח Stage 81 רק כדי להמשיך מספור.
+
+> עדכון Post-Stage-80 — 3 במאי 2026:
+> בוצע צעד שדרוג רוחבי בלי לפרק עוד קוד: נוסף `check:private-owner-imports`, audit אחד שמגן על משפחות facade/private-owner רשומות ומונע מצרכנים לא קשורים לייבא owners פרטיים ישירות. הכיסוי מתחיל במשפחות Stage 75-79 — sketch-box door visuals, drawer shared contracts, sketch-box controls runtime, `ui.raw` selectors, runtime selectors ו־Order PDF export commands — ומחובר ל־`check:refactor-guardrails`. זה משמר את הפיצולים המקצועיים שכבר נעשו ומונע נסיגה לארכיטקטורה מעורבבת בלי לפתוח Stage 81 מלאכותי.
+
+> עדכון קטלוג שלבים — 3 במאי 2026:
+> קטלוג ה־refactor שודרג כך ששלבי 74-80 אינם רק טווח מספרי אלא רשומות metadata מפורשות: slug, סוג שלב, facade או surface ראשי, guard, verification lane וסטטוס. בנוסף נרשמו guardrails של post-closeout כמו `check:import-cycles` ו־`check:private-owner-imports`. `check:refactor-integration` מאמת שהמטא־דאטה מחוברת לסקריפטים ולקבצי ה־guard, כך שהמשך העבודה נשען על control plane ברור ולא על פרוזה שנשכחת.

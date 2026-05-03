@@ -113,7 +113,10 @@ test('stage 79 order pdf export command ownership split is anchored', () => {
 
   assert.match(pdfjs, /export async function ensureOrderPdfJsWithDeps/);
   assert.match(pdfjs, /ensureOrderPdfJs\({/);
-  assert.doesNotMatch(pdfjs, /readPdfFileBytes|triggerBlobDownloadViaBrowser|gmailAction|normalizeUnknownError/);
+  assert.doesNotMatch(
+    pdfjs,
+    /readPdfFileBytes|triggerBlobDownloadViaBrowser|gmailAction|normalizeUnknownError/
+  );
 
   const callbacks = read('esm/native/ui/react/pdf/order_pdf_overlay_export_actions_callbacks.ts');
   assert.match(callbacks, /from '\.\/order_pdf_overlay_export_commands\.js';/);

@@ -65,4 +65,3 @@ test('box shelf preview keeps shallow shelf clearance labels front-facing at 25c
   assert.ok(measurements.every(entry => typeof entry.z === 'number' && entry.z < 0));
   assert.ok(measurements.every(entry => entry.labelFaceSign === 1));
 });
-

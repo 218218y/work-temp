@@ -17,7 +17,9 @@ export function buildLoadPdfError(error: unknown): Extract<LoadPdfActionResult, 
     : { ok: false, kind: 'load-pdf', reason: 'error' };
 }
 
-export function buildExportInteractiveError(error: unknown): Extract<ExportInteractiveActionResult, { ok: false }> {
+export function buildExportInteractiveError(
+  error: unknown
+): Extract<ExportInteractiveActionResult, { ok: false }> {
   const detail = readErrorDetail(error);
   return detail
     ? { ok: false, kind: 'export-interactive', reason: 'error', detail }

@@ -1,7 +1,4 @@
-import type {
-  AppContainer,
-  BuilderSchedulerStateInternalLike,
-} from '../../../types/index.js';
+import type { AppContainer, BuilderSchedulerStateInternalLike } from '../../../types/index.js';
 
 import { assertApp, reportError } from '../runtime/api.js';
 import { ensureBuilderService } from '../runtime/builder_service_access.js';

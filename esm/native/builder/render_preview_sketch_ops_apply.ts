@@ -36,7 +36,8 @@ function attachSketchPlacementPreviewToDesiredParent(
 
     const anchorObj = owner.shared.asPreviewGroup(input.anchor) || owner.shared.asPreviewMesh(input.anchor);
     const anchorParent = owner.shared.asPreviewGroup(input.anchorParent);
-    const desiredParent = anchorParent || (anchorObj && owner.shared.asPreviewGroup(anchorObj.parent)) || null;
+    const desiredParent =
+      anchorParent || (anchorObj && owner.shared.asPreviewGroup(anchorObj.parent)) || null;
     const root = owner.wardrobeGroup(App);
 
     if (desiredParent && typeof desiredParent.add === 'function') {
@@ -49,16 +50,16 @@ function attachSketchPlacementPreviewToDesiredParent(
   }
 }
 
-export function setSketchPlacementPreviewOwner(
-  owner: RenderPreviewSketchOpsContext,
-  args: unknown
-) {
+export function setSketchPlacementPreviewOwner(owner: RenderPreviewSketchOpsContext, args: unknown) {
   const input = owner.shared.readArgs(args);
   const App = owner.app(input);
   owner.ops(App);
 
-  const initialTHREE = owner.deps.asObject<PreviewTHREESurface>(input.THREE || owner.getThreeMaybe(App)) || null;
-  const group = owner.shared.asPreviewGroup(ensureSketchPlacementPreviewOwner(owner, { App, THREE: initialTHREE }));
+  const initialTHREE =
+    owner.deps.asObject<PreviewTHREESurface>(input.THREE || owner.getThreeMaybe(App)) || null;
+  const group = owner.shared.asPreviewGroup(
+    ensureSketchPlacementPreviewOwner(owner, { App, THREE: initialTHREE })
+  );
   if (!group) return null;
 
   const THREE = initialTHREE || resolveTHREEForApply(owner, input, App);
@@ -77,7 +78,14 @@ export function setSketchPlacementPreviewOwner(
     ud: userData,
     meshes: {
       ...slots,
-      helperMeshes: [slots.shelfA, slots.boxTop, slots.boxBottom, slots.boxLeft, slots.boxRight, slots.boxBack],
+      helperMeshes: [
+        slots.shelfA,
+        slots.boxTop,
+        slots.boxBottom,
+        slots.boxLeft,
+        slots.boxRight,
+        slots.boxBack,
+      ],
     },
     shared: owner.shared,
     wardrobeGroup: owner.wardrobeGroup,

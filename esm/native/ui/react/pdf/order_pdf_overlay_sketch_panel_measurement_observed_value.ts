@@ -6,7 +6,9 @@ import type {
   ObservedViewportValueResult,
 } from './order_pdf_overlay_sketch_panel_measurement_hooks_types.js';
 
-export function useObservedViewportValue<T>(args: ObservedViewportValueArgs<T>): ObservedViewportValueResult<T> {
+export function useObservedViewportValue<T>(
+  args: ObservedViewportValueArgs<T>
+): ObservedViewportValueResult<T> {
   const {
     enabled,
     anchor,

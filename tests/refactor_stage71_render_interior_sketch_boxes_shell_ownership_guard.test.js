@@ -34,7 +34,10 @@ test('stage 71 render interior sketch box shell ownership split is anchored', ()
   assert.match(apply, /resolveSketchBoxShellMaterial\(/);
   assert.match(apply, /renderSketchBoxShellFrame\(\{ state, renderArgs \}\)/);
   assert.match(apply, /const state: ResolvedSketchBoxState = \{/);
-  assert.doesNotMatch(apply, /createBoard\(|renderSketchFreeBoxDimensions|resolveSketchBoxGeometry\(|resolveSketchFreeBoxGeometry\(/);
+  assert.doesNotMatch(
+    apply,
+    /createBoard\(|renderSketchFreeBoxDimensions|resolveSketchBoxGeometry\(|resolveSketchFreeBoxGeometry\(/
+  );
 
   assert.match(height, /export function resolveSketchBoxHeight\(/);
   assert.match(height, /height < args\.woodThick \* 2 \+ 0\.02/);
@@ -59,7 +62,10 @@ test('stage 71 render interior sketch box shell ownership split is anchored', ()
   assert.match(frame, /renderSketchBoxCarcassAdornment\(/);
   assert.match(frame, /freeBoxDimensionEntries\.push\(/);
   assert.match(frame, /renderSketchFreeBoxDimensions\(/);
-  assert.doesNotMatch(frame, /resolveSketchBoxHeight|resolveSketchBoxShellGeometry|resolveSketchBoxShellMaterial/);
+  assert.doesNotMatch(
+    frame,
+    /resolveSketchBoxHeight|resolveSketchBoxShellGeometry|resolveSketchBoxShellMaterial/
+  );
 
   for (const exportedType of [
     'ResolveSketchBoxHeightArgs',
@@ -69,7 +75,10 @@ test('stage 71 render interior sketch box shell ownership split is anchored', ()
   ]) {
     assert.match(types, new RegExp(`export type ${exportedType}`));
   }
-  assert.doesNotMatch(types, /export function |createBoard|resolveSketchBoxGeometry|renderSketchFreeBoxDimensions/);
+  assert.doesNotMatch(
+    types,
+    /export function |createBoard|resolveSketchBoxGeometry|renderSketchFreeBoxDimensions/
+  );
 
   assert.match(boxesOwner, /from '\.\/render_interior_sketch_boxes_shell\.js';/);
   assert.doesNotMatch(

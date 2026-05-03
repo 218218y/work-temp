@@ -50,7 +50,16 @@ test('stage 66 render interior sketch shared ownership split is anchored', () =>
   }
   assert.doesNotMatch(types, /export function |readRecord|toFiniteNumber|drawer\.faceW/);
 
-  for (const fn of ['readObject', 'asSketchInput', 'asValueRecord', 'asRecordArray', 'asMesh', 'asMaterial', 'asGeometry', 'asDimensionLineFn']) {
+  for (const fn of [
+    'readObject',
+    'asSketchInput',
+    'asValueRecord',
+    'asRecordArray',
+    'asMesh',
+    'asMaterial',
+    'asGeometry',
+    'asDimensionLineFn',
+  ]) {
     assert.match(records, new RegExp(`export function ${fn}(?:<[^>]+>)?\\(`));
   }
   assert.match(records, /Reflect\.apply\(value, null/);

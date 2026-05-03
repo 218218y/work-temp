@@ -8,7 +8,10 @@ import type {
   InteriorValueRecord,
 } from './render_interior_ops_contracts.js';
 
-import type { InteriorDimensionLineFn, RenderInteriorSketchInput } from './render_interior_sketch_shared_types.js';
+import type {
+  InteriorDimensionLineFn,
+  RenderInteriorSketchInput,
+} from './render_interior_sketch_shared_types.js';
 
 export function readObject<T extends object>(value: unknown): T | null {
   return readRecord<T>(value);

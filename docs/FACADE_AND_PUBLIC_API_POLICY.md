@@ -18,13 +18,13 @@ Line count is a smell, not a verdict. In this codebase, a cohesive 220-line owne
 
 Use these practical thresholds:
 
-| File shape | Default decision |
-| --- | --- |
-| Under 150 lines and cohesive | Do not split unless it has clear mixed responsibilities or risky side effects. |
-| 150–300 lines and cohesive | Usually keep. Add tests/guards before more fragmentation. |
-| 300–500 lines with multiple reasons to change | Split only along real ownership seams. |
-| Over 500 lines or mixes UI/state/effects/I/O/policy | Strong candidate for split, but still require behavior coverage. |
-| Any size with public consumers | Protect the public import path unless redesigning the API deliberately. |
+| File shape                                          | Default decision                                                               |
+| --------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Under 150 lines and cohesive                        | Do not split unless it has clear mixed responsibilities or risky side effects. |
+| 150–300 lines and cohesive                          | Usually keep. Add tests/guards before more fragmentation.                      |
+| 300–500 lines with multiple reasons to change       | Split only along real ownership seams.                                         |
+| Over 500 lines or mixes UI/state/effects/I/O/policy | Strong candidate for split, but still require behavior coverage.               |
+| Any size with public consumers                      | Protect the public import path unless redesigning the API deliberately.        |
 
 A split is justified when at least one of these is true:
 
@@ -37,7 +37,7 @@ A split is justified when at least one of these is true:
 
 A split is probably not justified when:
 
-- the only reason is “the file is 210 lines”; 
+- the only reason is “the file is 210 lines”;
 - the new files are named mechanically but still share one tangled responsibility;
 - every function is still imported by every other new file;
 - the facade is private and has only one caller;
@@ -47,13 +47,13 @@ A split is probably not justified when:
 
 Every split module should fit one of these categories.
 
-| Category | Purpose | Allowed imports | Must not contain |
-| --- | --- | --- | --- |
-| Stable public facade | External or cross-family entry point, stable import path, service/hook/factory surface | Public consumers and sibling owners | Business logic, mutable hidden state, DOM/storage/timers, fallback chains |
-| Internal owner | Owns one narrow responsibility such as state, geometry, material policy, lifecycle, or command execution | Facade and sibling owners in the same family | Public cross-family imports unless explicitly promoted |
-| Internal shared seam | Shared contract/types/helper used by sibling owners | Same implementation family, sometimes tests | Product behavior orchestration |
-| Adapter boundary | Browser, DOM, storage, timer, or vendor integration boundary | Explicit adapter callers | Domain logic or hidden fallback chains |
-| Compatibility shim | Temporary legacy import path during migration | Existing legacy consumers only | New callers, new behavior, or unbounded lifetime |
+| Category             | Purpose                                                                                                  | Allowed imports                              | Must not contain                                                          |
+| -------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------- |
+| Stable public facade | External or cross-family entry point, stable import path, service/hook/factory surface                   | Public consumers and sibling owners          | Business logic, mutable hidden state, DOM/storage/timers, fallback chains |
+| Internal owner       | Owns one narrow responsibility such as state, geometry, material policy, lifecycle, or command execution | Facade and sibling owners in the same family | Public cross-family imports unless explicitly promoted                    |
+| Internal shared seam | Shared contract/types/helper used by sibling owners                                                      | Same implementation family, sometimes tests  | Product behavior orchestration                                            |
+| Adapter boundary     | Browser, DOM, storage, timer, or vendor integration boundary                                             | Explicit adapter callers                     | Domain logic or hidden fallback chains                                    |
+| Compatibility shim   | Temporary legacy import path during migration                                                            | Existing legacy consumers only               | New callers, new behavior, or unbounded lifetime                          |
 
 ## When to keep a facade
 

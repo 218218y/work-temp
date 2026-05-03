@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-05-03T08:57:47.674Z",
+  "generatedAt": "2026-05-03T09:46:43.259Z",
   "sourceRoot": "esm",
   "summary": {
-    "totalOccurrences": 924,
-    "totalFiles": 292,
+    "totalOccurrences": 919,
+    "totalFiles": 291,
     "byCategory": {
-      "runtime-default": 733,
+      "runtime-default": 728,
       "browser-adapter": 18,
       "project-migration": 21,
       "test-fixture": 7,
@@ -339,12 +339,6 @@
         "categories": {
           "legacy-runtime-risk": 1,
           "runtime-default": 2
-        }
-      },
-      "esm/native/builder/render_interior_sketch_boxes_contents_parts.ts": {
-        "total": 5,
-        "categories": {
-          "runtime-default": 5
         }
       },
       "esm/native/builder/render_interior_sketch_boxes_fronts_support.ts": {
@@ -2840,41 +2834,6 @@
       "term": "legacy",
       "category": "legacy-runtime-risk",
       "text": "// Moves the legacy createRod closure out of BuilderCore."
-    },
-    {
-      "file": "esm/native/builder/render_interior_sketch_boxes_contents_parts.ts",
-      "line": 19,
-      "term": "fallback",
-      "category": "runtime-default",
-      "text": "fallback: unknown;"
-    },
-    {
-      "file": "esm/native/builder/render_interior_sketch_boxes_contents_parts.ts",
-      "line": 21,
-      "term": "fallback",
-      "category": "runtime-default",
-      "text": "const { getPartMaterial, isFn, partId, fallback } = args;"
-    },
-    {
-      "file": "esm/native/builder/render_interior_sketch_boxes_contents_parts.ts",
-      "line": 30,
-      "term": "fallback",
-      "category": "runtime-default",
-      "text": "return fallback;"
-    },
-    {
-      "file": "esm/native/builder/render_interior_sketch_boxes_contents_parts.ts",
-      "line": 64,
-      "term": "fallback",
-      "category": "runtime-default",
-      "text": "fallback: boxMat,"
-    },
-    {
-      "file": "esm/native/builder/render_interior_sketch_boxes_contents_parts.ts",
-      "line": 157,
-      "term": "fallback",
-      "category": "runtime-default",
-      "text": "fallback: bodyMat,"
     },
     {
       "file": "esm/native/builder/render_interior_sketch_boxes_fronts_support.ts",

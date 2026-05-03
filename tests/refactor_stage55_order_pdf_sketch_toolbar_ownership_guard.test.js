@@ -14,7 +14,9 @@ test('stage 55 order pdf sketch toolbar ownership split is anchored', () => {
   const facade = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar.tsx');
   const view = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_view.tsx');
   const palettes = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_palettes.tsx');
-  const floatingPalette = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_floating_palette.tsx');
+  const floatingPalette = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_floating_palette.tsx'
+  );
   const freehand = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_freehand.ts');
   const types = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_types.ts');
   const panel = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_view.tsx');
@@ -37,7 +39,10 @@ test('stage 55 order pdf sketch toolbar ownership split is anchored', () => {
   assert.match(view, /OrderPdfSketchDrawToolPalette/);
   assert.match(view, /OrderPdfSketchWidthPalette/);
   assert.match(view, /OrderPdfSketchColorPalette/);
-  assert.doesNotMatch(view, /createPortal|ORDER_PDF_SKETCH_COLOR_SWATCHES|ORDER_PDF_SKETCH_WIDTH_OPTIONS|FREEHAND_TOOLS/);
+  assert.doesNotMatch(
+    view,
+    /createPortal|ORDER_PDF_SKETCH_COLOR_SWATCHES|ORDER_PDF_SKETCH_WIDTH_OPTIONS|FREEHAND_TOOLS/
+  );
 
   assert.match(palettes, /export function OrderPdfSketchDrawToolPalette/);
   assert.match(palettes, /export function OrderPdfSketchWidthPalette/);
@@ -51,7 +56,10 @@ test('stage 55 order pdf sketch toolbar ownership split is anchored', () => {
   assert.match(floatingPalette, /useOrderPdfSketchFloatingPalettePlacement/);
   assert.match(floatingPalette, /createPortal/);
   assert.match(floatingPalette, /getNodeDocument/);
-  assert.doesNotMatch(floatingPalette, /ORDER_PDF_SKETCH_COLOR_SWATCHES|ORDER_PDF_SKETCH_WIDTH_OPTIONS|FREEHAND_TOOLS/);
+  assert.doesNotMatch(
+    floatingPalette,
+    /ORDER_PDF_SKETCH_COLOR_SWATCHES|ORDER_PDF_SKETCH_WIDTH_OPTIONS|FREEHAND_TOOLS/
+  );
 
   assert.match(freehand, /export const FREEHAND_TOOLS/);
   assert.match(freehand, /export function resolveFreehandToolDefinition/);

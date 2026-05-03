@@ -26,12 +26,18 @@ test('corner and sketch external drawer fronts forward glass/mirror state throug
   assert.match(corner, /isGlass \? readCurtainType\(curtain\) : null/);
 
   assert.match(sketchExternal, /resolveSketchFrontVisualState\(context\.input, opPlan\.partId\)/);
-  assert.match(sketchExternal, /frontVisualState\.isGlass[\s\S]*\? 'glass'[\s\S]*: resolveEffectiveDoorStyle/);
+  assert.match(
+    sketchExternal,
+    /frontVisualState\.isGlass[\s\S]*\? 'glass'[\s\S]*: resolveEffectiveDoorStyle/
+  );
   assert.match(sketchExternal, /frontVisualState\.isMirror/);
   assert.match(sketchExternal, /frontVisualState\.mirrorLayout/);
 
   assert.match(sketchBoxDrawers, /resolveSketchFrontVisualState\(input, partId\)/);
-  assert.match(sketchBoxDrawers, /frontVisualState\.isGlass[\s\S]*\? 'glass'[\s\S]*: resolveEffectiveDoorStyle/);
+  assert.match(
+    sketchBoxDrawers,
+    /frontVisualState\.isGlass[\s\S]*\? 'glass'[\s\S]*: resolveEffectiveDoorStyle/
+  );
   assert.match(sketchBoxDrawers, /frontVisualState\.isMirror/);
   assert.match(sketchBoxDrawers, /frontVisualState\.mirrorLayout/);
 });

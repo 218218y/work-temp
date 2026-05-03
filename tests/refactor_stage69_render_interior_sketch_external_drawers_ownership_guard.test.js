@@ -38,7 +38,10 @@ test('stage 69 render interior sketch external drawers ownership split is anchor
   assert.match(apply, /addSketchExternalDrawerFrontVisual\(context, stack, opPlan, groupNode\)/);
   assert.match(apply, /addSketchExternalDrawerBoxAndConnector\(context, stack, opPlan, groupNode\)/);
   assert.match(apply, /registerSketchExternalDrawerMotionEntry\(context, opPlan, groupNode\)/);
-  assert.doesNotMatch(apply, /new context\.THREE|computeExternalDrawersOpsForModule|resolveBuilderMirrorMaterial|createDoorVisual\(/);
+  assert.doesNotMatch(
+    apply,
+    /new context\.THREE|computeExternalDrawersOpsForModule|resolveBuilderMirrorMaterial|createDoorVisual\(/
+  );
 
   assert.match(context, /export function createSketchExternalDrawerRenderContext\(/);
   assert.match(context, /getDrawersArray\(App\)/);
@@ -46,7 +49,10 @@ test('stage 69 render interior sketch external drawers ownership split is anchor
   assert.match(context, /const doorStyle = resolveSketchDoorStyle\(App, input\);/);
   assert.match(context, /const doorStyleMap = resolveSketchDoorStyleMap\(App, input\);/);
   assert.match(context, /const resolvePartMaterial = \(partId: string\): unknown => \{/);
-  assert.doesNotMatch(context, /computeExternalDrawersOpsForModule|applySketchModulePickMeta|createDoorVisual\(/);
+  assert.doesNotMatch(
+    context,
+    /computeExternalDrawersOpsForModule|applySketchModulePickMeta|createDoorVisual\(/
+  );
 
   assert.match(plan, /export function createSketchExternalDrawerStackPlan\(/);
   assert.match(plan, /computeExternalDrawersOpsForModule\(/);
@@ -56,7 +62,10 @@ test('stage 69 render interior sketch external drawers ownership split is anchor
     plan,
     /const drawerFaceOffsetX =\s*\(context\.moduleDoorFaceSpan\?\.centerX \?\? context\.internalCenterX\) - context\.internalCenterX;/
   );
-  assert.match(plan, /applySketchExternalDrawerFaceOverrides\(drawerOps, drawerFaceW, drawerFaceOffsetX, context\.frontZ\);/);
+  assert.match(
+    plan,
+    /applySketchExternalDrawerFaceOverrides\(drawerOps, drawerFaceW, drawerFaceOffsetX, context\.frontZ\);/
+  );
   assert.match(plan, /export function createSketchExternalDrawerOpPlan\(/);
   assert.match(plan, /resolveSketchExternalDrawerFaceVerticalAlignment\(/);
   assert.doesNotMatch(plan, /new context\.THREE|applySketchModulePickMeta|createDoorVisual\(/);
@@ -84,7 +93,10 @@ test('stage 69 render interior sketch external drawers ownership split is anchor
   assert.match(box, /export function addSketchExternalDrawerBoxAndConnector\(/);
   assert.match(box, /context\.input\.createInternalDrawerBox\(/);
   assert.match(box, /new context\.THREE\.BoxGeometry\(opPlan\.boxW, opPlan\.boxH, opPlan\.boxD\)/);
-  assert.match(box, /new context\.THREE\.BoxGeometry\(opPlan\.connectorW, opPlan\.connectorH, opPlan\.connectorD\)/);
+  assert.match(
+    box,
+    /new context\.THREE\.BoxGeometry\(opPlan\.connectorW, opPlan\.connectorH, opPlan\.connectorD\)/
+  );
   assert.match(box, /applySketchModulePickMetaDeep\(drawerBoxObj, opPlan\.partId, context\.moduleKeyStr, \{/);
   assert.match(box, /applySketchModulePickMeta\(connector, opPlan\.partId, context\.moduleKeyStr, \{/);
   assert.doesNotMatch(box, /createDoorVisual|computeExternalDrawersOpsForModule|drawersArray\.push/);

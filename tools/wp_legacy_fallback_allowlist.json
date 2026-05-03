@@ -331,12 +331,6 @@
         "runtime-default": 2
       }
     },
-    "esm/native/builder/render_interior_sketch_boxes_contents_parts.ts": {
-      "total": 5,
-      "categories": {
-        "runtime-default": 5
-      }
-    },
     "esm/native/builder/render_interior_sketch_boxes_fronts_support.ts": {
       "total": 3,
       "categories": {

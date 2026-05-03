@@ -29,9 +29,18 @@ test('[wave8] render_ops extracts sketch extras and carcass flows into focused h
   assert.doesNotMatch(renderOps, /export function applyInteriorSketchExtras\(/);
   assert.doesNotMatch(renderOps, /export function applyCarcassOps\(/);
 
-  assert.match(sketchOps, /export \{ createBuilderRenderInteriorSketchOps \} from '\.\/render_interior_sketch_ops_factory\.js';/);
-  assert.match(sketchOps, /export function createBuilderRenderInteriorSketchOps\(deps: RenderInteriorSketchOpsDeps\)/);
-  assert.match(sketchOps, /applyInteriorSketchExtras: \(args: unknown\) => applyInteriorSketchExtrasOwner\(owner, args\)/);
+  assert.match(
+    sketchOps,
+    /export \{ createBuilderRenderInteriorSketchOps \} from '\.\/render_interior_sketch_ops_factory\.js';/
+  );
+  assert.match(
+    sketchOps,
+    /export function createBuilderRenderInteriorSketchOps\(deps: RenderInteriorSketchOpsDeps\)/
+  );
+  assert.match(
+    sketchOps,
+    /applyInteriorSketchExtras: \(args: unknown\) => applyInteriorSketchExtrasOwner\(owner, args\)/
+  );
 
   assert.match(carcassOps, /export function createBuilderRenderCarcassOps\(deps: RenderCarcassOpsDeps\)/);
   assert.match(carcassOps, /function applyCarcassOps\(opsIn: unknown, ctxIn: unknown\)/);

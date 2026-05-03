@@ -1,9 +1,6 @@
 import type { AppContainer } from '../../../types';
 import { getDimLabelEntry } from './render_ops_extras_dimensions.js';
-import type {
-  PreviewGroupLike,
-  SketchPlacementPreviewArgs,
-} from './render_preview_ops_contracts.js';
+import type { PreviewGroupLike, SketchPlacementPreviewArgs } from './render_preview_ops_contracts.js';
 import type { RenderPreviewSketchShared } from './render_preview_sketch_shared.js';
 import {
   readFinite,

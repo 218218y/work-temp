@@ -16,7 +16,9 @@ test('sketch placement preview renderer supports explicit front overlays for ske
     'esm/native/builder/render_preview_sketch_ops_materials.ts',
     'esm/native/builder/render_preview_sketch_ops_meshes.ts',
     'esm/native/builder/render_preview_sketch_ops_apply.ts',
-  ].map(read).join('\n');
+  ]
+    .map(read)
+    .join('\n');
   const pipeline = read('esm/native/builder/render_preview_sketch_pipeline.ts');
   const pipelineShared = read('esm/native/builder/render_preview_sketch_pipeline_shared.ts');
   const pipelineBoxContent = read('esm/native/builder/render_preview_sketch_pipeline_box_content.ts');

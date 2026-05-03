@@ -11,7 +11,6 @@ This file keeps the active engineering policies in one place. Historical stage n
 - New modules must not perform work on import. Expose explicit install/setup functions.
 - Production TypeScript should avoid `as any`; prefer concrete types, `unknown` plus narrowing, and narrow local casts only when unavoidable.
 
-
 ## Public facades and external API boundaries
 
 Use `docs/FACADE_AND_PUBLIC_API_POLICY.md` as the active decision policy for split modules.

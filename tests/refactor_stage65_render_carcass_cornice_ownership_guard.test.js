@@ -62,7 +62,12 @@ test('stage 65 render carcass cornice ownership split is anchored', () => {
   assert.match(legacy, /new THREE\.Group\(/);
   assert.doesNotMatch(legacy, /createWaveFrontSegment|applyMiterTrims|__readArray\(/);
 
-  for (const exportedType of ['CorniceThreeRuntime', 'CorniceSegmentMeshArgs', 'CorniceMeshPlacementArgs', 'CorniceMeshLike']) {
+  for (const exportedType of [
+    'CorniceThreeRuntime',
+    'CorniceSegmentMeshArgs',
+    'CorniceMeshPlacementArgs',
+    'CorniceMeshLike',
+  ]) {
     assert.match(types, new RegExp(`export (type|interface) ${exportedType}`));
   }
   assert.doesNotMatch(types, /function |new THREE|wardrobeGroup\.add|__stripMiterCaps/);

@@ -68,7 +68,9 @@ const renderPreviewSketchOps = [
   'esm/native/builder/render_preview_sketch_ops_materials.ts',
   'esm/native/builder/render_preview_sketch_ops_meshes.ts',
   'esm/native/builder/render_preview_sketch_ops_apply.ts',
-].map(file => readFileSync(file, 'utf8')).join('\n');
+]
+  .map(file => readFileSync(file, 'utf8'))
+  .join('\n');
 const renderPreviewSketchPipeline = readFileSync(
   'esm/native/builder/render_preview_sketch_pipeline.ts',
   'utf8'

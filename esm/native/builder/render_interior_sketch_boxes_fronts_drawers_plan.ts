@@ -158,7 +158,10 @@ function resolveSketchBoxExternalDrawerStackCenterY(
   const yNormC = toFiniteNumber(item.yNormC);
   const yNormBase = toFiniteNumber(item.yNorm);
   if (yNormC != null) {
-    return context.clampDrawerCenterY(boxCenterY - boxHalfH + Math.max(0, Math.min(1, yNormC)) * boxHeight, stackH);
+    return context.clampDrawerCenterY(
+      boxCenterY - boxHalfH + Math.max(0, Math.min(1, yNormC)) * boxHeight,
+      stackH
+    );
   }
   if (yNormBase != null) {
     return context.clampDrawerCenterY(

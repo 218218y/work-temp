@@ -93,7 +93,12 @@ export function OrderPdfOverlaySketchPanel(props: OrderPdfOverlaySketchPanelProp
           />
 
           <div className="wp-pdf-sketch-panel-content">
-            <OrderPdfSketchPanelHeader activeEntry={activeEntry} busy={busy} error={error} entryCount={entries.length} />
+            <OrderPdfSketchPanelHeader
+              activeEntry={activeEntry}
+              busy={busy}
+              error={error}
+              entryCount={entries.length}
+            />
 
             <OrderPdfSketchPanelCards
               entries={entries}

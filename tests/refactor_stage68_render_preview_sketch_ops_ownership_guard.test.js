@@ -71,7 +71,10 @@ test('stage 68 render preview sketch placement ops ownership split is anchored',
   assert.match(apply, /attachSketchPlacementPreviewToDesiredParent\(owner, App, input, group\)/);
   assert.match(apply, /readSketchPlacementPreviewMeshSlots\(group, owner\.shared\)/);
   assert.match(apply, /applySketchPlacementPreview\(\{/);
-  assert.doesNotMatch(apply, /new THREE\.|MeshBasicMaterial|LineBasicMaterial|hideSketchPlacementMeasurements/);
+  assert.doesNotMatch(
+    apply,
+    /new THREE\.|MeshBasicMaterial|LineBasicMaterial|hideSketchPlacementMeasurements/
+  );
 
   for (const exportedType of [
     'RenderPreviewSketchOpsContext',
@@ -89,5 +92,8 @@ test('stage 68 render preview sketch placement ops ownership split is anchored',
     'render preview aggregator must keep using the public sketch placement facade instead of private owners'
   );
 
-  assert.doesNotMatch(facade + factory + context + state + materials + meshes + apply + types, /export default\s+/);
+  assert.doesNotMatch(
+    facade + factory + context + state + materials + meshes + apply + types,
+    /export default\s+/
+  );
 });

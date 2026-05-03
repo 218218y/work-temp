@@ -1,5 +1,5 @@
 export const REFACTOR_COMPLETED_STAGE_LABELS = Object.freeze(
-  Array.from({ length: 73 }, (_, index) => `Stage ${index}`)
+  Array.from({ length: 74 }, (_, index) => `Stage ${index}`)
 );
 
 export const REFACTOR_STAGE_PROGRESS_MARKER = Object.freeze({
@@ -180,13 +180,17 @@ export const REFACTOR_INTEGRATION_ANCHORS = Object.freeze([
     needle: 'stage 72 render interior sketch box external drawers ownership split is anchored',
     message: 'stage 72 render interior sketch box external drawers ownership split guard must stay anchored',
   },
+  {
+    file: 'tests/refactor_stage73_render_interior_sketch_boxes_contents_parts_ownership_guard.test.js',
+    needle: 'stage 73 render interior sketch box static contents ownership split is anchored',
+    message: 'stage 73 render interior sketch box static contents ownership split guard must stay anchored',
+  },
 
   {
     file: 'tests/project_config_migration_replace_keys_runtime.test.ts',
     needle: 'materializes every replace-owned branch',
     message: 'project config migration must prove replace-owned branch materialization',
   },
-
 
   {
     file: 'tests/project_config_migration_replace_keys_runtime.test.ts',

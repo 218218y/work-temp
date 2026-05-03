@@ -18,7 +18,11 @@ export function addSketchExternalDrawerFrontVisual(
   groupNode: InteriorGroupLike
 ): void {
   const frontVisualState = resolveSketchFrontVisualState(context.input, opPlan.partId);
-  const materialSet = resolveSketchExternalDrawerFrontMaterials(context, opPlan.frontMat, frontVisualState.isMirror);
+  const materialSet = resolveSketchExternalDrawerFrontMaterials(
+    context,
+    opPlan.frontMat,
+    frontVisualState.isMirror
+  );
   const visual = createSketchExternalDrawerFrontVisual(context, opPlan, materialSet, frontVisualState);
   const visualObj =
     (readObject<InteriorGroupLike>(visual) || asMesh(visual)) ??

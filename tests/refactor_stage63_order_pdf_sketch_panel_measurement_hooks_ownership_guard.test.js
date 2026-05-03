@@ -13,13 +13,19 @@ function lineCount(source) {
 test('stage 63 order pdf sketch panel measurement hooks ownership split is anchored', () => {
   const facade = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_measurement_hooks.ts');
   const types = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_measurement_hooks_types.ts');
-  const observed = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_measurement_observed_value.ts');
-  const drawingRect = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_measurement_drawing_rect.ts');
+  const observed = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_measurement_observed_value.ts'
+  );
+  const drawingRect = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_measurement_drawing_rect.ts'
+  );
   const placement = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_measurement_placement.ts');
   const panelHooks = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_hooks.ts');
   const card = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_card.tsx');
   const controllerHook = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_controller_hook.ts');
-  const floatingPalette = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_floating_palette.tsx');
+  const floatingPalette = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_floating_palette.tsx'
+  );
 
   assert.ok(lineCount(facade) <= 8, 'measurement hooks public module must stay a tiny facade');
   assert.match(facade, /order_pdf_overlay_sketch_panel_measurement_drawing_rect\.js/);
@@ -41,13 +47,19 @@ test('stage 63 order pdf sketch panel measurement hooks ownership split is ancho
   assert.match(observed, /observeViewportLayout/);
   assert.match(observed, /getNodeDocument/);
   assert.match(observed, /getNodeWindow/);
-  assert.doesNotMatch(observed, /readOrderPdfDrawingRect|resolveOrderPdfSketchToolbarPlacement|resolveOrderPdfSketchFloatingPalettePlacement/);
+  assert.doesNotMatch(
+    observed,
+    /readOrderPdfDrawingRect|resolveOrderPdfSketchToolbarPlacement|resolveOrderPdfSketchFloatingPalettePlacement/
+  );
 
   assert.match(drawingRect, /export function useObservedOrderPdfDrawingRect/);
   assert.match(drawingRect, /readOrderPdfDrawingRect/);
   assert.match(drawingRect, /areOrderPdfDrawingRectsEqual/);
   assert.match(drawingRect, /areOrderPdfDrawingRectSizesEqual/);
-  assert.doesNotMatch(drawingRect, /resolveOrderPdfSketchToolbarPlacement|resolveOrderPdfSketchFloatingPalettePlacement/);
+  assert.doesNotMatch(
+    drawingRect,
+    /resolveOrderPdfSketchToolbarPlacement|resolveOrderPdfSketchFloatingPalettePlacement/
+  );
 
   assert.match(placement, /export function useOrderPdfSketchFloatingPalettePlacement/);
   assert.match(placement, /export function useOrderPdfSketchToolbarPlacement/);

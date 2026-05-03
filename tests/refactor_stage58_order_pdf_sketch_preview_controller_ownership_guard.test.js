@@ -13,7 +13,9 @@ function lineCount(source) {
 test('stage 58 order pdf sketch preview controller ownership split is anchored', () => {
   const facade = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_preview_controller.ts');
   const types = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_preview_controller_types.ts');
-  const viewport = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_preview_controller_viewport_state.ts');
+  const viewport = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_preview_controller_viewport_state.ts'
+  );
   const session = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_preview_controller_session.ts');
   const refresh = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_preview_controller_refresh.ts');
   const hook = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_preview_controller_hook.ts');
@@ -54,13 +56,19 @@ test('stage 58 order pdf sketch preview controller ownership split is anchored',
   assert.match(refresh, /export function useOrderPdfSketchPreviewRefresh\(/);
   assert.match(refresh, /runOrderPdfSketchPreviewBuildSession/);
   assert.match(refresh, /revokeOrderPdfSketchPreviewEntries/);
-  assert.doesNotMatch(refresh, /applyViewportSketchMode|setDoorsOpenViaService|captureOrderPdfSketchPreviewSessionSnapshot/);
+  assert.doesNotMatch(
+    refresh,
+    /applyViewportSketchMode|setDoorsOpenViaService|captureOrderPdfSketchPreviewSessionSnapshot/
+  );
 
   assert.match(hook, /useOrderPdfSketchPreviewViewportStateAdapters/);
   assert.match(hook, /useOrderPdfSketchPreviewRefresh/);
   assert.match(hook, /captureOrderPdfSketchPreviewControllerSessionSnapshot/);
   assert.match(hook, /restoreOrderPdfSketchPreviewControllerSessionState/);
-  assert.doesNotMatch(hook, /applyViewportSketchMode|getDoorsOpenViaService|runOrderPdfSketchPreviewBuildSession/);
+  assert.doesNotMatch(
+    hook,
+    /applyViewportSketchMode|getDoorsOpenViaService|runOrderPdfSketchPreviewBuildSession/
+  );
 
   assert.match(overlay, /from '\.\/order_pdf_overlay_sketch_preview_controller\.js';/);
   assert.doesNotMatch(

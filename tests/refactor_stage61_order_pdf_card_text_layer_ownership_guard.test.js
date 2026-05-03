@@ -37,7 +37,10 @@ test('stage 61 order pdf card text layer ownership split is anchored', () => {
   assert.match(editor, /readOrderPdfSketchEditorTextValue/);
   assert.match(editor, /getNodeWindow/);
   assert.match(editor, /selection\.addRange/);
-  assert.doesNotMatch(editor, /useOrderPdfSketchCardTextLayerInteractions|resolveOrderPdfSketchRenderedTextBoxes/);
+  assert.doesNotMatch(
+    editor,
+    /useOrderPdfSketchCardTextLayerInteractions|resolveOrderPdfSketchRenderedTextBoxes/
+  );
 
   assert.match(palette, /export function useOrderPdfSketchCardTextLayerPaletteState/);
   assert.match(palette, /setColorPaletteOpen\(false\)/);
@@ -57,7 +60,10 @@ test('stage 61 order pdf card text layer ownership split is anchored', () => {
   assert.match(hook, /useOrderPdfSketchCardTextLayerInteractions/);
   assert.match(hook, /useOrderPdfSketchRenderedTextLayerBoxes/);
   assert.match(hook, /useOrderPdfSketchActiveTextLayerControls/);
-  assert.doesNotMatch(hook, /readOrderPdfSketchEditorTextValue|getNodeWindow|resolveOrderPdfSketchRenderedTextBoxes/);
+  assert.doesNotMatch(
+    hook,
+    /readOrderPdfSketchEditorTextValue|getNodeWindow|resolveOrderPdfSketchRenderedTextBoxes/
+  );
 
   assert.match(consumer, /from '\.\/order_pdf_overlay_sketch_card_text_layer_hooks\.js';/);
   assert.doesNotMatch(

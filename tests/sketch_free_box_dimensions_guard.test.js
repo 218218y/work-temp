@@ -29,7 +29,10 @@ test('[sketch free box] dimension overlay is rendered from sketch box geometry a
   const boxesNorm = normalizeWhitespace(boxes);
   const layoutNorm = normalizeWhitespace(layout);
   assert.match(srcNorm, /const renderOps = (?:asRecord|asValueRecord)\(owner\.ops\(App\)\);/);
-  assert.match(srcNorm, /const addDimensionLine = asDimensionLineFn\(resolved\.renderOps\?\.addDimensionLine\);/);
+  assert.match(
+    srcNorm,
+    /const addDimensionLine = asDimensionLineFn\(resolved\.renderOps\?\.addDimensionLine\);/
+  );
   assert.match(
     srcNorm,
     /const showDimensions = !!(?:asRecord|asValueRecord)\(resolved\.input\.cfg\)\?\.showDimensions;/

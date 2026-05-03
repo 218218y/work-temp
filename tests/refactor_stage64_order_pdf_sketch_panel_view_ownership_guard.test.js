@@ -30,7 +30,10 @@ test('stage 64 order pdf sketch panel view ownership split is anchored', () => {
   assert.match(types, /export type OrderPdfOverlaySketchPanelProps/);
   assert.match(types, /OrderPdfDraft/);
   assert.match(types, /OrderPdfSketchAnnotationPageKey/);
-  assert.doesNotMatch(types, /ReactElement|function |<section|OrderPdfSketchToolbar|useOrderPdfSketchPanelViewHooks/);
+  assert.doesNotMatch(
+    types,
+    /ReactElement|function |<section|OrderPdfSketchToolbar|useOrderPdfSketchPanelViewHooks/
+  );
 
   assert.match(view, /export function OrderPdfOverlaySketchPanel/);
   assert.match(view, /useOrderPdfSketchPanelViewHooks/);
@@ -48,7 +51,10 @@ test('stage 64 order pdf sketch panel view ownership split is anchored', () => {
   assert.match(cards, /export function OrderPdfSketchPanelCards/);
   assert.match(cards, /OrderPdfSketchCard/);
   assert.match(cards, /wp-pdf-sketch-grid/);
-  assert.doesNotMatch(cards, /OrderPdfSketchToolbar|OrderPdfSketchPanelHeader|useOrderPdfSketchPanelViewHooks/);
+  assert.doesNotMatch(
+    cards,
+    /OrderPdfSketchToolbar|OrderPdfSketchPanelHeader|useOrderPdfSketchPanelViewHooks/
+  );
 
   assert.match(editorSurface, /from '\.\/order_pdf_overlay_sketch_panel\.js';/);
   assert.doesNotMatch(

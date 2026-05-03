@@ -1,7 +1,4 @@
-import type {
-  PreviewMarkerArgs,
-  RenderPreviewMarkerContext,
-} from './render_preview_marker_ops_types.js';
+import type { PreviewMarkerArgs, RenderPreviewMarkerContext } from './render_preview_marker_ops_types.js';
 import {
   ensureCachedMarker,
   ensureWardrobeAttachment,

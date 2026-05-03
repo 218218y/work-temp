@@ -14,10 +14,7 @@ import { createInteriorSketchExtrasPlacementPlan } from './render_interior_sketc
 
 import type { RenderInteriorSketchOpsContext } from './render_interior_sketch_ops_types.js';
 
-export function applyInteriorSketchExtrasOwner(
-  owner: RenderInteriorSketchOpsContext,
-  args: unknown
-): true {
+export function applyInteriorSketchExtrasOwner(owner: RenderInteriorSketchOpsContext, args: unknown): true {
   const resolved = resolveInteriorSketchExtrasInput(owner, args);
   if (!resolved) return true;
 

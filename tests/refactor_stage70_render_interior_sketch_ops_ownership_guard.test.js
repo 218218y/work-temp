@@ -34,13 +34,19 @@ test('stage 70 render interior sketch ops ownership split is anchored', () => {
   assert.match(factory, /export function createBuilderRenderInteriorSketchOps\(/);
   assert.match(factory, /createBuilderRenderInteriorSketchOpsContext\(deps\)/);
   assert.match(factory, /applyInteriorSketchExtrasOwner\(owner, args\)/);
-  assert.doesNotMatch(factory, /renderInteriorSketchBoxes|resolveSketchModuleInnerFaces|createInteriorSketchPlacementSupport/);
+  assert.doesNotMatch(
+    factory,
+    /renderInteriorSketchBoxes|resolveSketchModuleInnerFaces|createInteriorSketchPlacementSupport/
+  );
 
   assert.match(context, /export function createBuilderRenderInteriorSketchOpsContext\(/);
   assert.match(context, /createMeasureWardrobeLocalBox\(/);
   assert.match(context, /markSplitHoverPickablesDirty:/);
   assert.match(context, /measureWardrobeLocalBox,/);
-  assert.doesNotMatch(context, /renderInteriorSketchBoxes|applySketchExternalDrawers|resolveSketchModuleInnerFaces/);
+  assert.doesNotMatch(
+    context,
+    /renderInteriorSketchBoxes|applySketchExternalDrawers|resolveSketchModuleInnerFaces/
+  );
 
   assert.match(input, /export function resolveInteriorSketchExtrasInput\(/);
   assert.match(input, /asRecordArray<SketchShelfExtra>\(extra\.shelves\)/);
@@ -48,11 +54,17 @@ test('stage 70 render interior sketch ops ownership split is anchored', () => {
   assert.match(input, /resolveSketchModuleDoorFaceSpan\(/);
   assert.match(input, /readSketchDoorVisualFactory\(input\.createDoorVisual\)/);
   assert.match(input, /const braceShelfWidth = braceInnerW > 0/);
-  assert.doesNotMatch(input, /renderInteriorSketchBoxes|createInteriorSketchPlacementSupport|applySketchExternalDrawers/);
+  assert.doesNotMatch(
+    input,
+    /renderInteriorSketchBoxes|createInteriorSketchPlacementSupport|applySketchExternalDrawers/
+  );
 
   assert.match(dimensions, /export function resolveInteriorSketchThreeAndDimensions\(/);
   assert.match(dimensions, /asDimensionLineFn\(resolved\.renderOps\?\.addDimensionLine\)/);
-  assert.match(dimensions, /owner\.assertTHREE\(resolved\.App, 'native\/builder\/render_ops\.applyInteriorSketchExtras'\)/);
+  assert.match(
+    dimensions,
+    /owner\.assertTHREE\(resolved\.App, 'native\/builder\/render_ops\.applyInteriorSketchExtras'\)/
+  );
   assert.match(dimensions, /export function renderInteriorSketchPendingFreeBoxDimensions\(/);
   assert.match(dimensions, /renderSketchFreeBoxDimensionOverlays\(/);
   assert.doesNotMatch(dimensions, /renderInteriorSketchBoxes|applySketchShelves|applySketchExternalDrawers/);
@@ -61,7 +73,10 @@ test('stage 70 render interior sketch ops ownership split is anchored', () => {
   assert.match(placement, /createInteriorSketchPlacementSupport\(/);
   assert.match(placement, /matCache: owner\.matCache/);
   assert.match(placement, /faces: resolved\.faces/);
-  assert.doesNotMatch(placement, /renderInteriorSketchBoxes|applySketchStorageBarriers|applySketchExternalDrawers/);
+  assert.doesNotMatch(
+    placement,
+    /renderInteriorSketchBoxes|applySketchStorageBarriers|applySketchExternalDrawers/
+  );
 
   assert.match(boxes, /export function renderInteriorSketchOwnedBoxes\(/);
   assert.match(boxes, /renderInteriorSketchBoxes\(/);
@@ -80,17 +95,26 @@ test('stage 70 render interior sketch ops ownership split is anchored', () => {
   assert.match(extras, /export function applyInteriorSketchOwnedDrawers\(/);
   assert.match(extras, /applySketchExternalDrawers\(/);
   assert.match(extras, /applySketchInternalDrawers\(/);
-  assert.doesNotMatch(extras, /renderInteriorSketchBoxes|resolveSketchModuleInnerFaces|createInteriorSketchPlacementSupport/);
+  assert.doesNotMatch(
+    extras,
+    /renderInteriorSketchBoxes|resolveSketchModuleInnerFaces|createInteriorSketchPlacementSupport/
+  );
 
   assert.match(apply, /export function applyInteriorSketchExtrasOwner\(/);
   assert.match(apply, /resolveInteriorSketchExtrasInput\(owner, args\)/);
   assert.match(apply, /resolveInteriorSketchThreeAndDimensions\(owner, resolved\)/);
   assert.match(apply, /createInteriorSketchExtrasPlacementPlan\(owner, resolved, resolvedThree\)/);
-  assert.match(apply, /renderInteriorSketchOwnedBoxes\(\{ owner, resolved, resolvedThree, placementPlan \}\)/);
+  assert.match(
+    apply,
+    /renderInteriorSketchOwnedBoxes\(\{ owner, resolved, resolvedThree, placementPlan \}\)/
+  );
   assert.match(apply, /applyInteriorSketchOwnedStorageBarriers\(resolved, owner\)/);
   assert.match(apply, /renderInteriorSketchPendingFreeBoxDimensions\(resolvedThree\)/);
   assert.match(apply, /applyInteriorSketchOwnedDrawers\(\{ owner, resolved, resolvedThree \}\)/);
-  assert.doesNotMatch(apply, /renderInteriorSketchBoxes\(|resolveSketchModuleInnerFaces|createInteriorSketchPlacementSupport|assertTHREE\(/);
+  assert.doesNotMatch(
+    apply,
+    /renderInteriorSketchBoxes\(|resolveSketchModuleInnerFaces|createInteriorSketchPlacementSupport|assertTHREE\(/
+  );
 
   for (const exportedType of [
     'RenderInteriorSketchOpsContext',

@@ -20,7 +20,9 @@ type UseOrderPdfSketchPreviewRefreshArgs = {
   viewport: OrderPdfSketchPreviewViewportStateAdapters;
 };
 
-export function useOrderPdfSketchPreviewRefresh(args: UseOrderPdfSketchPreviewRefreshArgs): () => Promise<void> {
+export function useOrderPdfSketchPreviewRefresh(
+  args: UseOrderPdfSketchPreviewRefreshArgs
+): () => Promise<void> {
   const {
     draft,
     buildSketchPreview,

@@ -91,7 +91,14 @@ export function useOrderPdfSketchActiveTextLayerControls(
       if (typeof patch.fontSize === 'number') closeSizePalette();
       focusTextBoxEditor(activeTextBox.id);
     },
-    [activeTextBox, closeColorPalette, closeSizePalette, focusTextBoxEditor, persistLiveTextBox, readEditorText]
+    [
+      activeTextBox,
+      closeColorPalette,
+      closeSizePalette,
+      focusTextBoxEditor,
+      persistLiveTextBox,
+      readEditorText,
+    ]
   );
 
   return { activateTextBox, handleApplyActiveTextBoxPatch };

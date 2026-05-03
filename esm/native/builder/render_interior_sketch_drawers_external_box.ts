@@ -6,7 +6,10 @@ import type {
 } from './render_interior_sketch_drawers_external_types.js';
 
 import { readObject } from './render_interior_sketch_shared.js';
-import { applySketchModulePickMeta, applySketchModulePickMetaDeep } from './render_interior_sketch_pick_meta.js';
+import {
+  applySketchModulePickMeta,
+  applySketchModulePickMetaDeep,
+} from './render_interior_sketch_pick_meta.js';
 
 export function addSketchExternalDrawerBoxAndConnector(
   context: SketchExternalDrawerRenderContext,
@@ -35,7 +38,10 @@ function addSketchExternalDrawerBox(
         false,
         false
       )
-    : new context.THREE.Mesh(new context.THREE.BoxGeometry(opPlan.boxW, opPlan.boxH, opPlan.boxD), context.bodyMat);
+    : new context.THREE.Mesh(
+        new context.THREE.BoxGeometry(opPlan.boxW, opPlan.boxH, opPlan.boxD),
+        context.bodyMat
+      );
   const drawerBoxObj = readObject<InteriorGroupLike>(drawerBox) ?? null;
   if (!drawerBoxObj) return;
 

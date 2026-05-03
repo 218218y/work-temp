@@ -8,9 +8,7 @@ import type {
   WardrobeAttachmentGroup,
 } from './render_preview_marker_ops_types.js';
 
-export function createRenderPreviewMarkerContext(
-  deps: RenderPreviewOpsDeps
-): RenderPreviewMarkerContext {
+export function createRenderPreviewMarkerContext(deps: RenderPreviewOpsDeps): RenderPreviewMarkerContext {
   return {
     app: deps.app,
     ops: deps.ops,
@@ -47,10 +45,7 @@ export function readMarkerTHREE(value: unknown): MarkerTHREESurface | null {
     : null;
 }
 
-export function ensureWardrobeAttachment(
-  group: unknown,
-  marker: MarkerMeshLike
-): MarkerMeshLike {
+export function ensureWardrobeAttachment(group: unknown, marker: MarkerMeshLike): MarkerMeshLike {
   marker.userData = marker.userData || {};
   marker.userData.__ignoreRaycast = true;
   marker.raycast = function () {};

@@ -21,7 +21,10 @@ export function createSketchExternalDrawerGroupNode(
   groupNode.position?.set?.(opPlan.px, opPlan.py, opPlan.pz);
 
   const groupUd = readObject<InteriorValueRecord>(groupNode.userData) || {};
-  const resolvedModuleIndex = resolveSketchExternalDrawerModuleIndexValue(context.moduleKeyStr, context.moduleIndex);
+  const resolvedModuleIndex = resolveSketchExternalDrawerModuleIndexValue(
+    context.moduleKeyStr,
+    context.moduleIndex
+  );
   const resolvedStackKey = resolveSketchExternalDrawerStackKey(context.input, context.moduleKeyStr);
   groupUd.partId = opPlan.partId;
   groupUd.moduleIndex = resolvedModuleIndex || context.moduleIndex;

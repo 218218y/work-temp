@@ -26,7 +26,9 @@ export function OrderPdfSketchPanelHeader(props: OrderPdfSketchPanelHeaderProps)
       {error ? <div className="wp-pdf-sketch-status is-error">{error}</div> : null}
       {busy ? <div className="wp-pdf-sketch-status">טוען את דפי הסקיצה מה‑PDF הנוכחי…</div> : null}
       {!busy && !entryCount ? (
-        <div className="wp-pdf-sketch-status">אין כרגע דפי סקיצה זמינים להצגה. לחץ על רענון כדי לטעון אותם.</div>
+        <div className="wp-pdf-sketch-status">
+          אין כרגע דפי סקיצה זמינים להצגה. לחץ על רענון כדי לטעון אותם.
+        </div>
       ) : null}
     </>
   );

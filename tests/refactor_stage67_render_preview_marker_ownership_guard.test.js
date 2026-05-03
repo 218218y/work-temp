@@ -70,7 +70,10 @@ test('stage 67 render preview marker ownership split is anchored', () => {
   assert.match(split, /function ensureSplitHoverMarker\(args: PreviewMarkerArgs\)/);
   assert.match(split, /ctx\.writeCacheValue\(App, 'splitHoverMarker', mesh\)/);
   assert.match(split, /mesh\.userData\.__matTop = matTop;/);
-  assert.doesNotMatch(split, /function ensureDoorActionHoverMarker|function ensureDoorCutHoverMarker|__matGroove|__matRemove/);
+  assert.doesNotMatch(
+    split,
+    /function ensureDoorActionHoverMarker|function ensureDoorCutHoverMarker|__matGroove|__matRemove/
+  );
 
   assert.match(doorAction, /export function createDoorActionHoverMarkerOwner\(/);
   assert.match(doorAction, /function ensureDoorActionHoverMarker\(args: PreviewMarkerArgs\)/);
@@ -78,14 +81,20 @@ test('stage 67 render preview marker ownership split is anchored', () => {
   assert.match(doorAction, /mesh\.userData\.__matAdd = addMat;/);
   assert.match(doorAction, /mesh\.userData\.__matMirror = mirrorMat;/);
   assert.match(doorAction, /mesh\.userData\.__matCenter = centerMat;/);
-  assert.doesNotMatch(doorAction, /function ensureSplitHoverMarker|function ensureDoorCutHoverMarker|__matTop/);
+  assert.doesNotMatch(
+    doorAction,
+    /function ensureSplitHoverMarker|function ensureDoorCutHoverMarker|__matTop/
+  );
 
   assert.match(doorCut, /export function createDoorCutHoverMarkerOwner\(/);
   assert.match(doorCut, /function ensureDoorCutHoverMarker\(args: PreviewMarkerArgs\)/);
   assert.match(doorCut, /ctx\.writeCacheValue\(App, 'doorCutHoverMarker', mesh\)/);
   assert.match(doorCut, /mesh\.userData\.__matAdd = addMat;/);
   assert.match(doorCut, /mesh\.userData\.__matRemove = removeMat;/);
-  assert.doesNotMatch(doorCut, /function ensureSplitHoverMarker|function ensureDoorActionHoverMarker|__matGroove|__matCenter/);
+  assert.doesNotMatch(
+    doorCut,
+    /function ensureSplitHoverMarker|function ensureDoorActionHoverMarker|__matGroove|__matCenter/
+  );
 
   assert.match(previewOwner, /from '\.\/render_preview_marker_ops\.js';/);
   assert.doesNotMatch(

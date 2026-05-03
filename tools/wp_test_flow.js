@@ -21,7 +21,8 @@ function normalizeSlash(value) {
 }
 
 function reportRoot(projectRoot, childEnv) {
-  const configured = typeof childEnv?.WP_TEST_REPORT_DIR === 'string' ? childEnv.WP_TEST_REPORT_DIR.trim() : '';
+  const configured =
+    typeof childEnv?.WP_TEST_REPORT_DIR === 'string' ? childEnv.WP_TEST_REPORT_DIR.trim() : '';
   return path.resolve(projectRoot, configured || REPORT_DIR);
 }
 
@@ -96,7 +97,9 @@ function createMarkdownReport({ failures, totalFiles }) {
   for (const failure of failures) {
     const names = failure.failedTests.length
       ? failure.failedTests.slice(0, MAX_INLINE_NAMES).join('<br>') +
-        (failure.failedTests.length > MAX_INLINE_NAMES ? `<br>… +${failure.failedTests.length - MAX_INLINE_NAMES} more` : '')
+        (failure.failedTests.length > MAX_INLINE_NAMES
+          ? `<br>… +${failure.failedTests.length - MAX_INLINE_NAMES} more`
+          : '')
       : '_No individual test name was parsed; open the log for the exact assertion output._';
     lines.push(
       `| \`${mdCell(failure.file)}\` | ${failure.status} | ${mdCell(names)} | \`${mdCell(failure.logFile)}\` |`
@@ -129,7 +132,9 @@ function createJunitReport(failures) {
   ];
   for (const testCase of cases) {
     const message = `${testCase.file} exited with status ${testCase.status}`;
-    lines.push(`    <testcase classname="${xml(testCase.file)}" name="${xml(testCase.name)}" file="${xml(testCase.file)}">`);
+    lines.push(
+      `    <testcase classname="${xml(testCase.file)}" name="${xml(testCase.name)}" file="${xml(testCase.file)}">`
+    );
     lines.push(`      <failure message="${xml(message)}">${xml(junitOutput(testCase.output))}</failure>`);
     lines.push('    </testcase>');
   }
@@ -173,8 +178,12 @@ function writeFailureReport({ projectRoot, childEnv, failures, totalFiles }) {
   fs.writeFileSync(junitPath, createJunitReport(normalized), 'utf8');
   fs.writeFileSync(jsonPath, `${JSON.stringify(summary, null, 2)}\n`, 'utf8');
 
-  console.error(`[WardrobePro] Test failure report written to ${normalizeSlash(path.relative(projectRoot, markdownPath))}`);
-  console.error(`[WardrobePro] JUnit failure report written to ${normalizeSlash(path.relative(projectRoot, junitPath))}`);
+  console.error(
+    `[WardrobePro] Test failure report written to ${normalizeSlash(path.relative(projectRoot, markdownPath))}`
+  );
+  console.error(
+    `[WardrobePro] JUnit failure report written to ${normalizeSlash(path.relative(projectRoot, junitPath))}`
+  );
 
   return { reportDir: root, markdownPath, junitPath, jsonPath, failures: normalized };
 }

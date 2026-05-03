@@ -39,14 +39,20 @@ test('stage 72 render interior sketch box external drawers ownership split is an
   assert.match(apply, /addSketchBoxExternalDrawerFrontVisual\(/);
   assert.match(apply, /addSketchBoxExternalDrawerBoxAndConnector\(/);
   assert.match(apply, /registerSketchBoxExternalDrawerMotionEntry\(/);
-  assert.doesNotMatch(apply, /computeExternalDrawersOpsForModule|resolveBuilderMirrorMaterial|new context\.THREE\.Mesh\(/);
+  assert.doesNotMatch(
+    apply,
+    /computeExternalDrawersOpsForModule|resolveBuilderMirrorMaterial|new context\.THREE\.Mesh\(/
+  );
 
   assert.match(context, /export function createSketchBoxExternalDrawersContext\(/);
   assert.match(context, /asRecordArray<InteriorValueRecord>\(box\.extDrawers\)/);
   assert.match(context, /resolveBuilderMirrorMaterial\(/);
   assert.match(context, /getDrawersArray\(App\)/);
   assert.match(context, /const clampDrawerCenterY = \(centerY: number, stackH: number\)/);
-  assert.doesNotMatch(context, /computeExternalDrawersOpsForModule|resolveSketchFrontVisualState|drawersArray\.push/);
+  assert.doesNotMatch(
+    context,
+    /computeExternalDrawersOpsForModule|resolveSketchFrontVisualState|drawersArray\.push/
+  );
 
   assert.match(plan, /export function createSketchBoxExternalDrawerStackPlan\(/);
   assert.match(plan, /computeExternalDrawersOpsForModule\(/);
@@ -55,19 +61,31 @@ test('stage 72 render interior sketch box external drawers ownership split is an
   assert.match(plan, /export function createSketchBoxExternalDrawerOpPlan\(/);
   assert.match(plan, /resolveSketchExternalDrawerFaceVerticalAlignment\(/);
   assert.match(plan, /containerMaxY: innerTopY - context\.woodThick/);
-  assert.doesNotMatch(plan, /resolveBuilderMirrorMaterial|resolveSketchFrontVisualState|createInternalDrawerBox|drawersArray\.push/);
+  assert.doesNotMatch(
+    plan,
+    /resolveBuilderMirrorMaterial|resolveSketchFrontVisualState|createInternalDrawerBox|drawersArray\.push/
+  );
 
   assert.match(group, /export function createSketchBoxExternalDrawerGroupNode\(/);
   assert.match(group, /__wpSketchBoxId: bid/);
   assert.match(group, /__wpSketchFreePlacement: isFreePlacement === true/);
   assert.match(group, /__wpSketchExtDrawer: true/);
-  assert.doesNotMatch(group, /computeExternalDrawersOpsForModule|resolveSketchFrontVisualState|createInternalDrawerBox|drawersArray\.push/);
+  assert.doesNotMatch(
+    group,
+    /computeExternalDrawersOpsForModule|resolveSketchFrontVisualState|createInternalDrawerBox|drawersArray\.push/
+  );
 
   assert.match(visual, /export function addSketchBoxExternalDrawerFrontVisual\(/);
   assert.match(visual, /resolveSketchFrontVisualState\(context\.input, opPlan\.partId\)/);
-  assert.match(visual, /resolveEffectiveDoorStyle\(context\.doorStyle, context\.doorStyleMap, opPlan\.partId\)/);
+  assert.match(
+    visual,
+    /resolveEffectiveDoorStyle\(context\.doorStyle, context\.doorStyleMap, opPlan\.partId\)/
+  );
   assert.match(visual, /applySketchBoxPickMetaDeep\(visualObj, opPlan\.partId, context\.moduleKeyStr, bid/);
-  assert.doesNotMatch(visual, /computeExternalDrawersOpsForModule|createInternalDrawerBox|drawersArray\.push/);
+  assert.doesNotMatch(
+    visual,
+    /computeExternalDrawersOpsForModule|createInternalDrawerBox|drawersArray\.push/
+  );
 
   assert.match(box, /export function addSketchBoxExternalDrawerBoxAndConnector\(/);
   assert.match(box, /context\.createInternalDrawerBox\(/);
@@ -78,7 +96,10 @@ test('stage 72 render interior sketch box external drawers ownership split is an
   assert.match(motion, /export function registerSketchBoxExternalDrawerMotionEntry\(/);
   assert.match(motion, /context\.drawersArray\.push\(drawerEntry\)/);
   assert.match(motion, /new context\.THREE\.Vector3\(x, y, z\)/);
-  assert.doesNotMatch(motion, /computeExternalDrawersOpsForModule|resolveSketchFrontVisualState|createInternalDrawerBox/);
+  assert.doesNotMatch(
+    motion,
+    /computeExternalDrawersOpsForModule|resolveSketchFrontVisualState|createInternalDrawerBox/
+  );
 
   for (const exportedType of [
     'RenderSketchBoxExternalDrawersArgs',
@@ -89,7 +110,10 @@ test('stage 72 render interior sketch box external drawers ownership split is an
   ]) {
     assert.match(types, new RegExp(`export type ${exportedType}`));
   }
-  assert.doesNotMatch(types, /export function |computeExternalDrawersOpsForModule|resolveSketchFrontVisualState/);
+  assert.doesNotMatch(
+    types,
+    /export function |computeExternalDrawersOpsForModule|resolveSketchFrontVisualState/
+  );
 
   assert.match(frontsOwner, /from '\.\/render_interior_sketch_boxes_fronts_drawers\.js';/);
   assert.doesNotMatch(
@@ -98,5 +122,8 @@ test('stage 72 render interior sketch box external drawers ownership split is an
     'sketch box fronts owner must keep using the public drawer facade instead of private drawer owners'
   );
 
-  assert.doesNotMatch(facade + apply + context + plan + group + visual + box + motion + types, /export default\s+/);
+  assert.doesNotMatch(
+    facade + apply + context + plan + group + visual + box + motion + types,
+    /export default\s+/
+  );
 });

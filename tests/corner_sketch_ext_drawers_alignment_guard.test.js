@@ -56,8 +56,14 @@ test('corner sketch external drawers carry scoped module metadata and reuse real
     sketchDrawersSrc,
     /resolveSketchFrontVisualState\(context\.input, opPlan\.partId\)[\s\S]*context\.input\.createDoorVisual\([\s\S]*materialSet\.frontFaceMat,[\s\S]*frontVisualState\.isGlass[\s\S]*resolveEffectiveDoorStyle\(context\.doorStyle, context\.doorStyleMap, opPlan\.partId\),[\s\S]*frontVisualState\.mirrorLayout,[\s\S]*opPlan\.partId/
   );
-  assert.match(sketchDrawersSrc, /applySketchModulePickMetaDeep\(visualObj, opPlan\.partId, context\.moduleKeyStr, \{/);
-  assert.match(sketchDrawersSrc, /applySketchModulePickMetaDeep\(groupNode, opPlan\.partId, context\.moduleKeyStr, \{/);
+  assert.match(
+    sketchDrawersSrc,
+    /applySketchModulePickMetaDeep\(visualObj, opPlan\.partId, context\.moduleKeyStr, \{/
+  );
+  assert.match(
+    sketchDrawersSrc,
+    /applySketchModulePickMetaDeep\(groupNode, opPlan\.partId, context\.moduleKeyStr, \{/
+  );
   assert.doesNotMatch(
     sketchDrawersSrc,
     /applySketchBoxPickMetaDeep\(groupNode, partId, moduleKeyStr, drawerId/

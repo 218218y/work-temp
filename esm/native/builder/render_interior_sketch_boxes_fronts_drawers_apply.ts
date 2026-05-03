@@ -16,7 +16,11 @@ export function renderSketchBoxExternalDrawers(args: RenderSketchBoxExternalDraw
   if (!context) return;
 
   for (let drawerIndex = 0; drawerIndex < context.boxExtDrawers.length; drawerIndex++) {
-    const stack = createSketchBoxExternalDrawerStackPlan(context, context.boxExtDrawers[drawerIndex], drawerIndex);
+    const stack = createSketchBoxExternalDrawerStackPlan(
+      context,
+      context.boxExtDrawers[drawerIndex],
+      drawerIndex
+    );
     if (!stack) continue;
 
     for (let opIndex = 0; opIndex < stack.drawerOps.length; opIndex++) {

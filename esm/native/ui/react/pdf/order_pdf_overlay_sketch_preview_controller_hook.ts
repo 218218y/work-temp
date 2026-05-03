@@ -82,7 +82,13 @@ export function useOrderPdfOverlaySketchPreview(
       }
       return nextOpen;
     });
-  }, [sketchPreviewEntries.length, sketchPreviewBusy, refreshSketchPreview, viewport, restoreSketchPreviewSessionState]);
+  }, [
+    sketchPreviewEntries.length,
+    sketchPreviewBusy,
+    refreshSketchPreview,
+    viewport,
+    restoreSketchPreviewSessionState,
+  ]);
 
   useEffect(() => {
     if (open) return;

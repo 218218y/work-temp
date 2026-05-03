@@ -5,7 +5,11 @@ import type { InteriorValueRecord } from './render_interior_ops_contracts.js';
 import type { ApplySketchExternalDrawersArgs } from './render_interior_sketch_drawers_shared.js';
 import type { SketchExternalDrawerRenderContext } from './render_interior_sketch_drawers_external_types.js';
 
-import { readObject, resolveSketchExternalDrawerDoorFaceTopY, toFiniteNumber } from './render_interior_sketch_shared.js';
+import {
+  readObject,
+  resolveSketchExternalDrawerDoorFaceTopY,
+  toFiniteNumber,
+} from './render_interior_sketch_shared.js';
 import {
   resolveSketchDoorStyle,
   resolveSketchDoorStyleMap,
@@ -14,7 +18,18 @@ import {
 export function createSketchExternalDrawerRenderContext(
   args: ApplySketchExternalDrawersArgs
 ): SketchExternalDrawerRenderContext | null {
-  const { App, input, extDrawers, THREE, innerW, moduleDepth, internalDepth, effectiveTopY, woodThick, isFn } = args;
+  const {
+    App,
+    input,
+    extDrawers,
+    THREE,
+    innerW,
+    moduleDepth,
+    internalDepth,
+    effectiveTopY,
+    woodThick,
+    isFn,
+  } = args;
 
   if (!extDrawers.length || !THREE) return null;
 

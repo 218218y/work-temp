@@ -11,14 +11,7 @@ export function createWaveFrontSegment(args: CorniceSegmentMeshArgs) {
   const ampRaw = __asFinite(seg.waveAmp);
   const cyclesRaw = __asFinite(seg.waveCycles);
   const cycles = Number.isFinite(cyclesRaw) ? Math.max(1, Math.round(cyclesRaw)) : 2;
-  if (
-    !Number.isFinite(w) ||
-    w <= 0 ||
-    !Number.isFinite(d) ||
-    d <= 0 ||
-    !Number.isFinite(hMax) ||
-    hMax <= 0
-  ) {
+  if (!Number.isFinite(w) || w <= 0 || !Number.isFinite(d) || d <= 0 || !Number.isFinite(hMax) || hMax <= 0) {
     return null;
   }
   const amp = Number.isFinite(ampRaw)

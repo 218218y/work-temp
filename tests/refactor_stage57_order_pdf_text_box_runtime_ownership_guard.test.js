@@ -14,7 +14,9 @@ test('stage 57 order pdf text box runtime ownership split is anchored', () => {
   const facade = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_text_box_runtime.ts');
   const types = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_text_box_runtime_types.ts');
   const geometry = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_text_box_runtime_geometry.ts');
-  const interaction = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_text_box_runtime_interaction.ts');
+  const interaction = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_text_box_runtime_interaction.ts'
+  );
   const equality = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_text_box_runtime_equality.ts');
   const consumerFiles = [
     'esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_runtime.ts',
@@ -52,7 +54,10 @@ test('stage 57 order pdf text box runtime ownership split is anchored', () => {
   ]) {
     assert.match(geometry, new RegExp(needle), `geometry owner must contain ${needle}`);
   }
-  assert.doesNotMatch(geometry, /createOrderPdfSketchTextBoxPointerInteraction|areOrderPdfSketchTextBoxesEqual/);
+  assert.doesNotMatch(
+    geometry,
+    /createOrderPdfSketchTextBoxPointerInteraction|areOrderPdfSketchTextBoxesEqual/
+  );
 
   for (const needle of [
     'createOrderPdfSketchTextBoxMoveInteraction',
@@ -63,7 +68,10 @@ test('stage 57 order pdf text box runtime ownership split is anchored', () => {
   ]) {
     assert.match(interaction, new RegExp(needle), `interaction owner must contain ${needle}`);
   }
-  assert.doesNotMatch(interaction, /areOrderPdfSketchTextBoxesEqual|shouldCreateOrderPdfSketchTextBoxFromPointerDrag/);
+  assert.doesNotMatch(
+    interaction,
+    /areOrderPdfSketchTextBoxesEqual|shouldCreateOrderPdfSketchTextBoxFromPointerDrag/
+  );
 
   for (const needle of [
     'areOrderPdfSketchTextBoxesEqual',

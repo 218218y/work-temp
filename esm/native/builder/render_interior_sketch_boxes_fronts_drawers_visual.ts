@@ -18,7 +18,11 @@ export function addSketchBoxExternalDrawerFrontVisual(
   const { shell } = context;
   const { boxId: bid, boxMat, isFreePlacement } = shell;
   const frontVisualState = resolveSketchFrontVisualState(context.input, opPlan.partId);
-  const materialSet = resolveSketchBoxExternalDrawerFrontMaterials(context, opPlan.frontMat, frontVisualState.isMirror);
+  const materialSet = resolveSketchBoxExternalDrawerFrontMaterials(
+    context,
+    opPlan.frontMat,
+    frontVisualState.isMirror
+  );
   const visual = createSketchBoxExternalDrawerFrontVisual(context, opPlan, materialSet, frontVisualState);
   const visualObj =
     (readObject<InteriorGroupLike>(visual) || asMesh(visual)) ??

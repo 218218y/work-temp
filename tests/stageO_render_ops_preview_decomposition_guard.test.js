@@ -69,7 +69,10 @@ test('[stageO] render_ops preview/hover helpers are extracted behind a focused h
   assert.match(previewSketchFactory, /ensureSketchPlacementPreviewOwner\(owner, args\)/);
   assert.match(previewSketchContext, /createRenderPreviewSketchShared\(deps\)/);
   assert.match(previewSketchState, /export function ensureSketchPlacementPreviewOwner\(/);
-  assert.match(previewSketchMaterials, /matBoxOverlay: createSketchMeshMaterial\(THREE, shared, 0xfbbf24, 0\.3, false\)/);
+  assert.match(
+    previewSketchMaterials,
+    /matBoxOverlay: createSketchMeshMaterial\(THREE, shared, 0xfbbf24, 0\.3, false\)/
+  );
   assert.match(previewSketchApply, /applySketchPlacementPreview\(\{/);
   assert.match(
     previewSketchShared,

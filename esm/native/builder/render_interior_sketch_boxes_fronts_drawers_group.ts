@@ -21,7 +21,10 @@ export function createSketchBoxExternalDrawerGroupNode(
     ...(readObject<InteriorValueRecord>(groupNode.userData) || {}),
     partId: opPlan.partId,
     moduleIndex: context.moduleIndex,
-    __wpStack: typeof context.moduleKeyStr === 'string' && context.moduleKeyStr.startsWith('lower_') ? 'bottom' : 'top',
+    __wpStack:
+      typeof context.moduleKeyStr === 'string' && context.moduleKeyStr.startsWith('lower_')
+        ? 'bottom'
+        : 'top',
     __doorWidth: opPlan.faceW,
     __doorHeight: opPlan.visualH,
     __wpFaceOffsetX: opPlan.faceOffsetX,

@@ -12,10 +12,7 @@ import {
 } from '../tools/wp_test_state.js';
 import { getNodeArgs } from '../tools/wp_test_shared.js';
 import { ensureDistBuilt, extractFailedTestNames, runTestFlow } from '../tools/wp_test_flow.js';
-import {
-  formatNodeTestOutputForConsole,
-  isNodeTestSummaryDiagnosticLine,
-} from '../tools/wp_test_console.js';
+import { formatNodeTestOutputForConsole, isNodeTestSummaryDiagnosticLine } from '../tools/wp_test_console.js';
 
 function tempDir() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'wp-test-'));

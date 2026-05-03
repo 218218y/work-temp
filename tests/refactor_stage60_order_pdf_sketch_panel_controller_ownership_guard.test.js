@@ -14,9 +14,13 @@ test('stage 60 order pdf sketch panel controller ownership split is anchored', (
   const facade = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_controller.ts');
   const types = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_controller_types.ts');
   const hook = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_controller_hook.ts');
-  const activeState = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_controller_active_state.ts');
+  const activeState = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_controller_active_state.ts'
+  );
   const stateHooks = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_controller_state_hooks.ts');
-  const annotationHooks = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_controller_annotation_hooks.ts');
+  const annotationHooks = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_controller_annotation_hooks.ts'
+  );
   const consumers = [
     read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_view_hooks.ts'),
     read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_types.ts'),

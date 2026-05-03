@@ -20,7 +20,7 @@ test('stage 77 sketch box controls runtime ownership split is anchored', () => {
   const integrationAudit = read('tools/wp_refactor_integration_audit.mjs');
   const pkg = JSON.parse(read('package.json'));
 
-  assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(-1), 'Stage 77');
+  assert.ok(REFACTOR_COMPLETED_STAGE_LABELS.includes('Stage 77'));
   assert.ok(
     REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
       anchor.needle.includes('stage 77 sketch box controls runtime ownership split is anchored')
@@ -40,7 +40,9 @@ test('stage 77 sketch box controls runtime ownership split is anchored', () => {
   const facade = read('esm/native/ui/react/tabs/interior_layout_sketch_box_controls_runtime.ts');
   const types = read('esm/native/ui/react/tabs/interior_layout_sketch_box_controls_runtime_types.ts');
   const sync = read('esm/native/ui/react/tabs/interior_layout_sketch_box_controls_runtime_sync.ts');
-  const dimensions = read('esm/native/ui/react/tabs/interior_layout_sketch_box_controls_runtime_dimensions.ts');
+  const dimensions = read(
+    'esm/native/ui/react/tabs/interior_layout_sketch_box_controls_runtime_dimensions.ts'
+  );
   const panels = read('esm/native/ui/react/tabs/interior_layout_sketch_box_controls_runtime_panels.ts');
   const base = read('esm/native/ui/react/tabs/interior_layout_sketch_box_controls_runtime_base.ts');
   const cornice = read('esm/native/ui/react/tabs/interior_layout_sketch_box_controls_runtime_cornice.ts');

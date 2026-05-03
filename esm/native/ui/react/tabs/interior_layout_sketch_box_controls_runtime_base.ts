@@ -1,8 +1,4 @@
-import type {
-  SketchBoxBaseType,
-  SketchBoxLegColor,
-  SketchBoxLegStyle,
-} from './interior_tab_helpers.js';
+import type { SketchBoxBaseType, SketchBoxLegColor, SketchBoxLegStyle } from './interior_tab_helpers.js';
 import {
   BASE_LEG_HEIGHT_MAX_CM,
   BASE_LEG_HEIGHT_MIN_CM,

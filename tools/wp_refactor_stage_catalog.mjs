@@ -1,5 +1,5 @@
 export const REFACTOR_COMPLETED_STAGE_LABELS = Object.freeze(
-  Array.from({ length: 78 }, (_, index) => `Stage ${index}`)
+  Array.from({ length: 79 }, (_, index) => `Stage ${index}`)
 );
 
 export const REFACTOR_STAGE_PROGRESS_MARKER = Object.freeze({
@@ -204,6 +204,12 @@ export const REFACTOR_INTEGRATION_ANCHORS = Object.freeze([
     file: 'tests/refactor_stage77_sketch_box_controls_runtime_ownership_guard.test.js',
     needle: 'stage 77 sketch box controls runtime ownership split is anchored',
     message: 'stage 77 sketch box controls runtime ownership split must stay anchored',
+  },
+
+  {
+    file: 'tests/refactor_stage78_runtime_access_surfaces_ownership_guard.test.js',
+    needle: 'stage 78 runtime access surfaces ownership split is anchored',
+    message: 'stage 78 runtime access surfaces ownership split must stay anchored',
   },
 
   {

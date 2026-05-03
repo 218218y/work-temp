@@ -44,7 +44,10 @@ test('stage 76 drawer shared render contract ownership split is anchored', () =>
   const external = read('esm/native/builder/render_drawer_ops_external.ts');
   const internal = read('esm/native/builder/render_drawer_ops_internal.ts');
 
-  assert.match(facade, /export type \{[\s\S]*BuilderRenderDrawerDeps[\s\S]*\} from '\.\/render_drawer_ops_shared_types\.js';/);
+  assert.match(
+    facade,
+    /export type \{[\s\S]*BuilderRenderDrawerDeps[\s\S]*\} from '\.\/render_drawer_ops_shared_types\.js';/
+  );
   assert.match(facade, /from '\.\/render_drawer_ops_shared_guards\.js';/);
   assert.match(facade, /from '\.\/render_drawer_ops_shared_readers\.js';/);
   assert.match(facade, /from '\.\/render_drawer_ops_shared_ops\.js';/);
@@ -64,14 +67,20 @@ test('stage 76 drawer shared render contract ownership split is anchored', () =>
   assert.match(guards, /export function isRecord/);
   assert.match(guards, /export function readThreeLike/);
   assert.match(guards, /export function readFinitePositive/);
-  assert.doesNotMatch(guards, /readDoorStyleMap|readCurtainType|readExternalDrawerOp|resolveDrawerVisualState/);
+  assert.doesNotMatch(
+    guards,
+    /readDoorStyleMap|readCurtainType|readExternalDrawerOp|resolveDrawerVisualState/
+  );
 
   assert.match(readers, /export function readDrawerConfig/);
   assert.match(readers, /readDoorStyleMap\(value\.doorStyleMap\)/);
   assert.match(readers, /export function readCreateDoorVisual/);
   assert.match(readers, /createDoorVisual returned invalid object/);
   assert.match(readers, /export function readAddFoldedClothes/);
-  assert.doesNotMatch(readers, /readCurtainType|export function readExternalDrawerOp|export function resolveDrawerVisualState/);
+  assert.doesNotMatch(
+    readers,
+    /readCurtainType|export function readExternalDrawerOp|export function resolveDrawerVisualState/
+  );
 
   assert.match(ops, /export function readExternalDrawerOp/);
   assert.match(ops, /export function readInternalDrawerOp/);

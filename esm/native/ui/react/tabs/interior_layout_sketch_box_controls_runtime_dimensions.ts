@@ -17,10 +17,7 @@ const OPTIONAL_DIM_BOUNDS: Readonly<{ min: number; max: number }> = {
   max: SKETCH_BOX_OPTIONAL_DIM_MAX_CM,
 };
 
-export function updateSketchBoxHeightDraft(
-  props: InteriorSketchBoxControlsSectionProps,
-  raw: string
-): void {
+export function updateSketchBoxHeightDraft(props: InteriorSketchBoxControlsSectionProps, raw: string): void {
   props.setSketchBoxHeightDraft(raw);
   if (raw.trim() === '') return;
 

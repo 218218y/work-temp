@@ -1,8 +1,4 @@
-import type {
-  SketchBoxBaseType,
-  SketchBoxLegColor,
-  SketchBoxLegStyle,
-} from './interior_tab_helpers.js';
+import type { SketchBoxBaseType, SketchBoxLegColor, SketchBoxLegStyle } from './interior_tab_helpers.js';
 import type { InteriorSketchBoxControlsSectionProps } from './interior_layout_sketch_section_types.js';
 import type { SketchBoxOptionalDimensionValue } from './interior_layout_sketch_box_controls_runtime_types.js';
 

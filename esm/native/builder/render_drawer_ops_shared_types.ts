@@ -1,9 +1,4 @@
-import type {
-  AppContainer,
-  DrawerVisualEntryLike,
-  UnknownCallable,
-  ThreeLike,
-} from '../../../types';
+import type { AppContainer, DrawerVisualEntryLike, UnknownCallable, ThreeLike } from '../../../types';
 import type { readDoorStyleMap } from '../features/door_style_overrides.js';
 
 export type FnLike = UnknownCallable;

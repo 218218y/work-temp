@@ -1,7 +1,7 @@
 # Refactor Next-Stage Plan
 
 Date: 2026-05-03  
-Baseline: Stage 77 complete; UI sketch-box controls runtime ownership split completed after the Stage 74 planning gate.  
+Baseline: Stage 78 complete; runtime access surface ownership split completed after the Stage 74 planning gate.  
 Purpose: keep the remaining modernization work professional, useful, and bounded. This document is intentionally not a wish list of large files. It is the decision gate for deciding whether the next stage should split code, improve tests, harden contracts, or stop.
 
 ## Stage 74 decision
@@ -36,7 +36,7 @@ The recent Builder sketch/render ownership work is coherent:
 
 ## Next qualified implementation stages
 
-These are the next useful candidates, ordered by expected value and risk control. Stages 75 and 76 are complete; the exact next stage should still be re-checked against the current ZIP before editing.
+These are the next useful candidates, ordered by expected value and risk control. Stages 75 through 78 are complete; the exact next stage should still be re-checked against the current ZIP before editing.
 
 ### Stage 75 — Sketch box fronts/doors ownership review — completed
 
@@ -62,13 +62,13 @@ Outcome: the review did not move JSX fragments around for line-count reasons. It
 
 Validation focus retained: UI action surface/source guards, option button/design-system guards, sketch-box UI regression guards, and targeted TypeScript checks for the changed UI owners.
 
-### Stage 78 — Runtime access surfaces closeout review
+### Stage 78 — Runtime access surfaces closeout review — completed
 
-Candidate area: `esm/native/runtime/ui_raw_selectors.ts`, `runtime_selectors.ts`, and related access readers/writers.
+Completed area: `esm/native/runtime/ui_raw_selectors.ts`, `runtime_selectors.ts`, and focused selector owner modules.
 
-Why it may be worthwhile: the high-value work here is not facades for their own sake. It is ensuring canonical raw-only reads, migration-boundary fallbacks, and write access stay separate.
+Outcome: the review did not create access wrappers for their own sake. It split two proven mixed seams while preserving the public facades: tolerant ui.raw snapshot fallback now lives in `ui_raw_selectors_snapshot.ts`, canonical raw-only fail-fast policy in `ui_raw_selectors_canonical.ts`, ui.raw store adapters in `ui_raw_selectors_store.ts`, and shared scalar parsing in `ui_raw_selectors_shared.ts`. Runtime selector defaults/snapshot access/store access were similarly separated across `runtime_selectors_shared.ts`, `runtime_selectors_normalizers.ts`, `runtime_selectors_snapshot.ts`, and `runtime_selectors_store.ts`. The canonical-vs-legacy boundary is now visible and guarded.
 
-Validation focus: runtime selector policy, project migration boundary, type-hardening, and public API contract tests.
+Validation focus retained: runtime selector policy, project migration boundary, runtime selector normalization tests, type-hardening, and public API contract tests.
 
 ### Stage 79 — Order PDF export/editor flow review
 

@@ -1,6 +1,9 @@
 import type { InteriorSketchBoxControlsSectionProps } from './interior_layout_sketch_section_types.js';
 import type { SketchBoxToolId } from './interior_layout_sketch_box_controls_runtime_types.js';
-import { syncSketchBoxBaseTool, syncSketchBoxTool } from './interior_layout_sketch_box_controls_runtime_sync.js';
+import {
+  syncSketchBoxBaseTool,
+  syncSketchBoxTool,
+} from './interior_layout_sketch_box_controls_runtime_sync.js';
 
 export function toggleSketchBoxControlsPanel(
   props: InteriorSketchBoxControlsSectionProps,

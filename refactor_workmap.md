@@ -1171,3 +1171,6 @@ Cloud Sync הוא אזור עצום ומכוסה בהרבה בדיקות:
 
 > עדכון Stage 79 — 3 במאי 2026:
 > בוצע review מקצועי לאזור Order PDF export/editor לפי שער Stage 74. לא פורק כל עורך ה־PDF ולא הוזזו callbacks של React סתם; פוצל רק seam מוכח סביב async export commands. `order_pdf_overlay_export_commands.ts` נשאר facade ציבורי יציב, בעוד חוזי command עברו ל־`order_pdf_overlay_export_commands_types.ts`, עיצוב תוצאות שגיאה ל־`order_pdf_overlay_export_commands_errors.ts`, טעינת PDF מיובא ל־`order_pdf_overlay_export_commands_load_pdf.ts`, הורדות דפדפן ל־`order_pdf_overlay_export_commands_downloads.ts`, פעולות Gmail ל־`order_pdf_overlay_export_commands_gmail.ts`, וטעינת pdf.js ל־`order_pdf_overlay_export_commands_pdfjs.ts`. React export callbacks ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
+
+
+- Stage 80 — Measurement and performance guard closeout retained: this stage deliberately did not split more production code. The active closeout keeps performance/hotpath ownership on `check:perf-hotpaths`, `perf:smoke`, `perf:browser`, `docs/PERF_AND_STABILITY_BASELINE.md`, and `docs/BROWSER_PERF_AND_E2E_BASELINE.md`; `tests/refactor_stage80_measurement_perf_closeout_guard.test.js` guards the closeout policy and prevents continuing the refactor track by numbering alone.

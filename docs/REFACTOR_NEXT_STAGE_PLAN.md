@@ -1,7 +1,7 @@
 # Refactor Next-Stage Plan
 
 Date: 2026-05-03  
-Baseline: Stage 79 complete; Order PDF export command ownership split completed after the Stage 74 planning gate.  
+Baseline: Stage 80 complete; measurement/performance closeout completed after the Stage 74 planning gate.  
 Purpose: keep the remaining modernization work professional, useful, and bounded. This document is intentionally not a wish list of large files. It is the decision gate for deciding whether the next stage should split code, improve tests, harden contracts, or stop.
 
 ## Stage 74 decision
@@ -36,7 +36,7 @@ The recent Builder sketch/render ownership work is coherent:
 
 ## Next qualified implementation stages
 
-These are the next useful candidates, ordered by expected value and risk control. Stages 75 through 79 are complete; the exact next stage should still be re-checked against the current ZIP before editing.
+These are the next useful candidates, ordered by expected value and risk control. Stages 75 through 80 are complete; further refactor work should stop unless a new bug, feature, or measured performance issue proves a fresh ownership seam.
 
 ### Stage 75 — Sketch box fronts/doors ownership review — completed
 
@@ -78,13 +78,24 @@ Outcome: the review did not split the whole PDF editor or move UI callbacks arou
 
 Validation focus retained: export command runtime tests, export overlay tests, command owner guard, docs-control-plane, refactor integration, and stage guards.
 
-### Stage 80 — Measurement and performance guard closeout
+### Stage 80 — Measurement and performance guard closeout — completed
 
-Candidate area: perf/runtime measurement docs, hotpath guards, and browser smoke baselines.
+Completed area: perf/runtime measurement docs, hotpath guard wiring, smoke baseline ownership, and refactor stop conditions.
 
-Why it may be worthwhile: after many ownership splits, the final professional step is proving performance and user-flow stability, not endlessly carving files.
+Outcome: this was deliberately not another source split. The closeout keeps `check:perf-hotpaths`, `perf:smoke`, `perf:browser`, `docs/PERF_AND_STABILITY_BASELINE.md`, and `docs/BROWSER_PERF_AND_E2E_BASELINE.md` as the active measurement surface. It also adds a Stage 80 guard so the completed refactor catalog, docs-control-plane, perf scripts, and stop policy stay synchronized.
 
-Validation focus: `check:perf-hotpaths`, smoke tests that are practical to run, and documented baselines.
+Validation focus retained: `check:perf-hotpaths`, `check:refactor-closeout`, smoke/baseline script wiring, documented baseline targets, refactor integration, docs-control-plane, and stage guards.
+
+## Refactor closeout after Stage 80
+
+Stage 80 closes the current modernization/refactor track. The next professional move is not Stage 81 by default. Future work should be triaged as one of these:
+
+1. **Bug fix** — reproduce the user-visible defect, fix the canonical owner, and add a behavior regression test.
+2. **Measured performance work** — run or update the relevant perf smoke/baseline, then change the owner responsible for the measured regression.
+3. **Feature work** — design the public API/state contract first, then implement the narrowest owner change.
+4. **New refactor stage** — allowed only if it passes the professional split gate again with a concrete ownership seam and behavior validation.
+
+Do not create Stage 81 just to continue the numbering. If no fresh ownership seam is proven, the refactor track is done.
 
 ## Validation matrix for every future stage
 

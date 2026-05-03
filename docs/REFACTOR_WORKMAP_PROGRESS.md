@@ -129,3 +129,7 @@ When docs are cleaned again, keep this file as the single compact integration ma
 
 > עדכון Stage 79 — 3 במאי 2026:
 > בוצע review מקצועי לאזור Order PDF export/editor לפי שער Stage 74. לא פורק כל עורך ה־PDF ולא הוזזו callbacks של React סתם; פוצל רק seam מוכח סביב async export commands. `order_pdf_overlay_export_commands.ts` נשאר facade ציבורי יציב, בעוד חוזי command עברו ל־`order_pdf_overlay_export_commands_types.ts`, עיצוב תוצאות שגיאה ל־`order_pdf_overlay_export_commands_errors.ts`, טעינת PDF מיובא ל־`order_pdf_overlay_export_commands_load_pdf.ts`, הורדות דפדפן ל־`order_pdf_overlay_export_commands_downloads.ts`, פעולות Gmail ל־`order_pdf_overlay_export_commands_gmail.ts`, וטעינת pdf.js ל־`order_pdf_overlay_export_commands_pdfjs.ts`. React export callbacks ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
+
+
+> עדכון Stage 80 — 3 במאי 2026:
+> בוצעה סגירת מסלול refactor מקצועית סביב מדידה וביצועים, לא עוד פירוק קוד. `docs/REFACTOR_NEXT_STAGE_PLAN.md` עודכן כך ש־Stage 80 מסומן כ־completed ומגדיר ש־Stage 81 אינו ברירת מחדל; המשך עבודה צריך להיות באגים, ביצועים מדידים או פיצ'רים, אלא אם מוכח seam חדש לפי שער Stage 74. `docs/QUALITY_GUARDRAILS.md` קיבל סעיף closeout שמחבר בין `check:perf-hotpaths`, `perf:smoke`, `perf:browser`, baseline docs ו־stop conditions. השלב מעוגן ב־`tests/refactor_stage80_measurement_perf_closeout_guard.test.js` וב־`check:refactor-closeout` כדי לשמור את הקטלוג, הבדיקות, התיעוד ומדיניות הסגירה מסונכרנים.

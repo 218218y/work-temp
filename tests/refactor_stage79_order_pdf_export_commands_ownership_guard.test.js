@@ -48,7 +48,7 @@ test('stage 79 order pdf export command ownership split is anchored', () => {
   const integrationAudit = read('tools/wp_refactor_integration_audit.mjs');
   const pkg = JSON.parse(read('package.json'));
 
-  assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(-1), 'Stage 79');
+  assert.ok(REFACTOR_COMPLETED_STAGE_LABELS.includes('Stage 79'));
   assert.ok(
     REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
       anchor.needle.includes('stage 79 order pdf export command ownership split is anchored')

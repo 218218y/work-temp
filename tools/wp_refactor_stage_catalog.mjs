@@ -1,5 +1,5 @@
 export const REFACTOR_COMPLETED_STAGE_LABELS = Object.freeze(
-  Array.from({ length: 80 }, (_, index) => `Stage ${index}`)
+  Array.from({ length: 81 }, (_, index) => `Stage ${index}`)
 );
 
 export const REFACTOR_STAGE_PROGRESS_MARKER = Object.freeze({
@@ -219,9 +219,21 @@ export const REFACTOR_INTEGRATION_ANCHORS = Object.freeze([
   },
 
   {
+    file: 'tests/refactor_stage80_measurement_perf_closeout_guard.test.js',
+    needle: 'stage 80 measurement and performance closeout is anchored',
+    message: 'stage 80 measurement and performance closeout must stay anchored',
+  },
+
+  {
     file: 'tests/project_config_migration_replace_keys_runtime.test.ts',
     needle: 'materializes every replace-owned branch',
     message: 'project config migration must prove replace-owned branch materialization',
+  },
+
+  {
+    file: 'tests/refactor_stage80_measurement_perf_closeout_guard.test.js',
+    needle: 'stage 80 measurement and performance closeout is anchored',
+    message: 'stage 80 measurement and performance closeout must stay anchored',
   },
 
   {

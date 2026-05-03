@@ -47,9 +47,7 @@ export function getRtFromSnapshot(rt: unknown): RuntimeRecordLike {
   return isRuntimeRecordLike(rt) ? rt : EMPTY_RUNTIME;
 }
 
-export function readRuntimeValue<K extends RuntimeScalarKey>(rt: unknown, key: K): unknown;
-export function readRuntimeValue(rt: unknown, key: string): unknown;
-export function readRuntimeValue(rt: unknown, key: string): unknown {
+export function readRuntimeValue(rt: unknown, key: RuntimeScalarKey | string): unknown {
   return getRtFromSnapshot(rt)[key];
 }
 

@@ -143,6 +143,7 @@ test('sketch external drawers source keeps module faces aligned to real door spa
   const src = [
     await readSourceFiles([
       '../esm/native/builder/render_interior_sketch_ops.ts',
+      '../esm/native/builder/render_interior_sketch_ops_input.ts',
       '../esm/native/builder/render_interior_sketch_module_geometry.ts',
       '../esm/native/builder/render_interior_sketch_drawers.ts',
       '../esm/native/builder/render_interior_sketch_drawers_shared.ts',
@@ -190,6 +191,7 @@ test('sketch box drawers and external drawers source use divider-aware spans', a
   const src = [
     await readSourceFiles([
       '../esm/native/builder/render_interior_sketch_ops.ts',
+      '../esm/native/builder/render_interior_sketch_ops_input.ts',
       '../esm/native/builder/render_interior_sketch_boxes.ts',
       '../esm/native/builder/render_interior_sketch_boxes_contents.ts',
       '../esm/native/builder/render_interior_sketch_boxes_contents_parts.ts',

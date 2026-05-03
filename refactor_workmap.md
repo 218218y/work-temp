@@ -1152,3 +1152,7 @@ Cloud Sync הוא אזור עצום ומכוסה בהרבה בדיקות:
 
 > עדכון Stage 71 — 3 במאי 2026:
 > ה־hotspot `esm/native/builder/render_interior_sketch_boxes_shell.ts` פורק ל־facade ציבורי זעיר ולבעלויות ממוקדות: sizing policy ב־`render_interior_sketch_boxes_shell_height.ts`, regular/free-placement geometry ב־`render_interior_sketch_boxes_shell_geometry.ts`, material resolution ב־`render_interior_sketch_boxes_shell_materials.ts`, frame boards/adornment/free-box dimensions ב־`render_interior_sketch_boxes_shell_frame.ts`, orchestration ב־`render_interior_sketch_boxes_shell_apply.ts`, וטיפוסי חוזה ב־`render_interior_sketch_boxes_shell_types.ts`. צרכני sketch boxes ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
+
+> עדכון Stage 72 — 3 במאי 2026:
+> ה־hotspot `esm/native/builder/render_interior_sketch_boxes_fronts_drawers.ts` פורק ל־facade ציבורי זעיר ולבעלויות ממוקדות: context ו־mirror material cache ב־`render_interior_sketch_boxes_fronts_drawers_context.ts`, תכנון stack/op ב־`render_interior_sketch_boxes_fronts_drawers_plan.ts`, metadata/group ownership ב־`render_interior_sketch_boxes_fronts_drawers_group.ts`, יצירת front visual כולל glass/mirror/door-style ב־`render_interior_sketch_boxes_fronts_drawers_visual.ts`, drawer box/connectors ב־`render_interior_sketch_boxes_fronts_drawers_box.ts`, ורישום motion entries ב־`render_interior_sketch_boxes_fronts_drawers_motion.ts`. צרכני sketch box fronts ממשיכים לצרוך את ה־facade בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
+

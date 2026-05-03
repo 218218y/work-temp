@@ -8,6 +8,7 @@ import {
   getRenderer,
   getScene,
   getShadowMap,
+  getWardrobeGroup,
 } from '../runtime/render_access.js';
 import { readConfigLooseScalarFromApp, readConfigNumberLooseFromApp } from '../runtime/config_selectors.js';
 
@@ -23,6 +24,8 @@ type HideMirrorFn = (obj: UnknownRecord | null, tex: unknown, mirrorsToHide: Unk
 
 type RenderSlotReader = <T = unknown>(app: AppContainer, key: string) => T | null;
 type RenderSlotWriter = (app: AppContainer, key: string, value: unknown) => void;
+
+const MIRROR_RENDER_EXCLUDE_USER_DATA_KEY = '__wpExcludeMirrorRender';
 
 function isRecord(v: unknown): v is UnknownRecord {
   return !!v && typeof v === 'object' && !Array.isArray(v);
@@ -77,6 +80,46 @@ function markBudgetDeferred(
 function getMirrorHideScratchList(A: AppContainer): UnknownRecord[] {
   const scratch = getMirrorHideScratch(A);
   return Array.isArray(scratch) ? scratch.filter(isRecord) : [];
+}
+
+function shouldHideFromMirrorRender(obj: UnknownRecord | null): boolean {
+  const userData = asRecordOrNull(obj?.userData);
+  return userData?.[MIRROR_RENDER_EXCLUDE_USER_DATA_KEY] === true;
+}
+
+function hideForMirrorRender(obj: UnknownRecord | null, hidden: UnknownRecord[]): void {
+  if (!obj || obj.visible === false) return;
+  if (hidden.includes(obj)) return;
+  obj.visible = false;
+  hidden.push(obj);
+}
+
+function traverseMirrorRenderExcludedObjects(root: UnknownRecord | null, visit: (obj: UnknownRecord) => void): void {
+  if (!root) return;
+  const traverse = typeof root.traverse === 'function' ? root.traverse : null;
+  if (traverse) {
+    try {
+      traverse.call(root, (candidate: unknown) => {
+        const obj = asRecordOrNull(candidate);
+        if (shouldHideFromMirrorRender(obj)) visit(obj);
+      });
+      return;
+    } catch {
+      // Fall through to a shallow/manual traversal below. Three.js traverse should not fail, but
+      // mirror updates must stay resilient because they run inside the render loop.
+    }
+  }
+
+  if (shouldHideFromMirrorRender(root)) visit(root);
+  const children = Array.isArray(root.children) ? root.children : [];
+  for (let i = 0; i < children.length; i++) {
+    traverseMirrorRenderExcludedObjects(asRecordOrNull(children[i]), visit);
+  }
+}
+
+function hideMirrorRenderExcludedObjects(App: AppContainer, hidden: UnknownRecord[]): void {
+  const wardrobeGroup = asRecordOrNull(getWardrobeGroup(App));
+  traverseMirrorRenderExcludedObjects(wardrobeGroup, obj => hideForMirrorRender(obj, hidden));
 }
 
 export function createRenderLoopMirrorDriver(
@@ -250,6 +293,8 @@ export function createRenderLoopMirrorDriver(
       }
 
       if (shouldRunMirrorCube && hasMirror) {
+        hideMirrorRenderExcludedObjects(A, mirrorsToHide);
+
         const sm = getShadowMap(A);
         const prevAuto = sm ? sm['autoUpdate'] : undefined;
         try {

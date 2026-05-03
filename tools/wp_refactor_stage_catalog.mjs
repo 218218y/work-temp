@@ -1,5 +1,5 @@
 export const REFACTOR_COMPLETED_STAGE_LABELS = Object.freeze(
-  Array.from({ length: 69 }, (_, index) => `Stage ${index}`)
+  Array.from({ length: 70 }, (_, index) => `Stage ${index}`)
 );
 
 export const REFACTOR_STAGE_PROGRESS_MARKER = Object.freeze({
@@ -159,6 +159,11 @@ export const REFACTOR_INTEGRATION_ANCHORS = Object.freeze([
     file: 'tests/refactor_stage68_render_preview_sketch_ops_ownership_guard.test.js',
     needle: 'stage 68 render preview sketch placement ops ownership split is anchored',
     message: 'stage 68 render preview sketch placement ops ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage69_render_interior_sketch_external_drawers_ownership_guard.test.js',
+    needle: 'stage 69 render interior sketch external drawers ownership split is anchored',
+    message: 'stage 69 render interior sketch external drawers ownership split guard must stay anchored',
   },
   {
     file: 'tests/project_config_migration_replace_keys_runtime.test.ts',

@@ -1,5 +1,5 @@
 export const REFACTOR_COMPLETED_STAGE_LABELS = Object.freeze(
-  Array.from({ length: 74 }, (_, index) => `Stage ${index}`)
+  Array.from({ length: 76 }, (_, index) => `Stage ${index}`)
 );
 
 export const REFACTOR_STAGE_PROGRESS_MARKER = Object.freeze({
@@ -184,6 +184,16 @@ export const REFACTOR_INTEGRATION_ANCHORS = Object.freeze([
     file: 'tests/refactor_stage73_render_interior_sketch_boxes_contents_parts_ownership_guard.test.js',
     needle: 'stage 73 render interior sketch box static contents ownership split is anchored',
     message: 'stage 73 render interior sketch box static contents ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage74_refactor_next_stage_plan_guard.test.js',
+    needle: 'stage 74 refactor next-stage plan quality gate is anchored',
+    message: 'stage 74 refactor next-stage plan quality gate must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage75_sketch_box_door_visual_ownership_guard.test.js',
+    needle: 'stage 75 sketch box door visual ownership split is anchored',
+    message: 'stage 75 sketch box door visual ownership split must stay anchored',
   },
 
   {

@@ -19,6 +19,9 @@ function sketchBoxFrontsBundle() {
     'esm/native/builder/render_interior_sketch_boxes_fronts_door_layout.ts',
     'esm/native/builder/render_interior_sketch_boxes_fronts_door_accents.ts',
     'esm/native/builder/render_interior_sketch_boxes_fronts_door_visuals.ts',
+    'esm/native/builder/render_interior_sketch_boxes_fronts_door_visual_materials.ts',
+    'esm/native/builder/render_interior_sketch_boxes_fronts_door_visual_routes.ts',
+    'esm/native/builder/render_interior_sketch_boxes_fronts_door_visual_core.ts',
     'esm/native/builder/render_interior_sketch_boxes_fronts_doors.ts',
     'esm/native/builder/render_interior_sketch_boxes_fronts_drawers.ts'
   );
@@ -86,16 +89,13 @@ test('sketch box renderer keeps the flat-slab path but upgrades free-box profile
   );
   assert.match(
     render,
-    /const styledVisual = createDoorVisual\([\s\S]*effectiveDoorStyle,[\s\S]*boxDoor\.groove === true,[\s\S]*doorPid/
+    /const styledVisual = visualRoute\.createDoorVisual\([\s\S]*visualRoute\.effectiveDoorStyle,[\s\S]*boxDoor\.groove === true,[\s\S]*doorPid/
   );
   assert.match(
     render,
-    /const doorSlab = new THREE\.Mesh\(new THREE\.BoxGeometry\(doorW, doorH, doorD\), doorMat\)/
+    /const doorSlab = new THREE\.Mesh\(new THREE\.BoxGeometry\(doorW, doorH, doorD\), materials\.doorMat\)/
   );
-  assert.match(
-    render,
-    /if \(!doorVisualState\.isMirror && !doorVisualState\.isGlass && !canUseStyledDoorVisual\) \{/
-  );
+  assert.match(render, /shouldUseClassicAccents: !doorVisualState\.isMirror && !doorVisualState\.isGlass/);
   assert.match(render, /if \(boxDoor\.groove === true\) \{/);
   assert.match(render, /addAccent\(`\$\{doorPid\}_accent_top`/);
   assert.doesNotMatch(render, /const handlePid = `\$\{doorPid\}_handle`/);

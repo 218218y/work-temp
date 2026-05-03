@@ -187,3 +187,16 @@ npm run check:facade-boundaries
 npm run test:refactor-stage-guards
 npm run check:refactor-guardrails
 ```
+
+## Actual progress update — 2026-05-03
+
+The proposed next-stage numbering in this planning note was overtaken by the later Builder ownership work. The actual completed baseline is now **Stage 71**:
+
+- Stage 70 completed the public-facade split for `render_interior_sketch_ops.ts`.
+- Stage 71 completed the public-facade split for `render_interior_sketch_boxes_shell.ts`.
+
+The next recommended technical stages are still aligned with the policy direction here, but should be renumbered from the current baseline:
+
+1. Stage 72 — split or harden the next remaining Builder hotspot, preferably `render_interior_sketch_boxes_fronts_drawers.ts` or `render_interior_sketch_boxes_fronts_doors.ts`, with a new ownership guard.
+2. Stage 73 — add a public/private owner import-boundary audit so private owner modules cannot leak across families.
+3. Stage 74 — add behavior tests around the most recent render/sketch facade splits, beyond regex ownership guards.

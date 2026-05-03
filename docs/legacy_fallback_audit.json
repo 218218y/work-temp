@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-03T05:41:56.430Z",
+  "generatedAt": "2026-05-03T08:57:47.674Z",
   "sourceRoot": "esm",
   "summary": {
     "totalOccurrences": 924,
-    "totalFiles": 290,
+    "totalFiles": 292,
     "byCategory": {
       "runtime-default": 733,
       "browser-adapter": 18,
@@ -353,10 +353,22 @@
           "runtime-default": 3
         }
       },
-      "esm/native/builder/render_interior_sketch_boxes_shell.ts": {
-        "total": 4,
+      "esm/native/builder/render_interior_sketch_boxes_shell_apply.ts": {
+        "total": 1,
         "categories": {
-          "runtime-default": 4
+          "runtime-default": 1
+        }
+      },
+      "esm/native/builder/render_interior_sketch_boxes_shell_materials.ts": {
+        "total": 2,
+        "categories": {
+          "runtime-default": 2
+        }
+      },
+      "esm/native/builder/render_interior_sketch_boxes_shell_types.ts": {
+        "total": 1,
+        "categories": {
+          "runtime-default": 1
         }
       },
       "esm/native/builder/render_interior_sketch_shared_box_doors.ts": {
@@ -2886,32 +2898,32 @@
       "text": "return fallback;"
     },
     {
-      "file": "esm/native/builder/render_interior_sketch_boxes_shell.ts",
-      "line": 130,
+      "file": "esm/native/builder/render_interior_sketch_boxes_shell_apply.ts",
+      "line": 54,
       "term": "fallback",
       "category": "runtime-default",
-      "text": "fallback: unknown;"
+      "text": "fallback: renderArgs.bodyMat,"
     },
     {
-      "file": "esm/native/builder/render_interior_sketch_boxes_shell.ts",
-      "line": 132,
+      "file": "esm/native/builder/render_interior_sketch_boxes_shell_materials.ts",
+      "line": 4,
       "term": "fallback",
       "category": "runtime-default",
       "text": "const { getPartMaterial, isFn, boxPid, fallback } = args;"
     },
     {
-      "file": "esm/native/builder/render_interior_sketch_boxes_shell.ts",
-      "line": 133,
+      "file": "esm/native/builder/render_interior_sketch_boxes_shell_materials.ts",
+      "line": 5,
       "term": "fallback",
       "category": "runtime-default",
       "text": "let boxMat = fallback;"
     },
     {
-      "file": "esm/native/builder/render_interior_sketch_boxes_shell.ts",
-      "line": 308,
+      "file": "esm/native/builder/render_interior_sketch_boxes_shell_types.ts",
+      "line": 33,
       "term": "fallback",
       "category": "runtime-default",
-      "text": "fallback: renderArgs.bodyMat,"
+      "text": "fallback: unknown;"
     },
     {
       "file": "esm/native/builder/render_interior_sketch_shared_box_doors.ts",

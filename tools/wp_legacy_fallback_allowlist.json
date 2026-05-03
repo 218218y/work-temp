@@ -343,10 +343,22 @@
         "runtime-default": 3
       }
     },
-    "esm/native/builder/render_interior_sketch_boxes_shell.ts": {
-      "total": 4,
+    "esm/native/builder/render_interior_sketch_boxes_shell_apply.ts": {
+      "total": 1,
       "categories": {
-        "runtime-default": 4
+        "runtime-default": 1
+      }
+    },
+    "esm/native/builder/render_interior_sketch_boxes_shell_materials.ts": {
+      "total": 2,
+      "categories": {
+        "runtime-default": 2
+      }
+    },
+    "esm/native/builder/render_interior_sketch_boxes_shell_types.ts": {
+      "total": 1,
+      "categories": {
+        "runtime-default": 1
       }
     },
     "esm/native/builder/render_interior_sketch_shared_box_doors.ts": {

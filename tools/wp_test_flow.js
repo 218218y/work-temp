@@ -1,7 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { writeNodeTestOutput } from './wp_test_console.js';
 import { fileExists, getNodeArgs } from './wp_test_shared.js';
 import {
   createNoTestsMessage,
@@ -260,8 +259,8 @@ export function runTestFlow({ projectRoot, childEnv, flags, runners = {} }) {
     const rel = normalizeSlash(path.relative(projectRoot, filePath));
     const res = runOne({ filePath, nodeArgs, cwd: projectRoot, env: childEnv });
 
-    if (typeof res?.stdout === 'string' && res.stdout.length) writeNodeTestOutput(process.stdout, res.stdout);
-    if (typeof res?.stderr === 'string' && res.stderr.length) writeNodeTestOutput(process.stderr, res.stderr);
+    if (typeof res?.stdout === 'string' && res.stdout.length) process.stdout.write(res.stdout);
+    if (typeof res?.stderr === 'string' && res.stderr.length) process.stderr.write(res.stderr);
     if (res?.error) console.error(res.error);
 
     const status = typeof res?.status === 'number' ? res.status : 1;

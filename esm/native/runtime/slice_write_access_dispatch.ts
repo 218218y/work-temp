@@ -2,7 +2,6 @@ import type { ActionMetaLike, PatchPayload } from '../../../types';
 
 import { createSliceWriteOptions, hasOwnKeys, toRootPatchPayload } from './slice_write_access_shared.js';
 import type {
-  CanonicalPatchDispatchOptions,
   MetaTouchDispatchTarget,
   MetaTouchOptions,
   RootPatchDispatchTarget,

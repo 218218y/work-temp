@@ -4,7 +4,6 @@ import { createSanitizedChildEnv } from './wp_node_child_env.js';
 import { resolveProjectRoot } from './wp_test_shared.js';
 import { parseTestArgs } from './wp_test_state.js';
 import { runTestFlow } from './wp_test_flow.js';
-import { formatStatusLine } from './wp_test_console.js';
 
 function run() {
   const projectRoot = resolveProjectRoot();
@@ -33,11 +32,11 @@ function run() {
   }
 
   if (!result.ok) {
-    console.error(formatStatusLine('fail', `[WardrobePro] ${result.fail} test(s) failed.`, process.stderr));
+    console.error(`[WardrobePro] ${result.fail} test(s) failed.`);
     process.exit(1);
   }
 
-  console.log(formatStatusLine('pass', '[WardrobePro] All tests passed.', process.stdout));
+  console.log('[WardrobePro] All tests passed.');
 }
 
 run();

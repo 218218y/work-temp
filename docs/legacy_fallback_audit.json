@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-03T03:12:38.019Z",
+  "generatedAt": "2026-05-03T05:41:56.430Z",
   "sourceRoot": "esm",
   "summary": {
     "totalOccurrences": 924,
-    "totalFiles": 289,
+    "totalFiles": 290,
     "byCategory": {
       "runtime-default": 733,
       "browser-adapter": 18,
@@ -359,10 +359,16 @@
           "runtime-default": 4
         }
       },
-      "esm/native/builder/render_interior_sketch_shared.ts": {
-        "total": 4,
+      "esm/native/builder/render_interior_sketch_shared_box_doors.ts": {
+        "total": 2,
         "categories": {
-          "runtime-default": 4
+          "runtime-default": 2
+        }
+      },
+      "esm/native/builder/render_interior_sketch_shared_numbers.ts": {
+        "total": 2,
+        "categories": {
+          "runtime-default": 2
         }
       },
       "esm/native/builder/render_interior_sketch_support_rods.ts": {
@@ -2908,32 +2914,32 @@
       "text": "fallback: renderArgs.bodyMat,"
     },
     {
-      "file": "esm/native/builder/render_interior_sketch_shared.ts",
-      "line": 187,
-      "term": "fallback",
-      "category": "runtime-default",
-      "text": "export function toNormalizedUnit(value: unknown, fallback = 0.5): number {"
-    },
-    {
-      "file": "esm/native/builder/render_interior_sketch_shared.ts",
-      "line": 189,
-      "term": "fallback",
-      "category": "runtime-default",
-      "text": "if (num == null) return fallback;"
-    },
-    {
-      "file": "esm/native/builder/render_interior_sketch_shared.ts",
-      "line": 327,
+      "file": "esm/native/builder/render_interior_sketch_shared_box_doors.ts",
+      "line": 17,
       "term": "fallback",
       "category": "runtime-default",
       "text": "export function readSketchBoxDoorId(value: unknown, fallback: string): string {"
     },
     {
-      "file": "esm/native/builder/render_interior_sketch_shared.ts",
-      "line": 330,
+      "file": "esm/native/builder/render_interior_sketch_shared_box_doors.ts",
+      "line": 20,
       "term": "fallback",
       "category": "runtime-default",
       "text": "return raw != null && String(raw) ? String(raw) : fallback;"
+    },
+    {
+      "file": "esm/native/builder/render_interior_sketch_shared_numbers.ts",
+      "line": 11,
+      "term": "fallback",
+      "category": "runtime-default",
+      "text": "export function toNormalizedUnit(value: unknown, fallback = 0.5): number {"
+    },
+    {
+      "file": "esm/native/builder/render_interior_sketch_shared_numbers.ts",
+      "line": 13,
+      "term": "fallback",
+      "category": "runtime-default",
+      "text": "if (num == null) return fallback;"
     },
     {
       "file": "esm/native/builder/render_interior_sketch_support_rods.ts",
@@ -5688,7 +5694,7 @@
     },
     {
       "file": "esm/native/runtime/slice_write_access_dispatch.ts",
-      "line": 41,
+      "line": 40,
       "term": "fallbacks",
       "category": "project-migration",
       "text": "'[WardrobePro] Unexpected root payload read: dispatch targets do not require root fallbacks'"

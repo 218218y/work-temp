@@ -261,6 +261,7 @@ test('cornice paint groups classic and wave parts together so click, hover, rend
   const carcassFlow = [
     readFileSync('esm/native/builder/render_carcass_ops.ts', 'utf8'),
     readFileSync('esm/native/builder/render_carcass_ops_cornice.ts', 'utf8'),
+    readFileSync('esm/native/builder/render_carcass_ops_cornice_apply.ts', 'utf8'),
   ].join('\n');
   assert.match(
     normalizeWhitespace(paintFlow),

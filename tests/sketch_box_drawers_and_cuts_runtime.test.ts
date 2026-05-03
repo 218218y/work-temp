@@ -153,7 +153,10 @@ test('sketch external drawers source keeps module faces aligned to real door spa
     await readSketchBoxFrontsBundle(),
   ].join('\n');
   const sketchPickMeta = await readSourceFiles(['../esm/native/builder/render_interior_sketch_pick_meta.ts']);
-  const shared = await readSourceFiles(['../esm/native/builder/render_interior_sketch_shared.ts']);
+  const shared = await readSourceFiles([
+    '../esm/native/builder/render_interior_sketch_shared.ts',
+    '../esm/native/builder/render_interior_sketch_shared_external_drawers.ts',
+  ]);
   assert.match(src, /const moduleDoorFaceSpan = resolveSketchModuleDoorFaceSpan\(\{/);
   assert.match(src, /const drawerFaceW = moduleDoorFaceSpan\?\.spanW \?\? outerW;/);
   assert.match(

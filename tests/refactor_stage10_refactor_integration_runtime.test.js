@@ -111,6 +111,30 @@ test('stage 10 refactor integration audit is wired into guardrails and verify la
     pkg.scripts['test:refactor-stage-guards'],
     /tests\/refactor_stage61_order_pdf_card_text_layer_ownership_guard\.test\.js/
   );
+  assert.match(
+    pkg.scripts['test:refactor-stage-guards'],
+    /tests\/refactor_stage62_order_pdf_sketch_preview_runtime_ownership_guard\.test\.js/
+  );
+  assert.match(
+    pkg.scripts['test:refactor-stage-guards'],
+    /tests\/refactor_stage63_order_pdf_sketch_panel_measurement_hooks_ownership_guard\.test\.js/
+  );
+  assert.match(
+    pkg.scripts['test:refactor-stage-guards'],
+    /tests\/refactor_stage64_order_pdf_sketch_panel_view_ownership_guard\.test\.js/
+  );
+  assert.match(
+    pkg.scripts['test:refactor-stage-guards'],
+    /tests\/refactor_stage65_render_carcass_cornice_ownership_guard\.test\.js/
+  );
+  assert.match(
+    pkg.scripts['test:refactor-stage-guards'],
+    /tests\/refactor_stage66_render_interior_sketch_shared_ownership_guard\.test\.js/
+  );
+  assert.match(
+    pkg.scripts['test:refactor-stage-guards'],
+    /tests\/refactor_stage67_render_preview_marker_ownership_guard\.test\.js/
+  );
 
   const verifyFlow = fs.readFileSync('tools/wp_verify_flow.js', 'utf8');
   const guardIndex = verifyFlow.indexOf("scriptName: 'check:refactor-guardrails'");
@@ -140,7 +164,7 @@ test('stage 10 refactor integration audit covers guardrails, stage tests, verify
 test('stage 39 to 41 refactor control-plane stage catalog is anchored', () => {
   assert.equal(assertRefactorStageCatalogIsWellFormed(), true);
   assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(0), 'Stage 0');
-  assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(-1), 'Stage 61');
+  assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(-1), 'Stage 67');
   assert.equal(new Set(REFACTOR_COMPLETED_STAGE_LABELS).size, REFACTOR_COMPLETED_STAGE_LABELS.length);
 
   const progress = fs.readFileSync(REFACTOR_STAGE_PROGRESS_MARKER.file, 'utf8');
@@ -255,6 +279,36 @@ test('stage 39 to 41 refactor control-plane stage catalog is anchored', () => {
   assert.ok(
     REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
       anchor.needle.includes('stage 61 order pdf card text layer ownership split is anchored')
+    )
+  );
+  assert.ok(
+    REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
+      anchor.needle.includes('stage 62 order pdf sketch preview runtime ownership split is anchored')
+    )
+  );
+  assert.ok(
+    REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
+      anchor.needle.includes('stage 63 order pdf sketch panel measurement hooks ownership split is anchored')
+    )
+  );
+  assert.ok(
+    REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
+      anchor.needle.includes('stage 64 order pdf sketch panel view ownership split is anchored')
+    )
+  );
+  assert.ok(
+    REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
+      anchor.needle.includes('stage 65 render carcass cornice ownership split is anchored')
+    )
+  );
+  assert.ok(
+    REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
+      anchor.needle.includes('stage 66 render interior sketch shared ownership split is anchored')
+    )
+  );
+  assert.ok(
+    REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
+      anchor.needle.includes('stage 67 render preview marker ownership split is anchored')
     )
   );
 

@@ -17,7 +17,7 @@ test('stage 55 order pdf sketch toolbar ownership split is anchored', () => {
   const floatingPalette = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_floating_palette.tsx');
   const freehand = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_freehand.ts');
   const types = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_toolbar_types.ts');
-  const panel = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel.tsx');
+  const panel = read('esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_view.tsx');
   const measurementContract = read('tests/order_pdf_overlay_sketch_panel_measurement_contracts.test.js');
 
   assert.ok(
@@ -70,7 +70,7 @@ test('stage 55 order pdf sketch toolbar ownership split is anchored', () => {
   assert.doesNotMatch(
     panel,
     /order_pdf_overlay_sketch_toolbar_(view|palettes|floating_palette|freehand|types)\.js/,
-    'sketch panel must keep using the public toolbar facade instead of private toolbar owners'
+    'sketch panel view must keep using the public toolbar facade instead of private toolbar owners'
   );
   assert.match(measurementContract, /order_pdf_overlay_sketch_toolbar_floating_palette\.tsx/);
   assert.doesNotMatch(facade + view + palettes + floatingPalette + freehand + types, /export default\s+/);

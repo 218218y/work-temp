@@ -7,6 +7,8 @@ const read = rel => fs.readFileSync(new URL(`../${rel}`, import.meta.url), 'utf8
 const renderOps = read('esm/native/builder/render_ops.ts');
 const previewOps = read('esm/native/builder/render_preview_ops.ts');
 const previewMarkerOps = read('esm/native/builder/render_preview_marker_ops.ts');
+const previewMarkerFactory = read('esm/native/builder/render_preview_marker_ops_factory.ts');
+const previewMarkerSplit = read('esm/native/builder/render_preview_marker_ops_split.ts');
 const previewSketchOps = read('esm/native/builder/render_preview_sketch_ops.ts');
 const previewSketchShared = read('esm/native/builder/render_preview_sketch_shared.ts');
 const previewSketchPipeline = read('esm/native/builder/render_preview_sketch_pipeline.ts');
@@ -54,7 +56,9 @@ test('[stageO] render_ops preview/hover helpers are extracted behind a focused h
   );
 
   // Smarter seam checks: validate the focused helpers themselves, not the aggregator text layout.
-  assert.match(previewMarkerOps, /function ensureSplitHoverMarker\(args: PreviewMarkerArgs\)/);
+  assert.match(previewMarkerOps, /render_preview_marker_ops_factory\.js/);
+  assert.match(previewMarkerFactory, /createSplitHoverMarkerOwner\(ctx\)/);
+  assert.match(previewMarkerSplit, /function ensureSplitHoverMarker\(args: PreviewMarkerArgs\)/);
   assert.match(previewSketchOps, /function ensureSketchPlacementPreview\(args: unknown\)/);
   assert.match(previewSketchOps, /createRenderPreviewSketchShared\(deps\)/);
   assert.match(previewSketchOps, /applySketchPlacementPreview\(\{/);

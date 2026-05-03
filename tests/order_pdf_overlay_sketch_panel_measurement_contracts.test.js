@@ -30,8 +30,21 @@ test('order-pdf sketch panel measurement stays decomposed into dedicated runtime
   assert.match(panelHooks, /from '\.\/order_pdf_overlay_sketch_panel_measurement_runtime\.js';/);
   assert.match(panelHooks, /from '\.\/order_pdf_overlay_sketch_panel_canvas_hooks\.js';/);
   assert.match(panelHooks, /from '\.\/order_pdf_overlay_sketch_panel_history_hooks\.js';/);
-  assert.match(measurementHooks, /function useObservedViewportValue/);
-  assert.match(measurementHooks, /generationRef/);
+  const measurementObservedValue = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_measurement_observed_value.ts'
+  );
+  const measurementDrawingRect = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_measurement_drawing_rect.ts'
+  );
+  const measurementPlacement = read(
+    'esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_measurement_placement.ts'
+  );
+  assert.match(measurementHooks, /order_pdf_overlay_sketch_panel_measurement_drawing_rect\.js/);
+  assert.match(measurementHooks, /order_pdf_overlay_sketch_panel_measurement_placement\.js/);
+  assert.match(measurementObservedValue, /function useObservedViewportValue/);
+  assert.match(measurementObservedValue, /generationRef/);
+  assert.match(measurementDrawingRect, /export function useObservedOrderPdfDrawingRect/);
+  assert.match(measurementPlacement, /export function useOrderPdfSketchToolbarPlacement/);
   assert.match(measurementRuntime, /DEFAULT_TOOLBAR_PLACEMENT/);
   assert.match(card, /from '\.\/order_pdf_overlay_sketch_panel_measurement_hooks\.js';/);
   assert.match(controllerHook, /from '\.\/order_pdf_overlay_sketch_panel_measurement_hooks\.js';/);

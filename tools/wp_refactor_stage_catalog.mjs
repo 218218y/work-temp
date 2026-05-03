@@ -1,5 +1,5 @@
 export const REFACTOR_COMPLETED_STAGE_LABELS = Object.freeze(
-  Array.from({ length: 62 }, (_, index) => `Stage ${index}`)
+  Array.from({ length: 68 }, (_, index) => `Stage ${index}`)
 );
 
 export const REFACTOR_STAGE_PROGRESS_MARKER = Object.freeze({
@@ -124,6 +124,36 @@ export const REFACTOR_INTEGRATION_ANCHORS = Object.freeze([
     file: 'tests/refactor_stage61_order_pdf_card_text_layer_ownership_guard.test.js',
     needle: 'stage 61 order pdf card text layer ownership split is anchored',
     message: 'stage 61 order pdf card text layer ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage62_order_pdf_sketch_preview_runtime_ownership_guard.test.js',
+    needle: 'stage 62 order pdf sketch preview runtime ownership split is anchored',
+    message: 'stage 62 order pdf sketch preview runtime ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage63_order_pdf_sketch_panel_measurement_hooks_ownership_guard.test.js',
+    needle: 'stage 63 order pdf sketch panel measurement hooks ownership split is anchored',
+    message: 'stage 63 order pdf sketch panel measurement hooks ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage64_order_pdf_sketch_panel_view_ownership_guard.test.js',
+    needle: 'stage 64 order pdf sketch panel view ownership split is anchored',
+    message: 'stage 64 order pdf sketch panel view ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage65_render_carcass_cornice_ownership_guard.test.js',
+    needle: 'stage 65 render carcass cornice ownership split is anchored',
+    message: 'stage 65 render carcass cornice ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage66_render_interior_sketch_shared_ownership_guard.test.js',
+    needle: 'stage 66 render interior sketch shared ownership split is anchored',
+    message: 'stage 66 render interior sketch shared ownership split guard must stay anchored',
+  },
+  {
+    file: 'tests/refactor_stage67_render_preview_marker_ownership_guard.test.js',
+    needle: 'stage 67 render preview marker ownership split is anchored',
+    message: 'stage 67 render preview marker ownership split guard must stay anchored',
   },
   {
     file: 'tests/project_config_migration_replace_keys_runtime.test.ts',

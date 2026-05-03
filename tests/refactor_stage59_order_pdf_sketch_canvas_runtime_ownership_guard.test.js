@@ -35,7 +35,10 @@ test('stage 59 order pdf sketch canvas runtime ownership split is anchored', () 
   );
 
   assert.match(types, /export type OrderPdfSketchCanvasDrawState/);
-  assert.doesNotMatch(types, /paintOrderPdfSketchAnnotations|shouldRepaintOrderPdfSketchCanvas|resolveOrderPdfSketchCanvasPixels/);
+  assert.doesNotMatch(
+    types,
+    /paintOrderPdfSketchAnnotations|shouldRepaintOrderPdfSketchCanvas|resolveOrderPdfSketchCanvasPixels/
+  );
 
   assert.match(equality, /export function shouldRepaintOrderPdfSketchCanvas\(/);
   assert.match(equality, /areOrderPdfSketchStrokeListsEqual/);

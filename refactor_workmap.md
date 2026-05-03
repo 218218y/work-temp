@@ -32,7 +32,6 @@
 > עדכון Stage 50 — 2 במאי 2026:
 > ה־hotspot `esm/native/ui/react/pdf/order_pdf_overlay_export_actions.ts` פורק ל־facade hook קטן ולבעלויות ממוקדות: callbacks/commands, interactive blob cache, export/Gmail operation adapters, PDF.js loader, sketch-preview action, וטיפוסי החוזה. ה־controller ממשיך לצרוך את ה־facade הציבורי בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי.
 
-
 > עדכון Stage 51 — 3 במאי 2026:
 > ה־hotspot `esm/native/builder/scheduler_shared.ts` פורק ל־facade ציבורי קטן ולבעלויות ממוקדות: record/plan helpers, scheduler state, dependency normalization, environment probes, build-plan seams, ו־timer/wait policy. `scheduler_runtime.ts` ו־`scheduler_install.ts` ממשיכים לצרוך את ה־facade הציבורי בלבד, והבעלות החדשה מעוגנת ב־guard ייעודי כדי שה־shared לא יחזור להיות מחסן כללי.
 
@@ -137,22 +136,22 @@ Expected 0 exact duplicate script command group(s), found 2.
 
 קבצים גדולים במיוחד שכדאי להמשיך לדקק בזהירות:
 
-| קובץ                                                          | שורות בקירוב | הערה                                                         |
-| ------------------------------------------------------------- | -----------: | ------------------------------------------------------------ |
-| `esm/native/runtime/perf_runtime_surface.ts`                  |          812 | surface רחב מאוד; לבדוק אם אפשר לפצל reader/writer/reporting |
-| `esm/native/builder/scheduler_debug_stats.ts`                 |          530 | לוגיקת debug/stats יכולה להפוך לבעלים פנימיים קטנים          |
-| `esm/native/builder/corner_connector_interior_special.ts`     |          525 | סכנת ערבוב geometry, material, policy, emit                  |
-| `esm/native/kernel/domain_api_surface_sections_shared.ts`     |          473 | surface/shared כבד - לבדוק ownership                         |
-| `esm/native/data/preset_models.ts`                            |          457 | data גדול; לשקול data partition או generator                 |
-| `esm/native/runtime/slice_write_access_dispatch.ts`           |          155 | Stage 49 facade; ordering/targets split           |
-| `esm/native/ui/react/pdf/order_pdf_overlay_export_actions.ts` |          116 | Stage 50 facade; export action owners split                            |
-| `esm/native/services/models.ts`                               |          402 | service surface רחב                                          |
-| `esm/native/builder/scheduler_shared.ts`                      |           51 | Stage 51 facade; shared scheduler owners split                                       |
-| `esm/native/ui/react/tabs/interior_tab_helpers.tsx`           |            4 | Stage 52 facade; core/buttons/sketch/types owners split       |
-| `esm/native/builder/room.ts`                                  |           33 | Stage 53 facade; active/lifecycle/install owners split        |
-| `esm/native/builder/render_preview_sketch_measurements.ts`    |            2 | Stage 54 facade; input/state/labels/apply/types owners split |
-| `esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks.ts` |            3 | Stage 56 facade; session types/interaction/create owners split |
-| `esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_canvas_runtime.ts` |            4 | Stage 59 facade; canvas types/equality/paint/resolve owners split |
+| קובץ                                                                                        | שורות בקירוב | הערה                                                              |
+| ------------------------------------------------------------------------------------------- | -----------: | ----------------------------------------------------------------- |
+| `esm/native/runtime/perf_runtime_surface.ts`                                                |          812 | surface רחב מאוד; לבדוק אם אפשר לפצל reader/writer/reporting      |
+| `esm/native/builder/scheduler_debug_stats.ts`                                               |          530 | לוגיקת debug/stats יכולה להפוך לבעלים פנימיים קטנים               |
+| `esm/native/builder/corner_connector_interior_special.ts`                                   |          525 | סכנת ערבוב geometry, material, policy, emit                       |
+| `esm/native/kernel/domain_api_surface_sections_shared.ts`                                   |          473 | surface/shared כבד - לבדוק ownership                              |
+| `esm/native/data/preset_models.ts`                                                          |          457 | data גדול; לשקול data partition או generator                      |
+| `esm/native/runtime/slice_write_access_dispatch.ts`                                         |          155 | Stage 49 facade; ordering/targets split                           |
+| `esm/native/ui/react/pdf/order_pdf_overlay_export_actions.ts`                               |          116 | Stage 50 facade; export action owners split                       |
+| `esm/native/services/models.ts`                                                             |          402 | service surface רחב                                               |
+| `esm/native/builder/scheduler_shared.ts`                                                    |           51 | Stage 51 facade; shared scheduler owners split                    |
+| `esm/native/ui/react/tabs/interior_tab_helpers.tsx`                                         |            4 | Stage 52 facade; core/buttons/sketch/types owners split           |
+| `esm/native/builder/room.ts`                                                                |           33 | Stage 53 facade; active/lifecycle/install owners split            |
+| `esm/native/builder/render_preview_sketch_measurements.ts`                                  |            2 | Stage 54 facade; input/state/labels/apply/types owners split      |
+| `esm/native/ui/react/pdf/order_pdf_overlay_sketch_card_text_layer_pointer_session_hooks.ts` |            3 | Stage 56 facade; session types/interaction/create owners split    |
+| `esm/native/ui/react/pdf/order_pdf_overlay_sketch_panel_canvas_runtime.ts`                  |            4 | Stage 59 facade; canvas types/equality/paint/resolve owners split |
 
 ### 2.4 CSS/UI style debt
 

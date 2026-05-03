@@ -84,8 +84,14 @@ test('order-pdf sketch card keeps note-box rendering and text-layer ownership de
   assert.match(pointerRuntime, /createOrderPdfSketchTextLayerInteractionPreview/);
   assert.match(pointerRuntime, /resolveOrderPdfSketchTextLayerCanvasPointerAction/);
   assert.match(pointerRuntime, /resolveOrderPdfSketchTextLayerCreateCommitAction/);
-  assert.match(pointerSessionHooks, /order_pdf_overlay_sketch_card_text_layer_pointer_interaction_session_hooks\.js/);
-  assert.match(pointerSessionHooks, /order_pdf_overlay_sketch_card_text_layer_pointer_create_session_hooks\.js/);
+  assert.match(
+    pointerSessionHooks,
+    /order_pdf_overlay_sketch_card_text_layer_pointer_interaction_session_hooks\.js/
+  );
+  assert.match(
+    pointerSessionHooks,
+    /order_pdf_overlay_sketch_card_text_layer_pointer_create_session_hooks\.js/
+  );
   assert.match(pointerInteractionSessionHooks, /updateOrderPdfSketchTextBoxInteractionPreview/);
   assert.match(pointerCreateSessionHooks, /updateOrderPdfSketchTextCreateSession/);
   assert.match(noteBox, /OrderPdfSketchNoteToolbar/);

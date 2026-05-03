@@ -72,7 +72,10 @@ test('stage 52 interior tab helpers ownership split is anchored', () => {
   ]) {
     assert.match(types, new RegExp(`export type ${exportedType}`), `types owner must expose ${exportedType}`);
   }
-  assert.doesNotMatch(types, /function |<OptionButton|readModulesConfigurationListFromConfigSnapshot|parseSketchBoxTool\(/);
+  assert.doesNotMatch(
+    types,
+    /function |<OptionButton|readModulesConfigurationListFromConfigSnapshot|parseSketchBoxTool\(/
+  );
 
   assert.match(
     optionButtonContract,

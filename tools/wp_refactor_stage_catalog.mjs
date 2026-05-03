@@ -121,7 +121,6 @@ export const REFACTOR_INTEGRATION_ANCHORS = Object.freeze([
     message: 'project config migration must prove replace-owned branch materialization',
   },
 
-
   {
     file: 'tests/project_config_migration_replace_keys_runtime.test.ts',
     needle: 'deterministic and type-narrowed',

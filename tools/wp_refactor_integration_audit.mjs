@@ -120,6 +120,7 @@ const requiredStageGuardTests = [
   'tests/refactor_stage76_drawer_shared_contract_ownership_guard.test.js',
   'tests/refactor_stage77_sketch_box_controls_runtime_ownership_guard.test.js',
   'tests/refactor_stage78_runtime_access_surfaces_ownership_guard.test.js',
+  'tests/refactor_stage79_order_pdf_export_commands_ownership_guard.test.js',
 ];
 const stageGuardCommand = requireScript('test:refactor-stage-guards');
 for (const testFile of requiredStageGuardTests)

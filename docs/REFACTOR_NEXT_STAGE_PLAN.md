@@ -1,7 +1,7 @@
 # Refactor Next-Stage Plan
 
 Date: 2026-05-03  
-Baseline: Stage 78 complete; runtime access surface ownership split completed after the Stage 74 planning gate.  
+Baseline: Stage 79 complete; Order PDF export command ownership split completed after the Stage 74 planning gate.  
 Purpose: keep the remaining modernization work professional, useful, and bounded. This document is intentionally not a wish list of large files. It is the decision gate for deciding whether the next stage should split code, improve tests, harden contracts, or stop.
 
 ## Stage 74 decision
@@ -36,7 +36,7 @@ The recent Builder sketch/render ownership work is coherent:
 
 ## Next qualified implementation stages
 
-These are the next useful candidates, ordered by expected value and risk control. Stages 75 through 78 are complete; the exact next stage should still be re-checked against the current ZIP before editing.
+These are the next useful candidates, ordered by expected value and risk control. Stages 75 through 79 are complete; the exact next stage should still be re-checked against the current ZIP before editing.
 
 ### Stage 75 — Sketch box fronts/doors ownership review — completed
 
@@ -70,13 +70,13 @@ Outcome: the review did not create access wrappers for their own sake. It split 
 
 Validation focus retained: runtime selector policy, project migration boundary, runtime selector normalization tests, type-hardening, and public API contract tests.
 
-### Stage 79 — Order PDF export/editor flow review
+### Stage 79 — Order PDF export/editor flow review — completed
 
-Candidate area: Order PDF editor/export modules that still combine view state, async PDF/image work, draft state, and action callbacks.
+Completed area: `esm/native/ui/react/pdf/order_pdf_overlay_export_commands.ts`.
 
-Why it may be worthwhile: this area has real async lifecycle risk. Split only where it improves ownership of blob/page lifecycle, draft mutation, or UI action boundaries.
+Outcome: the review did not split the whole PDF editor or move UI callbacks around. It split only the proven async command seam: the public `order_pdf_overlay_export_commands.ts` module now remains a stable facade, while command contracts live in `order_pdf_overlay_export_commands_types.ts`, error result shaping in `order_pdf_overlay_export_commands_errors.ts`, imported-PDF load lifecycle in `order_pdf_overlay_export_commands_load_pdf.ts`, browser download commands in `order_pdf_overlay_export_commands_downloads.ts`, Gmail command execution in `order_pdf_overlay_export_commands_gmail.ts`, and pdf.js loader command wiring in `order_pdf_overlay_export_commands_pdfjs.ts`. React action callbacks continue to consume only the public command facade.
 
-Validation focus: PDF preview/export guards, text-layer guards, and any existing overlay/editor tests.
+Validation focus retained: export command runtime tests, export overlay tests, command owner guard, docs-control-plane, refactor integration, and stage guards.
 
 ### Stage 80 — Measurement and performance guard closeout
 

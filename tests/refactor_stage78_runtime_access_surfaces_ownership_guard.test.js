@@ -49,7 +49,7 @@ test('stage 78 runtime access surfaces ownership split is anchored', () => {
   const projectBoundaryAudit = read('tools/wp_project_migration_boundary_audit.mjs');
   const pkg = JSON.parse(read('package.json'));
 
-  assert.equal(REFACTOR_COMPLETED_STAGE_LABELS.at(-1), 'Stage 78');
+  assert.ok(REFACTOR_COMPLETED_STAGE_LABELS.includes('Stage 78'));
   assert.ok(
     REFACTOR_INTEGRATION_ANCHORS.some(anchor =>
       anchor.needle.includes('stage 78 runtime access surfaces ownership split is anchored')

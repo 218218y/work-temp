@@ -41,6 +41,7 @@ try {
 const requiredGuardScripts = [
   'check:import-cycles',
   'check:private-owner-imports',
+  'check:project-import-fixtures',
   'check:project-migration-boundary',
   'check:runtime-selector-policy',
   'check:html-sinks',
@@ -56,6 +57,7 @@ const requiredGuardScripts = [
   'check:canvas-hit-parity',
   'check:cloud-sync-timers',
   'check:cloud-sync-races',
+  'check:cloud-sync-offline-reconnect',
   'check:perf-hotpaths',
   'check:refactor-closeout',
   'check:test-portfolio',

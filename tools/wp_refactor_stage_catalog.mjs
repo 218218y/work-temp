@@ -97,6 +97,30 @@ export const REFACTOR_POST_CLOSEOUT_GUARDRAILS = Object.freeze([
     verificationLane: 'check:refactor-guardrails',
     scope: 'registered facade/private-owner families',
   },
+  {
+    id: 'post-stage-80-project-import-fixtures',
+    script: 'check:project-import-fixtures',
+    tool: 'tools/wp_run_tsx_tests.mjs',
+    guard: 'tests/project_import_fixtures_runtime.test.ts',
+    verificationLane: 'check:refactor-guardrails',
+    scope: 'real project import fixtures and canonical load ingress',
+  },
+  {
+    id: 'post-stage-80-css-cascade-budget',
+    script: 'check:css-style',
+    tool: 'tools/wp_css_style_audit.mjs',
+    guard: 'tools/wp_css_style_budget.json',
+    verificationLane: 'check:refactor-guardrails',
+    scope: 'CSS cascade debt budget ratchet',
+  },
+  {
+    id: 'post-stage-80-cloud-sync-offline-reconnect',
+    script: 'check:cloud-sync-offline-reconnect',
+    tool: 'tools/wp_run_tsx_tests.mjs',
+    guard: 'tests/cloud_sync_offline_reconnect_runtime.test.ts',
+    verificationLane: 'check:refactor-guardrails',
+    scope: 'Cloud Sync offline/reconnect attention behavior',
+  },
 ]);
 
 export const REFACTOR_INTEGRATION_ANCHORS = Object.freeze([

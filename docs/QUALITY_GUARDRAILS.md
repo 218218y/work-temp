@@ -43,6 +43,7 @@ npm run test:refactor-stage-guards
 - Refactor completion is not proven by smaller files. It is proven by stable public seams, behavior tests, hotpath guards, and practical smoke baselines.
 - Keep `check:perf-hotpaths` as the fast source-level performance gate for render/scheduler hotpaths.
 - Use `perf:smoke` and `perf:browser` for measured runtime/browser baselines when dependencies and a browser environment are available; update baselines only after a deliberate product/performance decision.
+- Run `perf:smoke` as the foreground perf lane when enforcing total-runtime budgets; concurrent browser perf work can add machine noise to the aggregate time while individual script timings remain healthy.
 - If a future performance issue appears, start from measured regressions and the owning surface, not from broad file decomposition.
 
 Relevant checks:
@@ -52,6 +53,21 @@ npm run check:perf-hotpaths
 npm run check:refactor-closeout
 npm run perf:smoke
 npm run perf:browser
+```
+
+## CSS cascade
+
+- `tools/wp_css_style_budget.json` is the active CSS debt ratchet for `css/react_styles.css`.
+- `check:css-style` must read that budget file instead of embedding limits in code.
+- New CSS should not increase `!important`, `transition: all`, ad hoc `z-index`, or one-off `box-shadow` counts.
+- When CSS cleanup lowers a count, lower the matching budget in the same change. Raising a budget requires an explicit product/design reason in the review.
+- `report:css-style` regenerates the checked-in report targets from the same budget.
+
+Relevant checks:
+
+```bash
+npm run check:css-style
+npm run report:css-style
 ```
 
 ## Builder and render
@@ -104,6 +120,8 @@ npm run check:canvas-hit-parity
 - Main-row push failures must be reported non-fatally and must still notify settled listeners so parked pulls can recover.
 - Recovery pulls must not run ahead of a debounced main-row push; reconnect/attention/polling refresh work stays parked until the pending local write settles.
 - Browser attention listeners must report non-fatal pull errors and remain usable for later events.
+- Offline attention attempts must not consume reconnect eligibility; hidden reconnects must wait for a visible return before pulling.
+- Browser reconnect smoke should prove the visible Cloud Sync panel stays stable across offline/online transitions and that a real Cloud Sync action remains usable after reconnect.
 
 Relevant docs/checks:
 
@@ -111,6 +129,8 @@ Relevant docs/checks:
 docs/CLOUD_SYNC_LIFECYCLE_STATE_MACHINE.md
 npm run check:cloud-sync-timers
 npm run check:cloud-sync-races
+npm run check:cloud-sync-offline-reconnect
+npm run e2e:cloud-sync-reconnect
 ```
 
 ## Project load and runtime selectors
@@ -119,10 +139,12 @@ npm run check:cloud-sync-races
 - Old persisted shapes may be converted once in `esm/native/io/project_migrations/`.
 - After load/import migration, runtime and builder paths should read canonical state only.
 - Tolerant compatibility readers may remain for staged migration, but new live paths should prefer canonical readers/assertions.
+- Real project import fixtures under `tests/fixtures/project_import/` guard string/envelope ingress, canonical `ui.raw` materialization, config replace-owned branches, and map cleanup behavior.
 
 Relevant checks:
 
 ```bash
+npm run check:project-import-fixtures
 npm run check:project-migration-boundary
 npm run check:runtime-selector-policy
 ```

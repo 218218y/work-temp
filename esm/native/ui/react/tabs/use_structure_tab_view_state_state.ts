@@ -32,11 +32,11 @@ import {
 } from './structure_tab_view_state_runtime.js';
 import { getModeConst } from './structure_tab_shared.js';
 
-function readLibraryUpperDoorsHiddenPreference(value: unknown, fallback: boolean): boolean {
+function readLibraryUpperDoorsHiddenPreference(value: unknown, defaultValue: boolean): boolean {
   if (value === true || value === false) return value;
   if (value === 1 || value === '1' || value === 'true') return true;
   if (value === 0 || value === '0' || value === 'false') return false;
-  return fallback;
+  return defaultValue;
 }
 
 export function useStructureTabViewStateState(app: AppContainer): StructureTabViewState {
@@ -133,10 +133,7 @@ export function useStructureTabViewStateState(app: AppContainer): StructureTabVi
   );
   const libraryUpperDoorsHidden = useMemo(
     () =>
-      readLibraryUpperDoorsHiddenPreference(
-        libraryUpperDoorsHiddenRaw,
-        libraryUpperDoorsEffectivelyRemoved
-      ),
+      readLibraryUpperDoorsHiddenPreference(libraryUpperDoorsHiddenRaw, libraryUpperDoorsEffectivelyRemoved),
     [libraryUpperDoorsHiddenRaw, libraryUpperDoorsEffectivelyRemoved]
   );
   const modulesCount = useStoreSelector(st => readModulesCountFromRootSnapshot(st, doors));

@@ -12,7 +12,10 @@ import {
   readModuleKeyString,
 } from './render_interior_custom_ops_shared.js';
 import { computeCustomModuleInnerFaces } from './render_interior_custom_ops_wall_faces.js';
-import { createAddCustomGridShelf } from './render_interior_custom_ops_shelves.js';
+import {
+  addCustomBaseShelfContents,
+  createAddCustomGridShelf,
+} from './render_interior_custom_ops_shelves.js';
 import {
   applyCustomInteriorGridLayout,
   applyCustomStorageBarrier,
@@ -70,6 +73,8 @@ export function createBuilderRenderInteriorCustomOps(deps: RenderInteriorOpsDeps
     const currentShelfMat = input.currentShelfMat;
     const bodyMat = input.bodyMat;
     const braceSet = buildBraceShelfIndexSet(input);
+    const shelfSet = buildShelfIndexSet(ops);
+    const shelfVariantByIndex = buildShelfVariantByIndex(ops);
 
     const regularShelfDepthCap = 0.45;
     const regularDepth =
@@ -113,6 +118,36 @@ export function createBuilderRenderInteriorCustomOps(deps: RenderInteriorOpsDeps
         rightInnerX,
       },
       effectiveBottomY,
+      effectiveTopY,
+      localGridStep,
+      gridDivisions,
+      shelfSet,
+      shelfVariantByIndex,
+      internalCenterX,
+      innerW,
+      woodThick,
+      internalDepth,
+      internalZ,
+      isInternalDrawersEnabled,
+      activeSlots,
+    });
+
+    addCustomBaseShelfContents({
+      group,
+      addFoldedClothes: input.addFoldedClothes,
+      braceSet,
+      shelfSet,
+      shelfVariantByIndex,
+      braceMetrics: {
+        regularDepth,
+        regularZ,
+        regularShelfWidth,
+        braceShelfWidth,
+        braceCenterX,
+        leftInnerX,
+        rightInnerX,
+      },
+      effectiveBottomY,
       localGridStep,
       internalCenterX,
       innerW,
@@ -128,8 +163,8 @@ export function createBuilderRenderInteriorCustomOps(deps: RenderInteriorOpsDeps
       effectiveBottomY,
       effectiveTopY,
       localGridStep,
-      shelfSet: buildShelfIndexSet(ops),
-      shelfVariantByIndex: buildShelfVariantByIndex(ops),
+      shelfSet,
+      shelfVariantByIndex,
       addGridShelf,
       checkAndCreateInternalDrawer: input.checkAndCreateInternalDrawer,
       createRod,

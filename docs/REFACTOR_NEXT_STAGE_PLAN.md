@@ -70,6 +70,8 @@ The current ratchet covers:
 
 Future CSS work should lower these budgets after cleanup. Increasing a budget is allowed only when a deliberate product/design decision accepts the extra cascade debt.
 
+The first CSS cleanup slice is complete: `css/react_styles.css` no longer uses `transition: all`; each affected rule now names the properties it animates, and `tools/wp_css_style_budget.json` locks `transitionAll` at 0. Remaining CSS cleanup should focus only on safe reductions to `!important`, `z-index`, or `box-shadow`.
+
 ## Cloud Sync offline/reconnect behavior hardening
 
 The Cloud Sync offline/reconnect hardening slice is complete: `npm run check:cloud-sync-offline-reconnect` now guards browser attention behavior for reconnect paths.
@@ -82,6 +84,12 @@ The guard proves two product-risk cases:
 This keeps offline/hidden behavior inside the lifecycle refresh policy instead of adding browser-binding fallbacks or duplicate state paths.
 
 The browser smoke follow-up is also complete: `npm run e2e:cloud-sync-reconnect` runs a focused Playwright flow that moves the browser offline and back online, verifies the Cloud Sync panel stays stable, and proves a real sketch sync action remains usable after reconnect.
+
+## Canvas browser pointer parity
+
+The Canvas hover/click browser follow-up is complete: `npm run e2e:canvas-pointer-parity` now finds a real cell-dims target through the canonical canvas inspector, verifies the point is reachable by the browser canvas element, performs Playwright pointer hover and click events, and asserts the committed module is the same module identified before the click.
+
+This complements `check:canvas-hit-identity` and `check:canvas-hit-parity` without adding production fallbacks or coupling the test to private owner modules.
 
 ## Performance measurement refresh
 
@@ -195,6 +203,7 @@ Do not create Stage 81 just to continue the numbering. If no fresh ownership sea
 | Project import/load ingress  | `check:project-import-fixtures`, project migration boundary, runtime selector guard |
 | CSS cascade cleanup          | `check:css-style`, `report:css-style`, budget decrease when counts improve          |
 | Cloud Sync reconnect         | `check:cloud-sync-offline-reconnect`, `e2e:cloud-sync-reconnect`, race/timer guards |
+| Canvas pointer parity        | `check:canvas-hit-identity`, `check:canvas-hit-parity`, `e2e:canvas-pointer-parity` |
 | React UI split               | targeted UI tests, design-system/option-button guards, lint on changed files        |
 | Order PDF split              | targeted PDF/editor guards, text-layer/sketch-preview guards, lint on changed files |
 | Planning/control-plane stage | docs-control-plane audit, refactor integration audit, stage guard suite             |

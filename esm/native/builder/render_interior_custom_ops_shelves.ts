@@ -20,6 +20,12 @@ const PIN_LEN = 0.012;
 const PIN_EDGE_OFFSET_DEFAULT = 0.04;
 const GLASS_THICK_M = 0.018;
 
+function shelfHeightForVariant(variant: ShelfVariant | undefined, woodThick: number): number {
+  if (variant === 'glass') return GLASS_THICK_M;
+  if (variant === 'double') return Math.max(woodThick, woodThick * 2);
+  return woodThick;
+}
+
 export function createAddCustomGridShelf(args: {
   threeSurface: InteriorTHREESurface | null;
   matCache: unknown;
@@ -37,9 +43,13 @@ export function createAddCustomGridShelf(args: {
   addFoldedClothes: unknown;
   currentShelfMat: unknown;
   braceSet: Record<number, true>;
+  shelfSet: Record<number, true>;
+  shelfVariantByIndex: Record<number, ShelfVariant>;
   braceMetrics: InteriorCustomBraceMetrics;
   effectiveBottomY: number;
+  effectiveTopY: number;
   localGridStep: number;
+  gridDivisions: number;
   internalCenterX: number;
   innerW: number;
   woodThick: number;
@@ -56,9 +66,13 @@ export function createAddCustomGridShelf(args: {
     addFoldedClothes,
     currentShelfMat,
     braceSet,
+    shelfSet,
+    shelfVariantByIndex,
     braceMetrics,
     effectiveBottomY,
+    effectiveTopY,
     localGridStep,
+    gridDivisions,
     internalCenterX,
     innerW,
     woodThick,
@@ -158,6 +172,22 @@ export function createAddCustomGridShelf(args: {
     mkPin(braceMetrics.rightInnerX - PIN_LEN / 2, zFront);
   };
 
+  function resolveShelfContentsMaxHeight(gridIndex: number, shelfY: number, shelfH: number): number {
+    const shelfTopY = shelfY + shelfH / 2;
+    let topLimitY = effectiveTopY;
+    const maxGrid = Math.max(0, Math.floor(Number(gridDivisions) || 0));
+
+    for (let nextIndex = gridIndex + 1; nextIndex < maxGrid; nextIndex += 1) {
+      if (shelfSet[nextIndex]) {
+        const nextShelfH = shelfHeightForVariant(shelfVariantByIndex[nextIndex], woodThick);
+        topLimitY = effectiveBottomY + nextIndex * localGridStep - nextShelfH / 2;
+        break;
+      }
+    }
+
+    return Math.max(0, topLimitY - shelfTopY - 0.006);
+  }
+
   let glassMat: InteriorMaterialLike | null = null;
   try {
     const cache = isRecord(matCache) ? matCache : null;
@@ -189,8 +219,7 @@ export function createAddCustomGridShelf(args: {
     const shelfVariant = typeof variant === 'string' ? variant : 'regular';
     const isBrace = !!braceSet[gridIndex] || shelfVariant === 'brace';
     const isGlass = shelfVariant === 'glass';
-    const isDouble = shelfVariant === 'double';
-    const shelfH = isGlass ? GLASS_THICK_M : isDouble ? Math.max(woodThick, woodThick * 2) : woodThick;
+    const shelfH = shelfHeightForVariant(shelfVariant, woodThick);
     const shelfDepth = isBrace ? internalDepth : braceMetrics.regularDepth;
     const shelfZ = isBrace ? internalZ : braceMetrics.regularZ;
     const shelfW = isBrace ? braceMetrics.braceShelfWidth : braceMetrics.regularShelfWidth;
@@ -221,9 +250,63 @@ export function createAddCustomGridShelf(args: {
         shelfZ,
         innerW - 0.06,
         group,
-        undefined,
+        resolveShelfContentsMaxHeight(gridIndex, shelfY, shelfH),
         shelfDepth
       );
     }
   };
+}
+
+export function addCustomBaseShelfContents(args: {
+  group: InteriorGroupLike;
+  addFoldedClothes: unknown;
+  braceSet: Record<number, true>;
+  shelfSet: Record<number, true>;
+  shelfVariantByIndex: Record<number, ShelfVariant>;
+  braceMetrics: InteriorCustomBraceMetrics;
+  effectiveBottomY: number;
+  localGridStep: number;
+  internalCenterX: number;
+  innerW: number;
+  woodThick: number;
+  internalDepth: number;
+  internalZ: number;
+  isInternalDrawersEnabled: boolean;
+  activeSlots: unknown[];
+}): void {
+  const {
+    group,
+    addFoldedClothes,
+    braceSet,
+    shelfSet,
+    shelfVariantByIndex,
+    braceMetrics,
+    effectiveBottomY,
+    localGridStep,
+    internalCenterX,
+    innerW,
+    woodThick,
+    internalDepth,
+    internalZ,
+    isInternalDrawersEnabled,
+    activeSlots,
+  } = args;
+
+  if (!shelfSet[1] || !__isFn(addFoldedClothes)) return;
+  const hasDrawerInBottomSpace = isInternalDrawersEnabled && activeSlots.indexOf(1) !== -1;
+  if (hasDrawerInBottomSpace) return;
+
+  const firstShelfVariant = shelfVariantByIndex[1] || 'regular';
+  const firstShelfH = shelfHeightForVariant(firstShelfVariant, woodThick);
+  const maxHeight = Math.max(
+    0,
+    effectiveBottomY + localGridStep - firstShelfH / 2 - effectiveBottomY - 0.006
+  );
+  if (!(maxHeight > 0)) return;
+
+  const isBrace = !!braceSet[1] || firstShelfVariant === 'brace';
+  const shelfDepth = isBrace ? internalDepth : braceMetrics.regularDepth;
+  const shelfZ = isBrace ? internalZ : braceMetrics.regularZ;
+
+  addFoldedClothes(internalCenterX, effectiveBottomY, shelfZ, innerW - 0.06, group, maxHeight, shelfDepth);
 }

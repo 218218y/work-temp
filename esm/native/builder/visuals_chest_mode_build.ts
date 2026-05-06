@@ -2,6 +2,7 @@ import { getDrawersArray, getViewportSurface, getWardrobeGroup } from '../runtim
 import { getBuilderRenderOps } from '../runtime/builder_service_access.js';
 import {
   CARCASS_BASE_DIMENSIONS,
+  CHEST_MODE_DIMENSIONS,
   MATERIAL_DIMENSIONS,
 } from '../../shared/wardrobe_dimension_tokens_shared.js';
 import { resolveBaseLegGeometrySpec } from '../features/base_leg_support.js';
@@ -218,15 +219,15 @@ export function buildChestOnly(App: AppContainer, opts?: UnknownRecord | null) {
 
   if (getCfg(App).showDimensions && addDimensionLine) {
     addDimensionLine(
-      new THREE.Vector3(-totalW / 2, H + 0.1, 0),
-      new THREE.Vector3(totalW / 2, H + 0.1, 0),
+      new THREE.Vector3(-totalW / 2, H + CHEST_MODE_DIMENSIONS.dimensionGuideTopOffsetM, 0),
+      new THREE.Vector3(totalW / 2, H + CHEST_MODE_DIMENSIONS.dimensionGuideTopOffsetM, 0),
       new THREE.Vector3(0, 0, 0),
       (totalW * 100).toFixed(0),
       0.6
     );
     addDimensionLine(
-      new THREE.Vector3(totalW / 2 + 0.15, 0, 0),
-      new THREE.Vector3(totalW / 2 + 0.15, H, 0),
+      new THREE.Vector3(totalW / 2 + CHEST_MODE_DIMENSIONS.dimensionGuideSideOffsetM, 0, 0),
+      new THREE.Vector3(totalW / 2 + CHEST_MODE_DIMENSIONS.dimensionGuideSideOffsetM, H, 0),
       new THREE.Vector3(0, 0, 0),
       (H * 100).toFixed(0),
       0.6

@@ -1,4 +1,4 @@
-import { CORNER_WING_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
+import { CORNER_WING_DIMENSIONS, HANDLE_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
 import {
   __edgeHandleAlignedBaseAbsYForCornerCells,
   __edgeHandleLongLiftAbsYForCornerCells,
@@ -46,8 +46,8 @@ export function resolveCornerSharedAlignedEdgeHandleBaseAbsY(
   getCellCfg: CornerWingCellCfgResolver
 ): number {
   const cfgRec = asRecord(args.__cfg);
-  if (!cfgRec || cfgRec.globalHandleType !== 'edge') return 1.05;
-  if (!(doorCount > 0)) return 1.05;
+  if (!cfgRec || cfgRec.globalHandleType !== 'edge') return HANDLE_DIMENSIONS.edge.defaultGlobalAbsYM;
+  if (!(doorCount > 0)) return HANDLE_DIMENSIONS.edge.defaultGlobalAbsYM;
   const cellCount = Math.max(1, Math.ceil(doorCount / CORNER_WING_DIMENSIONS.cells.doorsPerCell));
   const cellCfgs: CornerCellCfg[] = [];
   for (let ci = 0; ci < cellCount; ci += 1) cellCfgs.push(getCellCfg(ci));

@@ -1,6 +1,7 @@
 // Builder core carcass shared preparation and normalization helpers.
 import {
   CARCASS_BASE_DIMENSIONS,
+  CARCASS_SHELL_DIMENSIONS,
   MATERIAL_DIMENSIONS,
 } from '../../shared/wardrobe_dimension_tokens_shared.js';
 
@@ -8,8 +9,8 @@ import { readBaseLegOptions } from '../features/base_leg_support.js';
 import { _asObject, __asArray, __asInt, __asNum } from './core_pure_shared.js';
 import type { MutableRecord } from './core_pure_shared.js';
 
-export const CARCASS_BACK_INSET_Z = 0.0078;
-export const CARCASS_FRONT_INSET_Z = 0.005;
+export const CARCASS_BACK_INSET_Z: number = CARCASS_SHELL_DIMENSIONS.backInsetZM;
+export const CARCASS_FRONT_INSET_Z: number = CARCASS_SHELL_DIMENSIONS.frontInsetZM;
 
 const PLINTH_DIMENSIONS = CARCASS_BASE_DIMENSIONS.plinth;
 const BASE_LEG_LAYOUT_DIMENSIONS = CARCASS_BASE_DIMENSIONS.legs;

@@ -136,6 +136,32 @@ export const STACK_SPLIT_LOWER_WIDTH_MAX: number = WARDROBE_LIMITS.stackSplit.lo
 export const STACK_SPLIT_LOWER_DOORS_MIN: number = WARDROBE_LIMITS.stackSplit.lowerDoorsMin;
 export const STACK_SPLIT_LOWER_DOORS_MAX: number = WARDROBE_LIMITS.stackSplit.lowerDoorsMax;
 
+export const CARCASS_SHELL_DIMENSIONS = Object.freeze({
+  frontInsetZM: 0.005,
+  backInsetZM: 0.0078,
+  boardMinDimensionM: 0.001,
+  boardMinDepthM: 0.02,
+  bodyMinDepthM: 0.05,
+  bodyMinHeightM: 0.05,
+  floorCeilWidthClearanceM: 0.001,
+  backPanelWidthClearanceM: 0.002,
+  backPanelSegmentWidthClearanceM: 0.002,
+  backPanelThicknessM: 0.005,
+  backPanelZM: 0.005,
+  sideDepthClearanceM: 0.0078,
+  sideZOffsetM: 0.0039,
+  internalBackInsetM: 0.005,
+  drawerGridDivisions: 6,
+  drawerSplitGridLineIndex: 4,
+});
+
+export const CARCASS_INTERIOR_DIMENSIONS = Object.freeze({
+  minTopBodyHeightM: CARCASS_SHELL_DIMENSIONS.bodyMinHeightM,
+  slidingDepthReductionM: 0.12,
+  hingedDepthReductionM: 0.03,
+  internalBackInsetM: CARCASS_SHELL_DIMENSIONS.internalBackInsetM,
+});
+
 export const CARCASS_BASE_DIMENSIONS = Object.freeze({
   plinth: Object.freeze({
     heightM: 0.08,
@@ -205,6 +231,58 @@ export const BASE_LEG_DIMENSIONS = Object.freeze({
   }),
 });
 
+export const CARCASS_CORNICE_DIMENSIONS = Object.freeze({
+  common: Object.freeze({
+    epsilonM: 1e-6,
+    yLiftM: 0.0006,
+    minSegmentLengthM: 0.02,
+    minBoxDimensionM: 0.001,
+    thetaClampM: 0.01,
+  }),
+  wave: Object.freeze({
+    maxHeightM: 0.095,
+    cycles: 2,
+    frameThicknessMinM: 0.01,
+    frameThicknessMaxM: 0.028,
+    fallbackWoodThicknessM: MATERIAL_DIMENSIONS.wood.thicknessM,
+    amplitudeRatio: 0.03,
+    amplitudeMinM: 0.03,
+    amplitudeMaxM: 0.06,
+    sampleSpacingM: 0.02,
+    sampleCountMin: 24,
+    sampleCountMax: 180,
+    connectorInsetM: 0.0004,
+    minInteriorNormalLengthSq: 1e-6,
+  }),
+  profile: Object.freeze({
+    heightM: 0.08,
+    overhangXM: 0.06,
+    overhangZM: 0.04,
+    insetOnRoofM: 0.03,
+    backStepM: 0.02,
+    seamEpsilonM: 0,
+    baseHeightM: 0.022,
+    step1OutM: 0.006,
+    slopeHeightM: 0.03,
+    slopeOutM: 0.018,
+    step2OutM: 0.006,
+    capRiseM: 0.012,
+    capOutM: 0.004,
+    topLipOutM: 0.003,
+    minOverhangM: 0.001,
+    xMaxFallbackM: 1,
+    baseHeightRatio: 0.6,
+    slopeHeightRatio: 0.92,
+    capHeightRatio: 0.96,
+    miterEpsilonZM: 0.0005,
+    baseSealEpsilonM: 0.003,
+    baseBandEpsilonM: 1e-6,
+    legacyEnvelopeProfileZM: 0.02,
+    legacyEnvelopeTopRadiusPadM: 0.12,
+    legacyEnvelopeDepthPadM: 0.08,
+  }),
+});
+
 export const DOOR_TRIM_DIMENSIONS = Object.freeze({
   defaults: Object.freeze({
     thicknessM: 0.035,
@@ -242,6 +320,7 @@ export const DRAWER_DIMENSIONS = Object.freeze({
     shoeHeightM: 0.2,
     regularHeightM: 0.22,
     frontOffsetZM: 0.01,
+    doorTopGapM: WARDROBE_DEFAULTS.stackSplit.seamGapM,
     openOffsetZM: 0.35,
     visualWidthClearanceM: 0.004,
     visualThicknessM: 0.02,
@@ -305,6 +384,15 @@ export const CORNER_WING_DIMENSIONS = Object.freeze({
     minSegmentHeightM: 0.12,
     visualMinWidthM: 0.03,
     visualMinHeightM: 0.2,
+    shellMinWallHeightM: CARCASS_SHELL_DIMENSIONS.bodyMinHeightM,
+    shellWallHeightClearanceM: 0.002,
+    shellBackPanelThicknessM: CARCASS_SHELL_DIMENSIONS.backPanelThicknessM,
+    shellBackPanelOutsideInsetM: 0.0025,
+    shellPanelMinLengthM: 0.01,
+    shellNoOverlapInsetExtraM: 0.001,
+    shellBaseMinHeightM: CARCASS_SHELL_DIMENSIONS.boardMinDimensionM,
+    shellCorniceHitMinM: CARCASS_SHELL_DIMENSIONS.bodyMinHeightM,
+    fullDoorTopHandleClearanceM: 0.002,
     visualWidthClearanceM: 0.004,
     visualHeightClearanceM: 0.004,
     frontThicknessM: MATERIAL_DIMENSIONS.wood.thicknessM,
@@ -370,6 +458,34 @@ export const CORNER_WING_DIMENSIONS = Object.freeze({
   }),
 });
 
+export const CHEST_MODE_DIMENSIONS = Object.freeze({
+  activeDefaults: Object.freeze({
+    doorsCount: 0,
+    widthCm: 50,
+    heightCm: 50,
+    depthCm: 40,
+    drawersCount: WARDROBE_LIMITS.chestDrawers.min,
+    baseType: 'legs',
+  }),
+  drawerBox: Object.freeze({
+    panelThicknessM: 0.015,
+    accentZOffsetM: 0.0008,
+    accentMinWidthM: 0.12,
+    accentMinHeightM: 0.08,
+    accentThicknessMinM: 0.0022,
+    accentThicknessMaxM: 0.004,
+    accentThicknessRatio: 0.035,
+    accentStripDepthM: 0.001,
+    accentRenderOrder: 2,
+    handleWidthM: 0.12,
+    handleHeightM: 0.02,
+    handleDepthM: 0.015,
+    handleFrontOffsetM: 0.005,
+  }),
+  dimensionGuideSideOffsetM: 0.15,
+  dimensionGuideTopOffsetM: 0.1,
+});
+
 export const HANDLE_DIMENSIONS = Object.freeze({
   edge: Object.freeze({
     shortLengthM: 0.2,
@@ -388,6 +504,13 @@ export const HANDLE_DIMENSIONS = Object.freeze({
     bridgeThicknessM: 0.007,
     bridgeOverlapM: 0.004,
     drawerReturnDropM: 0.0135,
+    defaultGlobalAbsYM: 1.05,
+    drawerLiftThresholdYM: 0.9,
+    drawerLiftClearanceM: 0.15,
+    longLiftDrawerCountThreshold: 4,
+    longLiftExtraM: 0.1,
+    shortClampPaddingM: 0.1,
+    longClampPaddingM: 0.2,
   }),
   standard: Object.freeze({
     drawerWidthM: 0.16,

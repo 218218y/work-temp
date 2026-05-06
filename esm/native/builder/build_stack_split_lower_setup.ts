@@ -1,6 +1,7 @@
 import { getBuilderRenderOps } from '../runtime/builder_service_access.js';
 import { getWardrobeGroup } from '../runtime/render_access.js';
 import { writeStackSplitLowerTopY } from '../runtime/cache_access.js';
+import { DEFAULT_STACK_SPLIT_LOWER_HEIGHT } from '../runtime/wardrobe_dimension_defaults.js';
 import { applyCarcassAndGetCabinetMetrics } from './carcass_pipeline.js';
 import { computeModulesAndLayout } from './module_layout_pipeline.js';
 import { readFiniteNumberArray, readRecord } from './build_flow_readers.js';
@@ -27,7 +28,7 @@ export function prepareStackSplitLowerSetup(
   const splitBottomHeightCm =
     Number.isFinite(args.lowerHeightCm) && args.lowerHeightCm > 0
       ? args.lowerHeightCm
-      : Math.min(args.heightCm, 60);
+      : Math.min(args.heightCm, DEFAULT_STACK_SPLIT_LOWER_HEIGHT);
   const splitBottomDepthCm =
     Number.isFinite(args.lowerDepthCm) && args.lowerDepthCm > 0 ? args.lowerDepthCm : args.depthCm;
 

@@ -1,3 +1,4 @@
+import { MATERIAL_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
 import {
   resolveSketchModuleDoorFaceSpan,
   resolveSketchModuleInnerFaces,
@@ -63,7 +64,7 @@ export function resolveInteriorSketchExtrasInput(
   if (!(spanH > 0.05)) return null;
 
   const innerW = Number(input.innerW || 0);
-  const woodThick = Number(input.woodThick || 0.018);
+  const woodThick = Number(input.woodThick || MATERIAL_DIMENSIONS.wood.thicknessM);
   const internalDepth = Number(input.internalDepth || 0);
   const internalCenterX = Number(input.internalCenterX || 0);
   const internalZ = Number(input.internalZ || 0);

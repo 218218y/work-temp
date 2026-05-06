@@ -490,7 +490,7 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 
 #reactSidebarRoot .wp-r-savedmodels-rowicon {
   min-width: 34px;
-  padding: 6px 8px !important;
+  padding: 6px 8px;
 }
 
 #reactSidebarRoot .wp-r-savedmodels-rowicon[aria-disabled='true'] {
@@ -565,9 +565,9 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 }
 
 #reactSidebarRoot .wp-r-savedmodels-btn {
-  margin: 0 !important;
-  font-size: 0.8rem !important;
-  padding: 8px 10px !important;
+  margin: 0;
+  font-size: 0.8rem;
+  padding: 8px 10px;
   border-radius: 10px;
 }
 
@@ -577,9 +577,9 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 }
 
 #reactSidebarRoot .wp-r-savedmodels-arrow {
-  margin: 0 !important;
+  margin: 0;
   flex: 1;
-  padding: 8px 0 !important;
+  padding: 8px 0;
   border-radius: 10px;
 }
 
@@ -716,6 +716,17 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 #reactSidebarRoot .wp-r-input-addon .wp-r-mini-link-toggle {
   width: 100%;
   justify-content: center;
+}
+
+#reactSidebarRoot .wp-r-input[aria-invalid='true'] {
+  border-color: var(--danger, #d33);
+}
+
+#reactSidebarRoot .wp-r-input-error {
+  margin-top: 4px;
+  color: var(--danger, #d33);
+  font-size: 0.78rem;
+  line-height: 1.25;
 }
 
 #reactSidebarRoot .wp-r-dims-grid {
@@ -1483,7 +1494,7 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
   .wp-tool-card--layout
   .wp-sketch-row
   .wp-r-type-selector.type-selector {
-  margin-bottom: 6px !important;
+  margin-bottom: 6px;
 }
 
 /* In the box grid we don't want any extra bottom margin inside the right column,
@@ -1494,7 +1505,7 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
   .wp-tool-card--layout
   .wp-sketch-box-col--btn
   .wp-r-type-selector.type-selector {
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
 }
 
 /* Make sketch headers a bit tighter so sections don't look "floating" */
@@ -1606,7 +1617,7 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 }
 
 #reactSidebarRoot .tab-content[data-tab='interior'] .wp-tool-card--layout .wp-sketch-box-cell .wp-r-label {
-  margin-bottom: 4px !important;
+  margin-bottom: 4px;
 }
 
 #reactSidebarRoot
@@ -1710,10 +1721,10 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 #reactSidebarRoot .tab-content[data-tab='interior'] .wp-tool-card--extdrawer .btn.btn-count {
   /* Some global .btn styles may set a fixed height/padding; force match to divider button */
   box-sizing: border-box;
-  padding: 10px 12px !important;
-  height: 35px !important;
-  min-height: 32px !important;
-  max-height: 42px !important;
+  padding: 10px 12px;
+  height: 35px;
+  min-height: 32px;
+  max-height: 42px;
   font-size: 0.9rem;
   line-height: 1;
 }
@@ -1780,9 +1791,9 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 }
 
 #reactSidebarRoot .tab-content[data-tab='render'] .wp-r-floor-type-selector {
-  display: grid !important;
+  display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px !important;
+  gap: 10px;
 }
 
 #reactSidebarRoot .tab-content[data-tab='render'] .wp-r-floor-type-selector .type-option {
@@ -1798,15 +1809,15 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
   line-height: 1.1;
   white-space: nowrap;
   box-sizing: border-box;
-  margin: 0 !important;
-  transform: none !important;
+  margin: 0;
+  transform: none;
 }
 
 #reactSidebarRoot .tab-content[data-tab='render'] .wp-r-floor-type-selector .type-option.selected {
   border-color: rgba(59, 130, 246, 0.75);
   box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.25);
   position: relative;
-  z-index: 1;
+  z-index: var(--wp-z-local-raised);
 }
 
 #reactSidebarRoot .tab-content[data-tab='render'] .wp-r-floor-type-selector .type-option i {
@@ -1841,10 +1852,10 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 
 #reactSidebarRoot .tab-content[data-tab='render'] .color-picker-row .color-dot-swatch,
 #reactSidebarRoot .tab-content[data-tab='design'] .color-picker-row .color-dot-swatch {
-  width: 38px !important;
-  height: 38px !important;
-  border-radius: 999px !important;
-  border: 2px solid #e2e8f0 !important;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 2px solid #e2e8f0;
   box-sizing: border-box;
   cursor: pointer;
   display: block;
@@ -1853,12 +1864,12 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 
 #reactSidebarRoot .tab-content[data-tab='render'] .color-picker-row .color-dot-swatch:hover,
 #reactSidebarRoot .tab-content[data-tab='design'] .color-picker-row .color-dot-swatch:hover {
-  border-color: rgba(59, 130, 246, 0.45) !important;
+  border-color: rgba(59, 130, 246, 0.45);
 }
 
 #reactSidebarRoot .tab-content[data-tab='render'] .color-picker-row .color-dot-swatch.is-selected,
 #reactSidebarRoot .tab-content[data-tab='design'] .color-picker-row .color-dot-swatch.is-selected {
-  border-color: rgba(59, 130, 246, 0.85) !important;
+  border-color: rgba(59, 130, 246, 0.85);
   box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.35);
 }
 
@@ -1929,27 +1940,27 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 #reactSidebarRoot .tab-content[data-tab='render'] .wp-r-light-presets .type-option {
   margin: 0;
   border-width: 1px;
-  transform: none !important;
-  box-shadow: none !important;
-  box-sizing: border-box !important;
-  border: 1px solid #e2e8f0 !important;
+  transform: none;
+  box-shadow: none;
+  box-sizing: border-box;
+  border: 1px solid #e2e8f0;
   background-clip: padding-box;
   position: relative;
-  z-index: 0;
+  z-index: var(--wp-z-local-base);
 }
 
 #reactSidebarRoot .tab-content[data-tab='render'] .wp-r-light-presets .type-option:hover {
-  transform: none !important;
-  border-color: #cbd5e1 !important;
-  box-shadow: none !important;
+  transform: none;
+  border-color: #cbd5e1;
+  box-shadow: none;
 }
 
 #reactSidebarRoot .tab-content[data-tab='render'] .wp-r-light-presets .type-option.selected {
-  box-shadow: inset 0 0 0 2px #3b82f6 !important;
-  border-color: transparent !important;
-  background: rgba(59, 130, 246, 0.05) !important;
-  color: #3b82f6 !important;
-  z-index: 1;
+  box-shadow: inset 0 0 0 2px #3b82f6;
+  border-color: transparent;
+  background: rgba(59, 130, 246, 0.05);
+  color: #3b82f6;
+  z-index: var(--wp-z-local-raised);
 }
 
 /* --------------------------------------------------------------------------
@@ -2013,9 +2024,9 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 }
 
 #reactSidebarRoot .wp-r-btn-row.wp-r-split-between > .btn {
-  width: 100% !important;
+  width: 100%;
   min-width: 0;
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
   height: 100%;
   /* Keep the row single-line by allowing the label INSIDE the button to wrap instead of pushing layout. */
   white-space: normal;
@@ -2023,14 +2034,14 @@ body.wp-ui-react #sidebar > :not(#reactSidebarRoot) {
 }
 
 #reactSidebarRoot .wp-r-btn-row > .btn {
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
   flex: 1 1 120px;
 }
 
 #reactSidebarRoot .wp-r-project-panel .wp-r-project-io-btn {
   min-height: 40px;
-  padding-top: 9px !important;
-  padding-bottom: 9px !important;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
 #reactSidebarRoot .wp-r-project-panel .wp-r-project-restore {
@@ -2294,34 +2305,34 @@ body.wp-ui-react .btn:active {
 }
 
 body.wp-ui-react .btn-primary {
-  background: #eff6ff !important;
-  color: #3b82f6 !important;
-  border: 1px solid #3b82f6 !important;
-  box-shadow: none !important;
-  font-weight: 700 !important;
+  background: #eff6ff;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+  box-shadow: none;
+  font-weight: 700;
   transition:
     background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
     color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.wp-ui-react .btn-primary:hover {
-  background: #dbeafe !important;
-  color: #1e40af !important;
-  border-color: #2563eb !important;
+  background: #dbeafe;
+  color: #1e40af;
+  border-color: #2563eb;
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2) !important;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
 }
 
 body.wp-ui-react .btn-primary:active {
-  background: #bfdbfe !important;
-  transform: translateY(0) !important;
+  background: #bfdbfe;
+  transform: translateY(0);
 }
 
 body.wp-ui-react .btn-primary i {
-  color: inherit !important;
+  color: inherit;
 }
 
 body.wp-ui-react .btn-accent {
@@ -2600,7 +2611,11 @@ body.wp-ui-react .btn-cancel:hover {
   height: 24px;
   background: #cbd5e1;
   border-radius: 24px;
-  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
   cursor: pointer;
 }
 
@@ -2613,7 +2628,11 @@ body.wp-ui-react .btn-cancel:hover {
   height: 20px;
   background: #fff;
   border-radius: 50%;
-  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -2627,20 +2646,20 @@ body.wp-ui-react .btn-cancel:hover {
 }
 
 #reactSidebarRoot input[type='checkbox']:checked + .toggle-switch {
-  background: #4e637e !important;
-  border: 1px solid #3b82f6 !important;
-  opacity: 1 !important;
+  background: #4e637e;
+  border: 1px solid #3b82f6;
+  opacity: 1;
 }
 
 #reactSidebarRoot input[type='checkbox']:checked + .toggle-switch::after {
-  background-color: #ffffff !important;
-  box-shadow: none !important;
-  left: 2px !important;
-  transform: translateX(18px) !important;
+  background-color: #ffffff;
+  box-shadow: none;
+  left: 2px;
+  transform: translateX(18px);
 }
 
 #reactSidebarRoot input[type='checkbox']:focus + .toggle-switch {
-  box-shadow: 0 0 0 2px rgba(78, 99, 126, 0.4) !important;
+  box-shadow: 0 0 0 2px rgba(78, 99, 126, 0.4);
 }
 
 #reactSidebarRoot .groove-check-label {
@@ -2716,14 +2735,14 @@ body.wp-ui-react .btn-cancel:hover {
   flex-shrink: 0;
   min-width: 118px;
   height: var(--wp-r-input-h);
-  padding: 0 14px !important;
-  border: 1px solid #cbd5e1 !important;
+  padding: 0 14px;
+  border: 1px solid #cbd5e1;
   border-radius: var(--radius-md);
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
-  color: #0f172a !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  color: #0f172a;
   box-shadow:
     0 1px 2px rgba(15, 23, 42, 0.08),
-    0 8px 20px rgba(148, 163, 184, 0.12) !important;
+    0 8px 20px rgba(148, 163, 184, 0.12);
   font-size: 0.84rem;
   font-weight: 700;
   line-height: 1;
@@ -2741,25 +2760,25 @@ body.wp-ui-react .btn-cancel:hover {
 }
 
 #reactSidebarRoot .wp-r-groove-reset-btn:hover {
-  border-color: #93c5fd !important;
-  background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%) !important;
+  border-color: #93c5fd;
+  background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);
   box-shadow:
     0 3px 10px rgba(59, 130, 246, 0.14),
-    0 10px 18px rgba(148, 163, 184, 0.14) !important;
+    0 10px 18px rgba(148, 163, 184, 0.14);
   transform: translateY(-1px);
 }
 
 #reactSidebarRoot .wp-r-groove-reset-btn:active {
   transform: translateY(0);
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
 }
 
 #reactSidebarRoot .wp-r-groove-reset-btn:focus-visible {
   outline: none;
-  border-color: #60a5fa !important;
+  border-color: #60a5fa;
   box-shadow:
     0 0 0 3px rgba(59, 130, 246, 0.18),
-    0 8px 20px rgba(148, 163, 184, 0.14) !important;
+    0 8px 20px rgba(148, 163, 184, 0.14);
 }
 
 #reactSidebarRoot .wp-r-sketch-drawer-height-field {
@@ -2784,7 +2803,7 @@ body.wp-ui-react .btn-cancel:hover {
 #reactSidebarRoot .wp-r-sketch-drawer-height-label {
   display: block;
   width: 100%;
-  margin-bottom: 6px !important;
+  margin-bottom: 6px;
   text-align: center;
   white-space: nowrap;
 }
@@ -2802,7 +2821,7 @@ body.wp-ui-react .btn-cancel:hover {
 #reactSidebarRoot .wp-r-sketch-drawer-height-reset-btn {
   min-width: 104px;
   height: var(--wp-r-input-h);
-  padding: 0 10px !important;
+  padding: 0 10px;
   gap: 6px;
   font-size: 0.78rem;
 }
@@ -2968,14 +2987,14 @@ body.wp-ui-react .btn-cancel:hover {
 }
 
 body.wp-ui-react .btn-inline {
-  width: auto !important;
-  margin-bottom: 0 !important;
+  width: auto;
+  margin-bottom: 0;
   white-space: nowrap;
 }
 
 body.wp-ui-react .btn-sm {
-  padding: 6px 10px !important;
-  font-size: 0.85rem !important;
+  padding: 6px 10px;
+  font-size: 0.85rem;
 }
 
 #reactSidebarRoot .wp-flex-1 {
@@ -3087,14 +3106,14 @@ body.wp-ui-react .btn .wp-icon {
 #reactSidebarRoot .color-dot:hover {
   transform: scale(1.15);
   border-color: #cbd5e1;
-  z-index: 2;
+  z-index: var(--wp-z-local-hover);
 }
 
 #reactSidebarRoot .color-dot.selected {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
   transform: scale(1.2);
-  z-index: 2;
+  z-index: var(--wp-z-local-hover);
 }
 
 #reactSidebarRoot .color-dot-swatch {
@@ -3178,7 +3197,7 @@ body.wp-ui-react .color-palette {
   border-radius: 4px;
   padding: 4px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 2000;
+  z-index: var(--wp-z-popover);
   flex-direction: column;
   gap: 4px;
 }
@@ -3264,7 +3283,7 @@ body.wp-ui-react .color-swatch:hover {
 #reactSidebarRoot .special-swatch .swatch-icon {
   font-size: 32px;
   line-height: 1;
-  z-index: 1;
+  z-index: var(--wp-z-local-raised);
 }
 
 /* Saved colors: lock indicator sits *outside* the color circle (doesn't cover the swatch). */
@@ -3331,7 +3350,7 @@ body.wp-ui-react .color-swatch:hover {
   justify-content: center;
   pointer-events: auto;
   cursor: pointer;
-  z-index: 3;
+  z-index: var(--wp-z-local-active);
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(203, 213, 225, 0.95);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
@@ -3381,13 +3400,13 @@ body.wp-ui-react .color-swatch:hover {
   background: transparent;
   padding: 0;
   line-height: 1;
-  z-index: 2;
+  z-index: var(--wp-z-local-hover);
   filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8));
 }
 
 body.wp-ui-react .annotation-box {
   position: absolute;
-  z-index: 1000;
+  z-index: var(--wp-z-note-box);
   border: 1px solid transparent;
   background-color: transparent;
   box-shadow: none;
@@ -3451,7 +3470,7 @@ body.wp-ui-react .annotation-box.active-edit {
   border: 2px solid #3b82f6;
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: none;
-  z-index: 1005;
+  z-index: var(--wp-z-note-box-interactive);
   pointer-events: auto !important;
   cursor: move;
 }
@@ -3470,7 +3489,7 @@ body.wp-ui-react .resize-handle {
   background-color: white;
   border: 1px solid #3b82f6;
   border-radius: 50%;
-  z-index: 1020;
+  z-index: var(--wp-z-note-resize-handle);
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -3559,7 +3578,7 @@ body.wp-ui-react .floating-toolbar {
   box-shadow: none;
   padding: 0 8px;
   margin-left: 12px;
-  z-index: 1010;
+  z-index: var(--wp-z-note-toolbar);
   direction: rtl;
   pointer-events: auto;
 }
@@ -3638,10 +3657,10 @@ body.wp-ui-react .toolbar-color-btn {
 }
 
 body.wp-ui-react .toolbar-size-select {
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  background-image: none !important;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
   height: 36px;
   width: 36px;
   text-align: center;
@@ -3683,7 +3702,7 @@ body.wp-ui-react .size-palette {
   border-radius: 8px;
   padding: 6px;
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
-  z-index: 2000;
+  z-index: var(--wp-z-popover);
   flex-direction: column;
   gap: 6px;
 }
@@ -3734,15 +3753,15 @@ body.wp-ui-react .size-swatch.is-selected {
 }
 
 body.wp-ui-react #btnDrawNote.active {
-  background-color: #eff6ff !important;
-  color: #3b82f6 !important;
-  border: 2px solid #3b82f6 !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
-  font-weight: 700 !important;
+  background-color: #eff6ff;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  font-weight: 700;
 }
 
 body.wp-ui-react #btnDrawNote.active i {
-  color: #3b82f6 !important;
+  color: #3b82f6;
 }
 
 body.wp-ui-react #notes-overlay {
@@ -3751,7 +3770,7 @@ body.wp-ui-react #notes-overlay {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  z-index: var(--wp-z-notes-overlay);
   pointer-events: none;
   touch-action: none !important;
 }
@@ -3780,7 +3799,7 @@ body.wp-ui-react .undo-redo-container {
   left: 20px;
   display: flex;
   gap: 10px;
-  z-index: 100;
+  z-index: var(--wp-z-viewer-controls);
 }
 
 body.wp-ui-react .wp-floating-sketchsync {
@@ -3788,7 +3807,7 @@ body.wp-ui-react .wp-floating-sketchsync {
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 105;
+  z-index: var(--wp-z-floating-sketch-sync);
 }
 
 body.wp-ui-react .hint-bottom {
@@ -3819,7 +3838,7 @@ body.wp-ui-react .hint-bottom::after {
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.2s;
-  z-index: 999999;
+  z-index: var(--wp-z-tooltip);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -3836,7 +3855,7 @@ body.wp-ui-react .hint-bottom::before {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s;
-  z-index: 999999;
+  z-index: var(--wp-z-tooltip);
 }
 
 body.wp-ui-react .hint-bottom:hover::after,
@@ -3851,7 +3870,7 @@ body.wp-ui-react .camera-controls {
   left: 20px;
   display: flex;
   gap: 8px;
-  z-index: 100;
+  z-index: var(--wp-z-viewer-controls);
 }
 
 body.wp-ui-react .cam-btn {
@@ -3923,7 +3942,7 @@ body.wp-ui-react .sticky-status-toast {
   top: -50px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 11000;
+  z-index: var(--wp-z-status-toast);
   max-width: calc(100% - 32px);
   box-sizing: border-box;
   pointer-events: auto;
@@ -4000,8 +4019,8 @@ body.wp-ui-react .toast-container {
   left: 50%;
   right: auto;
   transform: translateX(-50%);
-  /* Keep toasts visible above high z-index overlays (e.g., PDF editor). */
-  z-index: 40000;
+  /* Keep toasts visible above editor overlays. */
+  z-index: var(--wp-z-toast);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -4070,8 +4089,8 @@ body.wp-ui-react .modal-overlay {
   height: 100%;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(5px);
-  /* Must sit above all app overlays (e.g., PDF editor uses z-index ~20050). */
-  z-index: 45000;
+  /* Must sit above all app overlays, including the PDF editor. */
+  z-index: var(--wp-z-modal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4165,16 +4184,16 @@ body.wp-ui-react .modal-actions {
 }
 
 body.wp-ui-react .btn-count {
-  background: #f1f5f9 !important;
-  border: 1px solid #cbd5e1 !important;
-  color: #334155 !important;
-  width: auto !important;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  width: auto;
 }
 
 body.wp-ui-react .btn-count.is-selected {
-  background: var(--primary) !important;
-  border-color: var(--primary) !important;
-  color: #fff !important;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
 }
 
 /* ------------------------------------------------------------
@@ -4205,7 +4224,7 @@ body.wp-ui-react .wp-qa-toggle-pin {
   pointer-events: auto;
   cursor: pointer;
   /* Keep the pin clickable/visible even when the main toggle is hovered */
-  z-index: 10008;
+  z-index: var(--wp-z-quick-actions-pin);
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(203, 213, 225, 0.95);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
@@ -4220,7 +4239,7 @@ body.wp-ui-react .wp-qa-toggle-pin {
     border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
     color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: visible !important;
+  overflow: visible;
 }
 
 body.wp-ui-react .wp-qa-toggle-pin i {
@@ -4232,7 +4251,7 @@ body.wp-ui-react .wp-qa-toggle-pin:hover {
   border-color: rgba(59, 130, 246, 0.55);
   background: rgba(255, 255, 255, 0.98);
   transform: translateY(-1px);
-  z-index: 10009;
+  z-index: var(--wp-z-quick-actions-pin-hover);
 }
 
 body.wp-ui-react .wp-qa-toggle-pin:active {
@@ -4256,7 +4275,7 @@ body.wp-ui-react .cam-btn.wp-qa-toggle {
 
 /* Keep hover subtle (never push the button down) */
 body.wp-ui-react .cam-btn.wp-qa-toggle:hover {
-  transform: translateY(-2px) !important;
+  transform: translateY(-2px);
 }
 
 /* Sync button docked under the toggle (shown when menu is open or sync is pinned) */
@@ -4267,7 +4286,7 @@ body.wp-ui-react .wp-qa-sync-dock {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10002;
+  z-index: var(--wp-z-quick-actions-dock);
   overflow: visible;
 }
 
@@ -4297,7 +4316,7 @@ body.wp-ui-react .wp-qa-sync-pin {
   pointer-events: auto;
   cursor: pointer;
   /* Keep the pin clickable/visible even when the big sync button is hovered */
-  z-index: 10008;
+  z-index: var(--wp-z-quick-actions-pin);
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(203, 213, 225, 0.95);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
@@ -4325,7 +4344,7 @@ body.wp-ui-react .wp-qa-sync-pin:hover {
   background: rgba(255, 255, 255, 0.98);
   transform: translateY(-2px);
   color: #3b82f6;
-  z-index: 10009;
+  z-index: var(--wp-z-quick-actions-pin-hover);
 }
 
 body.wp-ui-react .wp-qa-sync-pin:active {
@@ -4353,7 +4372,7 @@ body.wp-ui-react .wp-qa-menu {
   background: transparent;
   border: none;
   box-shadow: none;
-  z-index: 10002;
+  z-index: var(--wp-z-quick-actions-dock);
   overflow: visible;
 }
 
@@ -4385,7 +4404,7 @@ body.wp-ui-react .wp-qa-btn {
     transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 0.95rem;
   position: relative;
-  overflow: visible !important;
+  overflow: visible;
 }
 
 body.wp-ui-react .wp-qa-btn:hover {
@@ -4393,7 +4412,7 @@ body.wp-ui-react .wp-qa-btn:hover {
   transform: translateY(-2px);
   color: #3b82f6;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  z-index: 10005;
+  z-index: var(--wp-z-quick-actions-hover);
 }
 
 /* The bottom sketch-sync button inside the menu */
@@ -4416,7 +4435,7 @@ body.wp-ui-react .wp-qa-sync {
     transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 1rem;
   position: relative;
-  overflow: visible !important;
+  overflow: visible;
 }
 
 body.wp-ui-react .wp-qa-sync:hover {
@@ -4424,24 +4443,24 @@ body.wp-ui-react .wp-qa-sync:hover {
   transform: translateY(-2px);
   color: #3b82f6;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  z-index: 10005;
+  z-index: var(--wp-z-quick-actions-hover);
 }
 
 /* Ensure tooltips never hide behind sibling buttons */
 body.wp-ui-react .wp-qa-menu .hint-bottom:hover {
-  z-index: 10006;
+  z-index: var(--wp-z-quick-actions-tooltip);
 }
 
 /* Also applies to the toggle and its pins */
 body.wp-ui-react .wp-qa-anchor .hint-bottom:hover {
-  z-index: 10006;
+  z-index: var(--wp-z-quick-actions-tooltip);
 }
 
 /* --- In-PDF Order Editor Overlay (auto-added) --- */
 body.wp-ui-react .wp-pdf-editor-overlay {
   position: fixed;
   inset: 0;
-  z-index: 20050;
+  z-index: var(--wp-z-pdf-editor-overlay);
   background: rgba(2, 6, 23, 0.6);
   backdrop-filter: blur(2px);
   display: flex;
@@ -4451,7 +4470,7 @@ body.wp-ui-react .wp-pdf-editor-overlay {
 body.wp-ui-react .wp-pdf-editor-toolbar {
   position: sticky;
   top: 10px;
-  z-index: 20051;
+  z-index: var(--wp-z-pdf-editor-toolbar);
   display: grid;
   /* Let the middle controls live only inside the space left between zoom and close. */
   grid-template-columns: max-content minmax(0, 1fr) max-content;
@@ -4533,7 +4552,7 @@ body.wp-ui-react .wp-pdf-editor-btn {
   cursor: pointer;
   user-select: none;
   position: relative;
-  z-index: 1;
+  z-index: var(--wp-z-local-raised);
   box-shadow:
     0 10px 24px rgba(15, 23, 42, 0.08),
     0 1px 0 rgba(255, 255, 255, 0.8) inset;
@@ -4555,7 +4574,7 @@ body.wp-ui-react .wp-pdf-editor-btn i {
 
 body.wp-ui-react .wp-pdf-editor-btn:focus-visible {
   outline: none;
-  z-index: 6;
+  z-index: var(--wp-z-local-focus);
   box-shadow:
     0 0 0 4px rgba(59, 130, 246, 0.18),
     0 10px 24px rgba(15, 23, 42, 0.08),
@@ -4571,7 +4590,7 @@ body.wp-ui-react .wp-pdf-editor-btn:disabled {
 
 body.wp-ui-react .wp-pdf-editor-btn:hover:not(:disabled) {
   transform: translateY(-1px);
-  z-index: 6;
+  z-index: var(--wp-z-local-focus);
   border-color: rgba(59, 130, 246, 0.28);
   box-shadow:
     0 16px 32px rgba(15, 23, 42, 0.12),
@@ -4733,7 +4752,7 @@ body.wp-ui-react .wp-pdf-editor-toggle {
   cursor: pointer;
   user-select: none;
   position: relative;
-  z-index: 1;
+  z-index: var(--wp-z-local-raised);
   box-shadow:
     0 10px 22px rgba(15, 23, 42, 0.07),
     0 1px 0 rgba(255, 255, 255, 0.8) inset;
@@ -4760,7 +4779,7 @@ body.wp-ui-react .wp-pdf-editor-toggle:hover {
     0 14px 28px rgba(15, 23, 42, 0.11),
     0 1px 0 rgba(255, 255, 255, 0.88) inset;
   transform: translateY(-1px);
-  z-index: 6;
+  z-index: var(--wp-z-local-focus);
 }
 
 body.wp-ui-react .wp-pdf-editor-toggle:active {
@@ -4778,7 +4797,7 @@ body.wp-ui-react .wp-pdf-editor-toggle.is-on {
 
 body.wp-ui-react .wp-pdf-editor-toggle:focus-visible {
   outline: none;
-  z-index: 6;
+  z-index: var(--wp-z-local-focus);
   box-shadow:
     0 0 0 4px rgba(59, 130, 246, 0.2),
     0 10px 22px rgba(15, 23, 42, 0.08);
@@ -5047,7 +5066,7 @@ body.wp-ui-react .wp-pdf-editor-size-anchor {
 /* PDF editor: local confirm modal for inline manual notes */
 body.wp-ui-react .wp-pdf-inline-modal {
   /* Make sure it sits above the PDF toolbar inside the overlay stacking context */
-  z-index: 46000;
+  z-index: var(--wp-z-pdf-inline-modal);
 }
 
 body.wp-ui-react .wp-pdf-inline-modal .modal-box {
@@ -5088,8 +5107,8 @@ body.wp-ui-react .wp-pdf-inline-preview {
 
 #reactSidebarRoot .wp-door-trim-panel .btn.btn-count {
   min-height: 30px;
-  padding: 5px 8px !important;
-  font-size: 0.78rem !important;
+  padding: 5px 8px;
+  font-size: 0.78rem;
   line-height: 1.15;
 }
 
@@ -5112,7 +5131,7 @@ body.wp-ui-react .wp-pdf-sketch-cta-wrap {
   position: absolute;
   inset-inline: 0;
   bottom: 18px;
-  z-index: 4;
+  z-index: var(--wp-z-local-cta);
   display: flex;
   justify-content: center;
   pointer-events: none;
@@ -5261,7 +5280,7 @@ body.wp-ui-react .wp-pdf-sketch-toolbar--floating {
   background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(15, 23, 42, 0.12);
   box-shadow: 0 18px 38px rgba(15, 23, 42, 0.16);
-  z-index: 12;
+  z-index: var(--wp-z-pdf-sketch-toolbar);
   pointer-events: auto;
   overflow: visible;
 }
@@ -5276,11 +5295,11 @@ body.wp-ui-react .wp-pdf-sketch-toolbar--shape {
 
 body.wp-ui-react .wp-pdf-sketch-toolbar-control {
   position: relative;
-  z-index: 0;
+  z-index: var(--wp-z-local-base);
 }
 
 body.wp-ui-react .wp-pdf-sketch-toolbar-control:focus-within {
-  z-index: 4;
+  z-index: var(--wp-z-local-cta);
 }
 
 body.wp-ui-react .wp-pdf-sketch-tool-btn,
@@ -5373,7 +5392,7 @@ body.wp-ui-react .wp-pdf-sketch-color-palette {
   padding: 10px;
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.18);
   align-items: center;
-  z-index: 30;
+  z-index: var(--wp-z-pdf-sketch-palette);
 }
 
 body.wp-ui-react .wp-pdf-sketch-floating-palette {
@@ -5383,7 +5402,7 @@ body.wp-ui-react .wp-pdf-sketch-floating-palette {
   right: auto !important;
   transform: none !important;
   margin: 0;
-  z-index: 46020;
+  z-index: var(--wp-z-pdf-sketch-floating-palette);
   overflow: auto;
   overscroll-behavior: contain;
 }
@@ -5487,7 +5506,7 @@ body.wp-ui-react .wp-pdf-sketch-card-image {
   object-fit: contain;
   user-select: none;
   pointer-events: none;
-  z-index: 1;
+  z-index: var(--wp-z-local-raised);
 }
 
 body.wp-ui-react .wp-pdf-sketch-card-canvas {
@@ -5497,7 +5516,7 @@ body.wp-ui-react .wp-pdf-sketch-card-canvas {
   height: 100%;
   touch-action: none;
   cursor: crosshair;
-  z-index: 2;
+  z-index: var(--wp-z-local-hover);
 }
 
 body.wp-ui-react .wp-pdf-sketch-card-canvas.is-pen,
@@ -5519,7 +5538,7 @@ body.wp-ui-react .wp-pdf-sketch-card-canvas.is-eraser {
 body.wp-ui-react .wp-pdf-sketch-card-text-layer {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: var(--wp-z-local-active);
   pointer-events: none;
 }
 
@@ -5533,7 +5552,7 @@ body.wp-ui-react .wp-pdf-sketch-card-text-layer.is-text-mode {
 }
 
 body.wp-ui-react .wp-pdf-sketch-card-text-layer .annotation-box {
-  z-index: 3;
+  z-index: var(--wp-z-local-active);
 }
 
 body.wp-ui-react .wp-pdf-sketch-card-text-layer .annotation-box .editor {

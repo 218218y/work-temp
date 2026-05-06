@@ -1,3 +1,4 @@
+import { MATERIAL_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
 import type {
   InteriorGroupLike,
   InteriorMaterialLike,
@@ -18,7 +19,7 @@ const BRACE_SEAM_W = Math.max(0, BRACE_SIDE_GAP - 2 * BRACE_SEAM_PAD);
 const PIN_RADIUS = 0.0025;
 const PIN_LEN = 0.012;
 const PIN_EDGE_OFFSET_DEFAULT = 0.04;
-const GLASS_THICK_M = 0.018;
+const GLASS_THICK_M = MATERIAL_DIMENSIONS.glassShelf.thicknessM;
 
 function shelfHeightForVariant(variant: ShelfVariant | undefined, woodThick: number): number {
   if (variant === 'glass') return GLASS_THICK_M;

@@ -1,4 +1,5 @@
 // Builder core pure door and sliding computations.
+import { MATERIAL_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
 
 import {
   _asObject,
@@ -13,7 +14,7 @@ import type { HingedDoorPivotSpec, UnknownRecord } from './core_pure_shared.js';
 export function computeHingedDoorPivotMap(input: unknown) {
   const inp = _asObject(input) || {};
   let totalW = __asNum(inp.totalW, 0);
-  let woodThick = __asNum(inp.woodThick, 0.018);
+  let woodThick = __asNum(inp.woodThick, MATERIAL_DIMENSIONS.wood.thicknessM);
   let singleUnitWidth = __asNum(inp.singleUnitWidth, 0);
   const hingeMap: UnknownRecord = _asObject(inp.hingeMap) || {};
 
@@ -156,7 +157,7 @@ export function computeHingedDoorPivotMap(input: unknown) {
 export function computeSlidingDoorSpecs(input: unknown) {
   const inp = _asObject(input) || {};
   let totalW = __asNum(inp.totalW, 0);
-  let woodThick = __asNum(inp.woodThick, 0.018);
+  let woodThick = __asNum(inp.woodThick, MATERIAL_DIMENSIONS.wood.thicknessM);
   let numDoors = __asInt(inp.numDoors, 2);
   if (numDoors < 1) numDoors = 1;
   let overlap = __asNum(inp.overlap, 0.03);
@@ -211,7 +212,7 @@ export function computeSlidingDoorSpecs(input: unknown) {
 export function computeSlidingDoorOps(input: unknown) {
   const inp = _asObject(input) || {};
   let totalW = __asNum(inp.totalW, 0);
-  let woodThick = __asNum(inp.woodThick, 0.018);
+  let woodThick = __asNum(inp.woodThick, MATERIAL_DIMENSIONS.wood.thicknessM);
   let D = __asNum(inp.depth, __asNum(inp.D, 0));
   let cabinetBodyHeight = __asNum(inp.cabinetBodyHeight, 0);
   let startY = __asNum(inp.startY, 0);

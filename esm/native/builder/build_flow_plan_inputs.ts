@@ -7,6 +7,7 @@ import {
   normalizeBaseLegWidthCm,
 } from '../features/base_leg_support.js';
 import { readUiState } from './build_flow_readers.js';
+import { MATERIAL_DIMENSIONS, WARDROBE_DEFAULTS } from '../../shared/wardrobe_dimension_tokens_shared.js';
 
 import type { BuildFlowPlanInputs, BuildFlowPlanInputsArgs } from './build_flow_plan_contracts.js';
 import type { UiRawInputsLike } from '../../../types';
@@ -38,7 +39,7 @@ export function resolveBuildFlowPlanInputs(args: BuildFlowPlanInputsArgs): Build
   const lowerWidthCm = split.lowerWidthCm;
   const lowerDoorsCount = split.lowerDoorsCount;
   const splitActiveForBuild = split.active;
-  const splitSeamGapM = splitActiveForBuild ? 0.002 : 0;
+  const splitSeamGapM = splitActiveForBuild ? WARDROBE_DEFAULTS.stackSplit.seamGapM : 0;
 
   const H = Math.max(0.05, split.topHeightCm / 100 - splitSeamGapM);
   const totalW = widthCm / 100;
@@ -85,6 +86,6 @@ export function resolveBuildFlowPlanInputs(args: BuildFlowPlanInputsArgs): Build
     splitDoors: !!ui.splitDoors,
     isGroovesEnabled: !!ui.groovesEnabled,
     isInternalDrawersEnabled: !!ui.internalDrawersEnabled,
-    woodThick: 0.018,
+    woodThick: MATERIAL_DIMENSIONS.wood.thicknessM,
   };
 }

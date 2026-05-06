@@ -845,36 +845,10 @@
         "runtime-default": 2
       }
     },
-    "esm/native/runtime/cache_access.ts": {
-      "total": 7,
-      "categories": {
-        "legacy-runtime-risk": 6,
-        "project-migration": 1
-      }
-    },
     "esm/native/runtime/cfg_access_core.ts": {
       "total": 5,
       "categories": {
         "runtime-default": 5
-      }
-    },
-    "esm/native/runtime/config_selectors_readers.ts": {
-      "total": 23,
-      "categories": {
-        "legacy-runtime-risk": 1,
-        "runtime-default": 22
-      }
-    },
-    "esm/native/runtime/config_selectors_scalars.ts": {
-      "total": 12,
-      "categories": {
-        "runtime-default": 12
-      }
-    },
-    "esm/native/runtime/config_selectors_shared.ts": {
-      "total": 21,
-      "categories": {
-        "runtime-default": 21
       }
     },
     "esm/native/runtime/config_selectors.ts": {
@@ -1006,32 +980,6 @@
       "total": 5,
       "categories": {
         "runtime-default": 5
-      }
-    },
-    "esm/native/runtime/runtime_selectors_normalizers.ts": {
-      "total": 11,
-      "categories": {
-        "legacy-runtime-risk": 1,
-        "runtime-default": 10
-      }
-    },
-    "esm/native/runtime/runtime_selectors_shared.ts": {
-      "total": 3,
-      "categories": {
-        "runtime-default": 3
-      }
-    },
-    "esm/native/runtime/runtime_selectors_snapshot.ts": {
-      "total": 12,
-      "categories": {
-        "legacy-runtime-risk": 1,
-        "runtime-default": 11
-      }
-    },
-    "esm/native/runtime/runtime_selectors_store.ts": {
-      "total": 4,
-      "categories": {
-        "runtime-default": 4
       }
     },
     "esm/native/runtime/runtime_write_access.ts": {
@@ -1421,12 +1369,6 @@
         "runtime-default": 7
       }
     },
-    "esm/native/ui/export/export_canvas_engine.ts": {
-      "total": 8,
-      "categories": {
-        "legacy-runtime-risk": 8
-      }
-    },
     "esm/native/ui/export/export_canvas_workflow_contracts.ts": {
       "total": 1,
       "categories": {
@@ -1500,24 +1442,6 @@
         "legacy-runtime-risk": 1
       }
     },
-    "esm/native/ui/notes_export_render_runtime.ts": {
-      "total": 6,
-      "categories": {
-        "legacy-runtime-risk": 6
-      }
-    },
-    "esm/native/ui/notes_export_render_shared.ts": {
-      "total": 1,
-      "categories": {
-        "legacy-runtime-risk": 1
-      }
-    },
-    "esm/native/ui/notes_export_render_transform.ts": {
-      "total": 5,
-      "categories": {
-        "legacy-runtime-risk": 5
-      }
-    },
     "esm/native/ui/notes_service_sanitize.ts": {
       "total": 4,
       "categories": {
@@ -1585,16 +1509,14 @@
       }
     },
     "esm/native/ui/react/notes/notes_overlay_helpers_shared.ts": {
-      "total": 5,
+      "total": 3,
       "categories": {
-        "legacy-runtime-risk": 2,
         "runtime-default": 3
       }
     },
     "esm/native/ui/react/notes/notes_overlay_text_style_runtime.ts": {
-      "total": 23,
+      "total": 16,
       "categories": {
-        "legacy-runtime-risk": 7,
         "runtime-default": 16
       }
     },

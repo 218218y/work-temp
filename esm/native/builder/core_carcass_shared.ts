@@ -1,4 +1,5 @@
 // Builder core carcass shared preparation and normalization helpers.
+import { MATERIAL_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
 
 import { readBaseLegOptions } from '../features/base_leg_support.js';
 import { _asObject, __asArray, __asInt, __asNum } from './core_pure_shared.js';
@@ -34,7 +35,7 @@ export function prepareCarcassInput(input: unknown): PreparedCarcassInput {
   const totalW = __asNum(inp.totalW, 0);
   const D = __asNum(inp.D, 0);
   const H = __asNum(inp.H, 0);
-  const woodThick = __asNum(inp.woodThick, 0.018);
+  const woodThick = __asNum(inp.woodThick, MATERIAL_DIMENSIONS.wood.thicknessM);
   const baseType = String(inp.baseType || '');
   const doorsCount = __asInt(inp.doorsCount, 0);
   const hasCornice = !!inp.hasCornice;

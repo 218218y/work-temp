@@ -22,7 +22,7 @@ import {
   WARDROBE_WIDTH_MIN,
   getDefaultDepthForWardrobeType,
   getDefaultDoorsForWardrobeType,
-} from '../runtime/wardrobe_dimension_defaults.js';
+} from '../../shared/wardrobe_dimension_tokens_shared.js';
 
 type SanitizedDims = {
   skipBuild: boolean;

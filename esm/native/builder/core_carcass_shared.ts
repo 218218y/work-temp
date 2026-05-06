@@ -1,5 +1,8 @@
 // Builder core carcass shared preparation and normalization helpers.
-import { MATERIAL_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
+import {
+  CARCASS_BASE_DIMENSIONS,
+  MATERIAL_DIMENSIONS,
+} from '../../shared/wardrobe_dimension_tokens_shared.js';
 
 import { readBaseLegOptions } from '../features/base_leg_support.js';
 import { _asObject, __asArray, __asInt, __asNum } from './core_pure_shared.js';
@@ -7,6 +10,9 @@ import type { MutableRecord } from './core_pure_shared.js';
 
 export const CARCASS_BACK_INSET_Z = 0.0078;
 export const CARCASS_FRONT_INSET_Z = 0.005;
+
+const PLINTH_DIMENSIONS = CARCASS_BASE_DIMENSIONS.plinth;
+const BASE_LEG_LAYOUT_DIMENSIONS = CARCASS_BASE_DIMENSIONS.legs;
 
 export type PreparedCarcassInput = {
   totalW: number;
@@ -46,16 +52,16 @@ export function prepareCarcassInput(input: unknown): PreparedCarcassInput {
   let base: MutableRecord | null = null;
 
   if (baseType === 'plinth') {
-    baseHeight = 0.08;
+    baseHeight = PLINTH_DIMENSIONS.heightM;
     startY = baseHeight;
     base = {
       kind: 'plinth',
-      width: totalW - 0.04,
+      width: totalW - PLINTH_DIMENSIONS.widthClearanceM,
       height: baseHeight,
-      depth: D - 0.05,
+      depth: D - PLINTH_DIMENSIONS.depthClearanceM,
       x: 0,
       y: baseHeight / 2,
-      z: -0.015,
+      z: -PLINTH_DIMENSIONS.frontInsetM,
       partId: 'plinth_color',
     };
   } else if (baseType === 'legs') {
@@ -63,14 +69,26 @@ export function prepareCarcassInput(input: unknown): PreparedCarcassInput {
     baseHeight = legOptions.heightM;
     startY = baseHeight;
     const pos: MutableRecord[] = [
-      { x: -totalW / 2 + 0.05, z: D / 2 - 0.05 },
-      { x: totalW / 2 - 0.05, z: D / 2 - 0.05 },
-      { x: -totalW / 2 + 0.05, z: -D / 2 + 0.05 },
-      { x: totalW / 2 - 0.05, z: -D / 2 + 0.05 },
+      {
+        x: -totalW / 2 + BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM,
+        z: D / 2 - BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM,
+      },
+      {
+        x: totalW / 2 - BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM,
+        z: D / 2 - BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM,
+      },
+      {
+        x: -totalW / 2 + BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM,
+        z: -D / 2 + BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM,
+      },
+      {
+        x: totalW / 2 - BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM,
+        z: -D / 2 + BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM,
+      },
     ];
-    if (doorsCount >= 5) {
-      pos.push({ x: 0, z: D / 2 - 0.05 });
-      pos.push({ x: 0, z: -D / 2 + 0.05 });
+    if (doorsCount >= BASE_LEG_LAYOUT_DIMENSIONS.centerSupportDoorsThreshold) {
+      pos.push({ x: 0, z: D / 2 - BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM });
+      pos.push({ x: 0, z: -D / 2 + BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM });
     }
     base = {
       kind: 'legs',
@@ -183,9 +201,15 @@ function adaptDepthSteppedBase(params: DepthSteppedBaseParams): void {
 
       const leftBoundary = i === 0 ? -totalW / 2 : internalLeft;
       const rightBoundary = i === moduleWidths.length - 1 ? totalW / 2 : internalLeft + w + woodThick;
-      const segW = Math.max(0.001, rightBoundary - leftBoundary - 0.001);
-      const segDepth = Math.max(0.02, dm - 0.05);
-      const segZ = -D / 2 + 0.01 + segDepth / 2;
+      const segW = Math.max(
+        PLINTH_DIMENSIONS.segmentWidthEpsilonM,
+        rightBoundary - leftBoundary - PLINTH_DIMENSIONS.segmentWidthEpsilonM
+      );
+      const segDepth = Math.max(
+        PLINTH_DIMENSIONS.steppedMinSegmentDepthM,
+        dm - PLINTH_DIMENSIONS.depthClearanceM
+      );
+      const segZ = -D / 2 + PLINTH_DIMENSIONS.steppedBackInsetM + segDepth / 2;
 
       segments.push({
         kind: 'plinth',
@@ -240,9 +264,10 @@ function adaptDepthSteppedBase(params: DepthSteppedBaseParams): void {
       const z = __asNum(pRec.z, 0);
       if (z > 0) {
         const dm = depthAtX(x);
-        let newZ = -D / 2 + dm - 0.05;
-        const backZ = -D / 2 + 0.05;
-        if (newZ < backZ + 0.03) newZ = backZ + 0.03;
+        let newZ = -D / 2 + dm - BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM;
+        const backZ = -D / 2 + BASE_LEG_LAYOUT_DIMENSIONS.cornerInsetM;
+        if (newZ < backZ + BASE_LEG_LAYOUT_DIMENSIONS.depthSteppedMinFrontBackGapM)
+          newZ = backZ + BASE_LEG_LAYOUT_DIMENSIONS.depthSteppedMinFrontBackGapM;
         pRec.z = newZ;
       }
     }

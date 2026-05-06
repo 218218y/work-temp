@@ -19,7 +19,7 @@ import {
   getDefaultDepthForWardrobeType,
   getDefaultDoorsForWardrobeType,
   getDefaultWidthForWardrobeType,
-} from '../esm/native/runtime/wardrobe_dimension_defaults.ts';
+} from '../esm/shared/wardrobe_dimension_tokens_shared.ts';
 import {
   DEFAULT_BASE_LEG_HEIGHT_CM,
   DEFAULT_TAPERED_BASE_LEG_WIDTH_CM,

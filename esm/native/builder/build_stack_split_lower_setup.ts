@@ -1,7 +1,7 @@
 import { getBuilderRenderOps } from '../runtime/builder_service_access.js';
 import { getWardrobeGroup } from '../runtime/render_access.js';
 import { writeStackSplitLowerTopY } from '../runtime/cache_access.js';
-import { DEFAULT_STACK_SPLIT_LOWER_HEIGHT } from '../runtime/wardrobe_dimension_defaults.js';
+import { DEFAULT_STACK_SPLIT_LOWER_HEIGHT } from '../../shared/wardrobe_dimension_tokens_shared.js';
 import { applyCarcassAndGetCabinetMetrics } from './carcass_pipeline.js';
 import { computeModulesAndLayout } from './module_layout_pipeline.js';
 import { readFiniteNumberArray, readRecord } from './build_flow_readers.js';

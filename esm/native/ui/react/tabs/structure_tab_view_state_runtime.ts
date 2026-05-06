@@ -15,7 +15,7 @@ import {
   DEFAULT_STACK_SPLIT_LOWER_HEIGHT,
   DEFAULT_WIDTH,
   getDefaultDepthForWardrobeType,
-} from '../../../runtime/wardrobe_dimension_defaults.js';
+} from '../../../services/api.js';
 import type {
   StructureTabBaseUiState,
   StructureTabCellDimKey,

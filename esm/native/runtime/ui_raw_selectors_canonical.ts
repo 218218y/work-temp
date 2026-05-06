@@ -18,7 +18,7 @@ import {
   DEFAULT_HINGED_DOORS,
   DEFAULT_WIDTH,
   HINGED_DEFAULT_DEPTH,
-} from './wardrobe_dimension_defaults.js';
+} from '../../shared/wardrobe_dimension_tokens_shared.js';
 
 /**
  * Read a canonical `ui.raw` scalar without falling back to old `ui.*` fields.

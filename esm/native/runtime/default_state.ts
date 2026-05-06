@@ -17,8 +17,8 @@ import {
   DEFAULT_STACK_SPLIT_LOWER_HEIGHT,
   DEFAULT_WIDTH,
   HINGED_DEFAULT_DEPTH,
-} from './wardrobe_dimension_defaults.js';
-import { BASE_LEG_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
+  BASE_LEG_DIMENSIONS,
+} from '../../shared/wardrobe_dimension_tokens_shared.js';
 
 export function createDefaultState(opts?: { noneMode?: string }): RootStateLike {
   opts = opts && typeof opts === 'object' ? opts : {};

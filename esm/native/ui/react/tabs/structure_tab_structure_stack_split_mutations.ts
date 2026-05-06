@@ -9,7 +9,7 @@ import {
   STACK_SPLIT_LOWER_WIDTH_MIN,
   STACK_SPLIT_MIN_TOP_HEIGHT,
   WARDROBE_DEPTH_MIN,
-} from '../../../runtime/wardrobe_dimension_defaults.js';
+} from '../../../services/api.js';
 import {
   buildRawUiPatch,
   readRawPatch,

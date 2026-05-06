@@ -1,4 +1,5 @@
 import type { CornerBuildMeta, CornerBuildUI } from './corner_state_normalize_contracts.js';
+import { CARCASS_BASE_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
 import { readBaseLegOptions, type BaseLegColor, type BaseLegStyle } from '../features/base_leg_support.js';
 import {
   readBool,
@@ -240,7 +241,8 @@ export function resolveCornerWingPlacement(args: {
         : uiAny.baseLegWidthCm,
   });
 
-  let baseH = baseType === 'plinth' ? 0.08 : baseType === 'legs' ? legOptions.heightM : 0;
+  let baseH =
+    baseType === 'plinth' ? PLINTH_DIMENSIONS.heightM : baseType === 'legs' ? legOptions.heightM : 0;
   if (startY < 0.25 && baseH > startY) baseH = Math.max(0, startY);
 
   const stackOffsetY = Math.max(0, startY - baseH);

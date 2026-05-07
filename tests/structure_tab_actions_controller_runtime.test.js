@@ -9,6 +9,18 @@ const require = createRequire(import.meta.url);
 const ts = require('typescript');
 
 const serviceApiDimensionConstants = Object.freeze({
+  DEFAULT_CORNER_WIDTH: 120,
+  DEFAULT_CORNER_DOORS: 3,
+  CHEST_MODE_DIMENSIONS: Object.freeze({
+    activeDefaults: Object.freeze({
+      doorsCount: 0,
+      widthCm: 50,
+      heightCm: 50,
+      depthCm: 40,
+      drawersCount: 2,
+      baseType: 'legs',
+    }),
+  }),
   WARDROBE_WIDTH_MIN: 40,
   WARDROBE_CHEST_WIDTH_MIN: 20,
   WARDROBE_WIDTH_MAX: 560,

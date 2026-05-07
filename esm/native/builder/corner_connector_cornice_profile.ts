@@ -47,7 +47,8 @@ export function applyCornerConnectorProfileCornice(args: {
     const lipBase = Math.max(0, profTopLipOut);
 
     let xMaxBase = step1Base + slopeBase + step2Base + capBase + lipBase;
-    if (!Number.isFinite(xMaxBase) || xMaxBase < corniceCommon.epsilonM) xMaxBase = corniceProfile.xMaxFallbackM;
+    if (!Number.isFinite(xMaxBase) || xMaxBase < corniceCommon.epsilonM)
+      xMaxBase = corniceProfile.xMaxFallbackM;
     const sx = oh / xMaxBase;
 
     const step1 = step1Base * sx;
@@ -177,7 +178,8 @@ export function applyCornerConnectorProfileCornice(args: {
       // If the pentagon diagonal miter trims the inner (x<=0) base band too aggressively, it can leave a
       // visible hole from the front near the bottom band. We keep the visible outer profile unchanged,
       // and only relax the trim by a few millimeters for the inner/base region to close the seam.
-      const baseBandY = Math.min(profBaseH, cHeight * corniceProfile.baseHeightRatio) + corniceProfile.baseBandEpsilonM;
+      const baseBandY =
+        Math.min(profBaseH, cHeight * corniceProfile.baseHeightRatio) + corniceProfile.baseBandEpsilonM;
       const baseSealEps = corniceProfile.baseSealEpsilonM;
 
       for (let vi = 0; vi < pos.count; vi++) {

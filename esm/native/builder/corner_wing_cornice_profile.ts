@@ -1,4 +1,7 @@
-import { CARCASS_CORNICE_DIMENSIONS, CARCASS_SHELL_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
+import {
+  CARCASS_CORNICE_DIMENSIONS,
+  CARCASS_SHELL_DIMENSIONS,
+} from '../../shared/wardrobe_dimension_tokens_shared.js';
 import type {
   CorniceCtxLike,
   CorniceHelpersLike,
@@ -84,7 +87,8 @@ export function applyCornerWingProfileCornice(args: {
     const lipBase = Math.max(0, profTopLipOut);
 
     let xMaxBase = step1Base + slopeBase + step2Base + capBase + lipBase;
-    if (!Number.isFinite(xMaxBase) || xMaxBase < corniceCommon.epsilonM) xMaxBase = corniceProfile.xMaxFallbackM;
+    if (!Number.isFinite(xMaxBase) || xMaxBase < corniceCommon.epsilonM)
+      xMaxBase = corniceProfile.xMaxFallbackM;
     const sx = oh / xMaxBase;
 
     const step1 = step1Base * sx;

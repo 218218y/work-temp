@@ -149,9 +149,8 @@
       }
     },
     "esm/native/builder/external_drawers_pipeline.ts": {
-      "total": 5,
+      "total": 4,
       "categories": {
-        "legacy-runtime-risk": 1,
         "runtime-default": 4
       }
     },
@@ -467,12 +466,6 @@
       }
     },
     "esm/native/features/door_trim_shared.ts": {
-      "total": 6,
-      "categories": {
-        "runtime-default": 6
-      }
-    },
-    "esm/native/features/library_preset/library_preset_shared.ts": {
       "total": 6,
       "categories": {
         "runtime-default": 6

@@ -47,7 +47,9 @@ export function getExtraLongEdgeHandleLiftAbsY(
   // Long vertical edge handle is 40cm vs 20cm regular.
   // Keep the same ~5cm bottom clearance from the door bottom:
   // center should move up by half the delta => +10cm.
-  return maxExtDrawersCount >= HANDLE_DIMENSIONS.edge.longLiftDrawerCountThreshold ? HANDLE_DIMENSIONS.edge.longLiftExtraM : 0;
+  return maxExtDrawersCount >= HANDLE_DIMENSIONS.edge.longLiftDrawerCountThreshold
+    ? HANDLE_DIMENSIONS.edge.longLiftExtraM
+    : 0;
 }
 
 export function getMaxGlobalExternalDrawerHeightM(moduleCfgList: unknown[] | null | undefined): number {

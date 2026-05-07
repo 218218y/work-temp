@@ -201,7 +201,10 @@ function resolveRunSideClosure(run: CorniceRun, neighbor: CorniceRun | undefined
   }
   if (run.depth > neighbor.depth + CORNICE_EPS) {
     return {
-      startDepth: Math.min(run.depth - CORNICE_COMMON.minSegmentLengthM, Math.max(CARCASS_BACK_INSET_Z, neighbor.depth)),
+      startDepth: Math.min(
+        run.depth - CORNICE_COMMON.minSegmentLengthM,
+        Math.max(CARCASS_BACK_INSET_Z, neighbor.depth)
+      ),
       internal: true,
     };
   }
@@ -236,8 +239,14 @@ function buildWaveCorniceSection(params: CorniceSectionParams): MutableRecord[] 
   const { left, right, globalD, depth, woodThick, topY, leftSide, rightSide } = params;
   const sectionW = Math.max(CORNICE_COMMON.minBoxDimensionM, right - left);
   const yPlace = topY + CORNICE_Y_EPS;
-  const frameT = Math.max(CORNICE_WAVE.frameThicknessMinM, Math.min(CORNICE_WAVE.frameThicknessMaxM, woodThick || CORNICE_WAVE.fallbackWoodThicknessM));
-  const waveAmp = Math.min(Math.max(sectionW * CORNICE_WAVE.amplitudeRatio, CORNICE_WAVE.amplitudeMinM), CORNICE_WAVE.amplitudeMaxM);
+  const frameT = Math.max(
+    CORNICE_WAVE.frameThicknessMinM,
+    Math.min(CORNICE_WAVE.frameThicknessMaxM, woodThick || CORNICE_WAVE.fallbackWoodThicknessM)
+  );
+  const waveAmp = Math.min(
+    Math.max(sectionW * CORNICE_WAVE.amplitudeRatio, CORNICE_WAVE.amplitudeMinM),
+    CORNICE_WAVE.amplitudeMaxM
+  );
   const leftInset = leftSide == null ? 0 : frameT;
   const rightInset = rightSide == null ? 0 : frameT;
   const frontW = Math.max(CORNICE_COMMON.minSegmentLengthM, sectionW - leftInset - rightInset);
@@ -396,7 +405,8 @@ function makeCorniceProfile(overhang: number): MutableRecord[] {
   const lipBase = Math.max(0, PROFILE_TOP_LIP_OUT);
 
   let xMaxBase = step1Base + slopeBase + step2Base + capBase + lipBase;
-  if (!Number.isFinite(xMaxBase) || xMaxBase < CORNICE_COMMON.epsilonM) xMaxBase = CORNICE_PROFILE.xMaxFallbackM;
+  if (!Number.isFinite(xMaxBase) || xMaxBase < CORNICE_COMMON.epsilonM)
+    xMaxBase = CORNICE_PROFILE.xMaxFallbackM;
   const sx = oh / xMaxBase;
 
   const step1 = step1Base * sx;
@@ -444,8 +454,11 @@ function buildLegacyCorniceEnvelope(params: LegacyCorniceEnvelopeParams): Mutabl
   const baseSize = Math.max(totalW, D);
   const topRadius = (baseSize + CORNICE_PROFILE.legacyEnvelopeTopRadiusPadM) / Math.sqrt(2);
   const bottomRadius = baseSize / Math.sqrt(2);
-  const scaleX = (totalW + CORNICE_PROFILE.legacyEnvelopeTopRadiusPadM) / (baseSize + CORNICE_PROFILE.legacyEnvelopeTopRadiusPadM);
-  const scaleZ = (D + CORNICE_PROFILE.legacyEnvelopeDepthPadM) / (baseSize + CORNICE_PROFILE.legacyEnvelopeTopRadiusPadM);
+  const scaleX =
+    (totalW + CORNICE_PROFILE.legacyEnvelopeTopRadiusPadM) /
+    (baseSize + CORNICE_PROFILE.legacyEnvelopeTopRadiusPadM);
+  const scaleZ =
+    (D + CORNICE_PROFILE.legacyEnvelopeDepthPadM) / (baseSize + CORNICE_PROFILE.legacyEnvelopeTopRadiusPadM);
 
   return {
     kind: 'cornice',

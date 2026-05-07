@@ -210,7 +210,8 @@ export function computeBottomLineY(
 ): number {
   let h = CORNER_WING_DIMENSIONS.connector.bottomStorageHeightM;
   const layout = uiAny.layout ?? cfg0.layout;
-  if (layout === 'storage' || layout === 'storage_shelf') h = CORNER_WING_DIMENSIONS.connector.bottomStorageHeightM;
+  if (layout === 'storage' || layout === 'storage_shelf')
+    h = CORNER_WING_DIMENSIONS.connector.bottomStorageHeightM;
   if (asRecord(cfg0.customData).storage) h = CORNER_WING_DIMENSIONS.connector.bottomStorageHeightM;
   const effectiveBottomY = startY + woodThick;
   let y = effectiveBottomY + h;

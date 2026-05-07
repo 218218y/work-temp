@@ -1,7 +1,12 @@
 import { getBuilderRenderOps } from '../runtime/builder_service_access.js';
 import { getWardrobeGroup } from '../runtime/render_access.js';
 import { writeStackSplitLowerTopY } from '../runtime/cache_access.js';
-import { CARCASS_INTERIOR_DIMENSIONS, CARCASS_SHELL_DIMENSIONS, DEFAULT_STACK_SPLIT_LOWER_HEIGHT, HANDLE_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
+import {
+  CARCASS_INTERIOR_DIMENSIONS,
+  CARCASS_SHELL_DIMENSIONS,
+  DEFAULT_STACK_SPLIT_LOWER_HEIGHT,
+  HANDLE_DIMENSIONS,
+} from '../../shared/wardrobe_dimension_tokens_shared.js';
 import { applyCarcassAndGetCabinetMetrics } from './carcass_pipeline.js';
 import { computeModulesAndLayout } from './module_layout_pipeline.js';
 import { readFiniteNumberArray, readRecord } from './build_flow_readers.js';
@@ -118,11 +123,13 @@ export function prepareStackSplitLowerSetup(
   const bottomCabinetBodyHeight = bottomCarcassRes.cabinetBodyHeight;
   const bottomCabinetTopY = bottomCarcassRes.cabinetTopY;
   const bottomInternalDepth = Math.max(args.woodThick, bottomD - args.depthReduction);
-  const bottomInternalZ = -bottomD / 2 + bottomInternalDepth / 2 + CARCASS_INTERIOR_DIMENSIONS.internalBackInsetM;
+  const bottomInternalZ =
+    -bottomD / 2 + bottomInternalDepth / 2 + CARCASS_INTERIOR_DIMENSIONS.internalBackInsetM;
   const bottomInternalTotalHeight =
     bottomStartY + bottomCabinetBodyHeight - args.woodThick - (bottomStartY + args.woodThick);
   const bottomGridStep = bottomInternalTotalHeight / CARCASS_SHELL_DIMENSIONS.drawerGridDivisions;
-  const bottomSplitLineY = bottomStartY + args.woodThick + CARCASS_SHELL_DIMENSIONS.drawerSplitGridLineIndex * bottomGridStep;
+  const bottomSplitLineY =
+    bottomStartY + args.woodThick + CARCASS_SHELL_DIMENSIONS.drawerSplitGridLineIndex * bottomGridStep;
 
   writeStackSplitLowerTopY(args.App, bottomCabinetTopY);
 
@@ -163,7 +170,9 @@ export function prepareStackSplitLowerSetup(
       bottomStartY + args.woodThick + getMaxGlobalExternalDrawerHeightM(bottomModuleCfgList);
     if (maxDoorBottom > HANDLE_DIMENSIONS.edge.drawerLiftThresholdYM) {
       lowerGlobalHingedHandleAbsY =
-        maxDoorBottom + HANDLE_DIMENSIONS.edge.drawerLiftClearanceM + getExtraLongEdgeHandleLiftAbsY(args.cfg, bottomModuleCfgList);
+        maxDoorBottom +
+        HANDLE_DIMENSIONS.edge.drawerLiftClearanceM +
+        getExtraLongEdgeHandleLiftAbsY(args.cfg, bottomModuleCfgList);
     }
   }
 

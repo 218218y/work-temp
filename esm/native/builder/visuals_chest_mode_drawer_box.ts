@@ -56,8 +56,19 @@ export const createInternalDrawerBox: AppAwareCreateInternalDrawerBoxFn = (
       const accentW = Number(w);
       const accentH = Number(innerH);
       const accentZ = d / 2 + drawerBoxDimensions.accentZOffsetM;
-      if (Number.isFinite(accentW) && Number.isFinite(accentH) && accentW > drawerBoxDimensions.accentMinWidthM && accentH > drawerBoxDimensions.accentMinHeightM) {
-        const lineT = Math.min(drawerBoxDimensions.accentThicknessMaxM, Math.max(drawerBoxDimensions.accentThicknessMinM, Math.min(accentW, accentH) * drawerBoxDimensions.accentThicknessRatio));
+      if (
+        Number.isFinite(accentW) &&
+        Number.isFinite(accentH) &&
+        accentW > drawerBoxDimensions.accentMinWidthM &&
+        accentH > drawerBoxDimensions.accentMinHeightM
+      ) {
+        const lineT = Math.min(
+          drawerBoxDimensions.accentThicknessMaxM,
+          Math.max(
+            drawerBoxDimensions.accentThicknessMinM,
+            Math.min(accentW, accentH) * drawerBoxDimensions.accentThicknessRatio
+          )
+        );
         if (accentW > lineT * 2 && accentH > lineT * 2) {
           const accentMat = new THREE.MeshBasicMaterial({
             color: 0x4b4b4b,
@@ -74,7 +85,10 @@ export const createInternalDrawerBox: AppAwareCreateInternalDrawerBoxFn = (
 
           const addStrip = (sw: number, sh: number, x: number, y: number) => {
             if (!(sw > 0) || !(sh > 0)) return;
-            const strip = new THREE.Mesh(new THREE.BoxGeometry(sw, sh, drawerBoxDimensions.accentStripDepthM), accentMat);
+            const strip = new THREE.Mesh(
+              new THREE.BoxGeometry(sw, sh, drawerBoxDimensions.accentStripDepthM),
+              accentMat
+            );
             strip.position.set(x, y, accentZ);
             strip.renderOrder = drawerBoxDimensions.accentRenderOrder;
             strip.userData = strip.userData || {};
@@ -114,7 +128,11 @@ export const createInternalDrawerBox: AppAwareCreateInternalDrawerBoxFn = (
 
   if (addHandle && !omitFrontPanel) {
     const handle = new THREE.Mesh(
-      new THREE.BoxGeometry(drawerBoxDimensions.handleWidthM, drawerBoxDimensions.handleHeightM, drawerBoxDimensions.handleDepthM),
+      new THREE.BoxGeometry(
+        drawerBoxDimensions.handleWidthM,
+        drawerBoxDimensions.handleHeightM,
+        drawerBoxDimensions.handleDepthM
+      ),
       new THREE.MeshStandardMaterial({ color: 0x555555 })
     );
     handle.userData = handle.userData || {};

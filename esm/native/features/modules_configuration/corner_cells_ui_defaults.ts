@@ -40,7 +40,15 @@ function readCornerDoorsCountFromUi(uiSnapshot: unknown): number {
   if (!Number.isFinite(wingLenCm)) wingLenCm = CORNER_WING_DIMENSIONS.wing.defaultWidthCm;
   if (wingLenCm < 0) wingLenCm = 0;
   const wingLenM = wingLenCm / CM_PER_METER;
-  return wingLenM > CORNER_WING_DIMENSIONS.wing.minActiveWidthM ? Math.max(1, Math.round(wingLenM / (CORNER_WING_DIMENSIONS.cells.doorsPerCell * CORNER_WING_DIMENSIONS.cells.minDoorUnitWidthM))) : 0;
+  return wingLenM > CORNER_WING_DIMENSIONS.wing.minActiveWidthM
+    ? Math.max(
+        1,
+        Math.round(
+          wingLenM /
+            (CORNER_WING_DIMENSIONS.cells.doorsPerCell * CORNER_WING_DIMENSIONS.cells.minDoorUnitWidthM)
+        )
+      )
+    : 0;
 }
 
 export function resolveTopCornerCellDefaultLayout(index: number): string {

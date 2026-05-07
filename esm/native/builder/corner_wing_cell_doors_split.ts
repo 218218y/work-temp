@@ -50,7 +50,11 @@ export function appendCornerWingSplitDoor(ctx: CornerWingDoorContext, state: Cor
     return;
   }
 
-  if (state.topSplitEnabled && state.bottomSplitEnabled && state.bottomLineY < state.splitLineY - CORNER_WING_DIMENSIONS.connector.minSegmentHeightM) {
+  if (
+    state.topSplitEnabled &&
+    state.bottomSplitEnabled &&
+    state.bottomLineY < state.splitLineY - CORNER_WING_DIMENSIONS.connector.minSegmentHeightM
+  ) {
     const topTopY = topEdge;
     const topBottomY = state.splitLineY + ctx.splitGap / 2;
     const topH = topTopY - topBottomY;
@@ -173,7 +177,11 @@ function pushSegment(
 ): void {
   const isRemovedDoor = ctx.removeDoorsEnabled && ctx.isDoorRemoved(partId);
   const group = createCornerDoorGroup(ctx, state, partId, segH, handleAbsY, isRemovedDoor);
-  group.position.set(state.pivotX, segY, 0.01 + state.doorZShift);
+  group.position.set(
+    state.pivotX,
+    segY,
+    CORNER_WING_DIMENSIONS.drawers.externalFrontOffsetZM + state.doorZShift
+  );
 
   const added = processCornerDoorVisual(ctx, partId, {
     partId,

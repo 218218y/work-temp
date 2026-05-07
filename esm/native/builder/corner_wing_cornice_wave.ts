@@ -1,4 +1,7 @@
-import { CARCASS_CORNICE_DIMENSIONS, CARCASS_SHELL_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
+import {
+  CARCASS_CORNICE_DIMENSIONS,
+  CARCASS_SHELL_DIMENSIONS,
+} from '../../shared/wardrobe_dimension_tokens_shared.js';
 import type { CorniceCtxLike, CorniceLocalsLike } from './corner_wing_cornice_contracts.js';
 import { getThreeCornice } from './corner_wing_cornice_contracts.js';
 
@@ -39,11 +42,17 @@ export function applyCornerWingWaveCornice(args: { ctx: CorniceCtxLike; locals: 
   const backTrimZ = Math.max(backPlaneZ, backPanelOutsideZ);
 
   // Frame thickness (meters): use panel thickness, clamped.
-  const frameT = Math.max(corniceWave.frameThicknessMinM, Math.min(corniceWave.frameThicknessMaxM, woodThick || corniceWave.fallbackWoodThicknessM));
+  const frameT = Math.max(
+    corniceWave.frameThicknessMinM,
+    Math.min(corniceWave.frameThicknessMaxM, woodThick || corniceWave.fallbackWoodThicknessM)
+  );
 
   // Heights (meters)
   const maxH = corniceWave.maxHeightM; // peak height
-  const waveAmp = Math.min(Math.max(wingW * corniceWave.amplitudeRatio, corniceWave.amplitudeMinM), corniceWave.amplitudeMaxM);
+  const waveAmp = Math.min(
+    Math.max(wingW * corniceWave.amplitudeRatio, corniceWave.amplitudeMinM),
+    corniceWave.amplitudeMaxM
+  );
   const waveCycles = corniceWave.cycles; // peaks at ends + center
 
   // Material: allow both whole-cornice coloring ('corner_cornice') and per-part coloring
@@ -64,7 +73,10 @@ export function applyCornerWingWaveCornice(args: { ctx: CorniceCtxLike; locals: 
     const halfW = w / 2;
 
     // Sampling resolution: ~2cm, clamped.
-    const samples = Math.max(corniceWave.sampleCountMin, Math.min(corniceWave.sampleCountMax, Math.round(w / corniceWave.sampleSpacingM)));
+    const samples = Math.max(
+      corniceWave.sampleCountMin,
+      Math.min(corniceWave.sampleCountMax, Math.round(w / corniceWave.sampleSpacingM))
+    );
 
     const shape = new threeCornice.Shape();
     shape.moveTo(-halfW, 0);

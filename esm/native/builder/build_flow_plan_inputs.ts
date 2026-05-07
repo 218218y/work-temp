@@ -7,7 +7,11 @@ import {
   normalizeBaseLegWidthCm,
 } from '../features/base_leg_support.js';
 import { readUiState } from './build_flow_readers.js';
-import { CARCASS_INTERIOR_DIMENSIONS, MATERIAL_DIMENSIONS, WARDROBE_DEFAULTS } from '../../shared/wardrobe_dimension_tokens_shared.js';
+import {
+  CARCASS_INTERIOR_DIMENSIONS,
+  MATERIAL_DIMENSIONS,
+  WARDROBE_DEFAULTS,
+} from '../../shared/wardrobe_dimension_tokens_shared.js';
 
 import type { BuildFlowPlanInputs, BuildFlowPlanInputsArgs } from './build_flow_plan_contracts.js';
 import type { UiRawInputsLike } from '../../../types';
@@ -47,7 +51,9 @@ export function resolveBuildFlowPlanInputs(args: BuildFlowPlanInputsArgs): Build
 
   const isSliding = typeof cfg.wardrobeType !== 'undefined' && cfg.wardrobeType === 'sliding';
   const noMainWardrobe = !isSliding && doorsCount === 0;
-  const depthReduction = isSliding ? CARCASS_INTERIOR_DIMENSIONS.slidingDepthReductionM : CARCASS_INTERIOR_DIMENSIONS.hingedDepthReductionM;
+  const depthReduction = isSliding
+    ? CARCASS_INTERIOR_DIMENSIONS.slidingDepthReductionM
+    : CARCASS_INTERIOR_DIMENSIONS.hingedDepthReductionM;
   const baseType = toStr(ui.baseType, '');
   const baseLegStyle = normalizeBaseLegStyle(ui.baseLegStyle);
   const baseLegColor = normalizeBaseLegColor(ui.baseLegColor);

@@ -22,7 +22,8 @@ export function resolveModuleDepthProfile(
       ? depthCmActive / CM_PER_METER
       : runtime.D;
   const moduleInternalDepth = Math.max(runtime.woodThick, moduleTotalDepth - runtime.depthReduction);
-  const moduleInternalZ = -runtime.D / 2 + moduleInternalDepth / 2 + CARCASS_INTERIOR_DIMENSIONS.internalBackInsetM;
+  const moduleInternalZ =
+    -runtime.D / 2 + moduleInternalDepth / 2 + CARCASS_INTERIOR_DIMENSIONS.internalBackInsetM;
   const moduleOuterZ = -runtime.D / 2 + moduleTotalDepth / 2;
   const moduleFrontZ = -runtime.D / 2 + moduleTotalDepth;
 

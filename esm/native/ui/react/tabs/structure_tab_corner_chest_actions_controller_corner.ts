@@ -100,11 +100,12 @@ export function createStructureTabCornerActionsController(args: StructureTabCorn
   };
 
   const commitCornerDoors = (nn: number) => {
-    const nextDoors = normalizeStructureDimensionValue(nn, readStructureCornerDoorsBounds()) ?? DEFAULT_CORNER_DOORS;
+    const nextDoors =
+      normalizeStructureDimensionValue(nn, readStructureCornerDoorsBounds()) ?? DEFAULT_CORNER_DOORS;
     if (nextDoors === Math.max(0, Math.round(Number(args.cornerDoors) || 0))) return;
 
     const patch: CornerPatch = { cornerDoors: nextDoors };
-    const perDoor = 40;
+    const perDoor = DEFAULT_CORNER_WIDTH / DEFAULT_CORNER_DOORS;
     const curDoors = Number(args.cornerDoors);
     const curWidth = Number(args.cornerWidth);
 

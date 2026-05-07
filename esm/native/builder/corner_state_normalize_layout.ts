@@ -1,5 +1,8 @@
 import type { CornerBuildMeta, CornerBuildUI } from './corner_state_normalize_contracts.js';
-import { CARCASS_BASE_DIMENSIONS, CORNER_WING_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
+import {
+  CARCASS_BASE_DIMENSIONS,
+  CORNER_WING_DIMENSIONS,
+} from '../../shared/wardrobe_dimension_tokens_shared.js';
 import { readBaseLegOptions, type BaseLegColor, type BaseLegStyle } from '../features/base_leg_support.js';
 import {
   readBool,
@@ -130,7 +133,9 @@ export function resolveCornerWingMetrics(args: {
       ? Math.max(CORNER_WING.minBodyHeightM, __cornerHeightCM / 100 - startY)
       : mainH;
 
-  const wingD = Number.isFinite(__cornerDepthCM) ? Math.max(CORNER_WING.minDepthM, __cornerDepthCM / 100) : mainD;
+  const wingD = Number.isFinite(__cornerDepthCM)
+    ? Math.max(CORNER_WING.minDepthM, __cornerDepthCM / 100)
+    : mainD;
   const wingW = wingLengthCM / 100;
   const blindWidth = cornerConnectorEnabled ? 0 : Math.max(mainD, wingD) + CORNER_WING.blindClearanceM;
   const activeWidth = wingW - blindWidth - woodThick;
@@ -254,7 +259,9 @@ export function resolveCornerWingPlacement(args: {
 
   const rawWallLen =
     uiAny.cornerCabinetWallLenCm ?? uiAny.cornerCabinetWallLen ?? uiAny.cornerConnectorWallLenCm;
-  let cornerWallL = Number.isFinite(readFiniteNumber(rawWallLen) ?? NaN) ? Number(rawWallLen) / 100 : CORNER_CONNECTOR.defaultWallLengthM;
+  let cornerWallL = Number.isFinite(readFiniteNumber(rawWallLen) ?? NaN)
+    ? Number(rawWallLen) / 100
+    : CORNER_CONNECTOR.defaultWallLengthM;
   if (!Number.isFinite(cornerWallL) || cornerWallL <= CORNER_CONNECTOR.minWallLengthM) {
     cornerWallL = CORNER_CONNECTOR.defaultWallLengthM;
   }

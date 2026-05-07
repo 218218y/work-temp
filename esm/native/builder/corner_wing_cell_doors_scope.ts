@@ -76,7 +76,8 @@ export function hingeDirExplicit(ctx: CornerWingDoorContext, hingeKey: unknown):
 }
 
 export function defaultHingeDir(ctx: CornerWingDoorContext, doorIdx: number): 'left' | 'right' {
-  if (ctx.doorCount % CORNER_WING_DIMENSIONS.cells.doorsPerCell === 1 && doorIdx === ctx.doorCount - 1) return 'right';
+  if (ctx.doorCount % CORNER_WING_DIMENSIONS.cells.doorsPerCell === 1 && doorIdx === ctx.doorCount - 1)
+    return 'right';
   return doorIdx % CORNER_WING_DIMENSIONS.cells.doorsPerCell === 0 ? 'left' : 'right';
 }
 
@@ -97,7 +98,11 @@ export function maybeSeedEdgeHandleDefaultNone(
   }
   if (!doorsInCell) doorsInCell = Math.max(1, ctx.doorCount);
 
-  if (doorsInCell >= CORNER_WING_DIMENSIONS.cells.doorsPerCell && within % CORNER_WING_DIMENSIONS.cells.doorsPerCell === 0 && within + 1 < doorsInCell) {
+  if (
+    doorsInCell >= CORNER_WING_DIMENSIONS.cells.doorsPerCell &&
+    within % CORNER_WING_DIMENSIONS.cells.doorsPerCell === 0 &&
+    within + 1 < doorsInCell
+  ) {
     markEdgeHandleDefaultNone(ctx.App, ctx.stackKey === 'bottom' ? 'bottom' : 'top', doorBaseId, 'corner');
   }
 }
@@ -111,8 +116,10 @@ export function computeBottomLineY(
 ): number {
   let storageHeight = CORNER_WING_DIMENSIONS.connector.bottomStorageHeightM;
   const layout = (cellCfg && cellCfg.layout) || (ctx.uiAny.layout ?? null);
-  if (layout === 'storage' || layout === 'storage_shelf') storageHeight = CORNER_WING_DIMENSIONS.connector.bottomStorageHeightM;
-  if (cellCfg && cellCfg.customData && cellCfg.customData.storage) storageHeight = CORNER_WING_DIMENSIONS.connector.bottomStorageHeightM;
+  if (layout === 'storage' || layout === 'storage_shelf')
+    storageHeight = CORNER_WING_DIMENSIONS.connector.bottomStorageHeightM;
+  if (cellCfg && cellCfg.customData && cellCfg.customData.storage)
+    storageHeight = CORNER_WING_DIMENSIONS.connector.bottomStorageHeightM;
   let y = cellEffBottomY + storageHeight;
   if (doorBottomY > cellEffBottomY) {
     y += doorBottomY - cellEffBottomY + ctx.splitGap / 2;

@@ -165,7 +165,9 @@ export function edgeHandleLongLiftAbsY(
     if (count > maxExtDrawersCount) maxExtDrawersCount = count;
   });
 
-  return maxExtDrawersCount >= HANDLE_DIMENSIONS.edge.longLiftDrawerCountThreshold ? HANDLE_DIMENSIONS.edge.longLiftExtraM : 0;
+  return maxExtDrawersCount >= HANDLE_DIMENSIONS.edge.longLiftDrawerCountThreshold
+    ? HANDLE_DIMENSIONS.edge.longLiftExtraM
+    : 0;
 }
 
 export function isLongEdgeHandleVariantForPart(
@@ -194,7 +196,9 @@ export function topSplitHandleInsetForPart(
   cfg: HingedDoorPipelineCfg | null | undefined,
   partId: string
 ): number {
-  return isLongEdgeHandleVariantForPart(cfg, partId) ? HANDLE_DIMENSIONS.edge.longClampPaddingM : HANDLE_DIMENSIONS.edge.shortClampPaddingM;
+  return isLongEdgeHandleVariantForPart(cfg, partId)
+    ? HANDLE_DIMENSIONS.edge.longClampPaddingM
+    : HANDLE_DIMENSIONS.edge.shortClampPaddingM;
 }
 
 export function requireThree(ctx: BuildContextLike): ThreeLike {

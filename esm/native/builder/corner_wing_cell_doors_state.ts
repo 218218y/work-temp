@@ -32,9 +32,10 @@ export function createCornerWingDoorState(ctx: CornerWingDoorContext, doorIdx: n
   const doorZShift = cellD - ctx.wingD;
   const effectiveTopLimit = getEffectiveTopLimitForDoor(ctx, doorIdx);
   const splitLineY =
-    ctx.startY + ctx.woodThick + (CORNER_WING_DIMENSIONS.cells.splitGridLineIndex *
-      (effectiveTopLimit - (ctx.startY + ctx.woodThick))) /
-    CORNER_WING_DIMENSIONS.cells.defaultGridDivisions;
+    ctx.startY +
+    ctx.woodThick +
+    (CORNER_WING_DIMENSIONS.cells.splitGridLineIndex * (effectiveTopLimit - (ctx.startY + ctx.woodThick))) /
+      CORNER_WING_DIMENSIONS.cells.defaultGridDivisions;
   const doorBaseId = `corner_door_${doorIdx + 1}`;
   const scopedDoorBaseId = ctx.stackKey === 'bottom' ? ctx.stackScopePartKey(doorBaseId) : doorBaseId;
   const geom = getDoorGeom(ctx, doorIdx);
@@ -124,7 +125,9 @@ function getDoorGeom(ctx: CornerWingDoorContext, doorIdx: number): DoorGeomLike 
     const doorsInCell = Math.max(1, Number(ctx.asRecord(cell).doorsInCell) || 1);
     const doorW = Number(ctx.asRecord(cell).width) / doorsInCell;
     const doorStart = Number(ctx.asRecord(cell).doorStart);
-    const within = Number.isFinite(doorStart) ? doorIdx - doorStart : doorIdx % CORNER_WING_DIMENSIONS.cells.doorsPerCell;
+    const within = Number.isFinite(doorStart)
+      ? doorIdx - doorStart
+      : doorIdx % CORNER_WING_DIMENSIONS.cells.doorsPerCell;
     const dX = Number(ctx.asRecord(cell).startX) + within * doorW + doorW / 2;
     return { cell, doorW, dX };
   }

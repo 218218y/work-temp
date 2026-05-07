@@ -64,7 +64,8 @@ export function resolveBuildWardrobeHingedContext(args: {
 
     if (maxDoorBottomAbs > HANDLE_DIMENSIONS.edge.drawerLiftThresholdYM) {
       const extraLongEdgeLift = getExtraLongEdgeHandleLiftAbsYFn(cfg, modulesCfg);
-      globalHingedHandleAbsY = maxDoorBottomAbs + HANDLE_DIMENSIONS.edge.drawerLiftClearanceM + extraLongEdgeLift;
+      globalHingedHandleAbsY =
+        maxDoorBottomAbs + HANDLE_DIMENSIONS.edge.drawerLiftClearanceM + extraLongEdgeLift;
     }
   }
 

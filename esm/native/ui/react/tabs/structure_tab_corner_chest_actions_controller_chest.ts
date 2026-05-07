@@ -12,7 +12,6 @@ import {
 } from '../actions/store_actions.js';
 import {
   CHEST_MODE_DIMENSIONS,
-  DEFAULT_CHEST_DRAWERS_COUNT,
   DEFAULT_HEIGHT,
   DEFAULT_HINGED_DOORS,
   DEFAULT_WIDTH,
@@ -101,10 +100,16 @@ export function createStructureTabChestActionsController(args: StructureTabCorne
     }
 
     const pre = readPreChestState(args.preChestState);
-    const doorsR = pre ? asFiniteInt(pre.doors, DEFAULT_HINGED_DOORS) : Math.max(1, asFiniteInt(args.doors, DEFAULT_HINGED_DOORS));
+    const doorsR = pre
+      ? asFiniteInt(pre.doors, DEFAULT_HINGED_DOORS)
+      : Math.max(1, asFiniteInt(args.doors, DEFAULT_HINGED_DOORS));
     const widthR = pre ? asFiniteNumber(pre.width, DEFAULT_WIDTH) : asFiniteNumber(args.width, DEFAULT_WIDTH);
-    const heightR = pre ? asFiniteNumber(pre.height, DEFAULT_HEIGHT) : asFiniteNumber(args.height, DEFAULT_HEIGHT);
-    const depthR = pre ? asFiniteNumber(pre.depth, HINGED_DEFAULT_DEPTH) : asFiniteNumber(args.depth, HINGED_DEFAULT_DEPTH);
+    const heightR = pre
+      ? asFiniteNumber(pre.height, DEFAULT_HEIGHT)
+      : asFiniteNumber(args.height, DEFAULT_HEIGHT);
+    const depthR = pre
+      ? asFiniteNumber(pre.depth, HINGED_DEFAULT_DEPTH)
+      : asFiniteNumber(args.depth, HINGED_DEFAULT_DEPTH);
     const baseR =
       pre && typeof pre.base === 'string' && pre.base ? pre.base : String(args.baseType || 'plinth');
 

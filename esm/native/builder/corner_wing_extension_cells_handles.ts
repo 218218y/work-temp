@@ -22,7 +22,13 @@ export function resolveCornerWingDoorCount(
   return Number.isFinite(parsed)
     ? Math.max(0, Math.round(parsed))
     : args.activeWidth > CORNER_WING_DIMENSIONS.wing.minActiveWidthM
-      ? Math.max(1, Math.round(args.activeWidth / (CORNER_WING_DIMENSIONS.cells.doorsPerCell * CORNER_WING_DIMENSIONS.cells.minDoorUnitWidthM)))
+      ? Math.max(
+          1,
+          Math.round(
+            args.activeWidth /
+              (CORNER_WING_DIMENSIONS.cells.doorsPerCell * CORNER_WING_DIMENSIONS.cells.minDoorUnitWidthM)
+          )
+        )
       : 0;
 }
 

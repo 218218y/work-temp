@@ -40,7 +40,10 @@ export function createCornerConnectorShellMetrics(setup: CornerConnectorSetup): 
   return {
     panelThick: woodThick,
     backPanelThick: connectorDimensions.shellBackPanelThicknessM,
-    wallH: Math.max(connectorDimensions.shellMinWallHeightM, wingH - connectorDimensions.shellWallHeightClearanceM),
+    wallH: Math.max(
+      connectorDimensions.shellMinWallHeightM,
+      wingH - connectorDimensions.shellWallHeightClearanceM
+    ),
     backWallH: Math.max(connectorDimensions.shellMinWallHeightM, wingH),
     backPanelOutsideInsetX: connectorDimensions.shellBackPanelOutsideInsetM,
     backPanelOutsideInsetZ: connectorDimensions.shellBackPanelOutsideInsetM,

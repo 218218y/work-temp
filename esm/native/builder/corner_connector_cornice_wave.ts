@@ -23,7 +23,10 @@ export function applyCornerConnectorWaveCornice(args: {
   const epsY = corniceCommon.yLiftM;
   const yPlace = topY + epsY;
 
-  const frameT = Math.max(corniceWave.frameThicknessMinM, Math.min(corniceWave.frameThicknessMaxM, woodThick || corniceWave.fallbackWoodThicknessM));
+  const frameT = Math.max(
+    corniceWave.frameThicknessMinM,
+    Math.min(corniceWave.frameThicknessMaxM, woodThick || corniceWave.fallbackWoodThicknessM)
+  );
   const maxH = corniceWave.maxHeightM;
   const cycles = corniceWave.cycles;
 
@@ -38,11 +41,17 @@ export function applyCornerConnectorWaveCornice(args: {
     const midX = (a.x + b.x) / 2;
     const midZ = (a.z + b.z) / 2;
 
-    const amp = Math.min(Math.max(segLen * corniceWave.amplitudeRatio, corniceWave.amplitudeMinM), corniceWave.amplitudeMaxM);
+    const amp = Math.min(
+      Math.max(segLen * corniceWave.amplitudeRatio, corniceWave.amplitudeMinM),
+      corniceWave.amplitudeMaxM
+    );
     const halfL = segLen / 2;
 
     // Sampling resolution: ~2cm, clamped.
-    const samples = Math.max(corniceWave.sampleCountMin, Math.min(corniceWave.sampleCountMax, Math.round(segLen / corniceWave.sampleSpacingM)));
+    const samples = Math.max(
+      corniceWave.sampleCountMin,
+      Math.min(corniceWave.sampleCountMax, Math.round(segLen / corniceWave.sampleSpacingM))
+    );
 
     if (hasCorniceExtrusionSupport(THREE)) {
       const shape = new THREE.Shape();

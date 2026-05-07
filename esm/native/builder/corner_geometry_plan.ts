@@ -101,7 +101,9 @@ export function __isLongEdgeHandleVariantForPart(
 }
 
 export function __topSplitHandleInsetForPart(cfg: ValueRecord | null | undefined, partId: string): number {
-  return __isLongEdgeHandleVariantForPart(cfg, partId) ? CORNER_WING_DIMENSIONS.connector.edgeHandleLongInsetM : CORNER_WING_DIMENSIONS.connector.edgeHandleShortInsetM;
+  return __isLongEdgeHandleVariantForPart(cfg, partId)
+    ? CORNER_WING_DIMENSIONS.connector.edgeHandleLongInsetM
+    : CORNER_WING_DIMENSIONS.connector.edgeHandleShortInsetM;
 }
 
 export function __edgeHandleLongLiftAbsYForCell(
@@ -140,7 +142,8 @@ export function __edgeHandleAlignedBaseAbsYForCornerCells(
   woodThick: number
 ): number {
   const handleCfg = readCornerHandleCfg(cfg);
-  if (!handleCfg || handleCfg.globalHandleType !== 'edge') return CORNER_WING_DIMENSIONS.connector.edgeHandleDefaultAbsY;
+  if (!handleCfg || handleCfg.globalHandleType !== 'edge')
+    return CORNER_WING_DIMENSIONS.connector.edgeHandleDefaultAbsY;
 
   const list = Array.isArray(cornerCellCfgs) ? cornerCellCfgs : [];
   let maxDrawerH = 0;
@@ -158,7 +161,11 @@ export function __edgeHandleAlignedBaseAbsYForCornerCells(
     if (h > maxDrawerH) maxDrawerH = h;
   }
 
-  const maxDoorBottom = startY + woodThick + maxDrawerH + (maxDrawerH > 0 ? CORNER_WING_DIMENSIONS.connector.doorBottomOffsetM : 0);
+  const maxDoorBottom =
+    startY +
+    woodThick +
+    maxDrawerH +
+    (maxDrawerH > 0 ? CORNER_WING_DIMENSIONS.connector.doorBottomOffsetM : 0);
   if (maxDoorBottom > CORNER_WING_DIMENSIONS.connector.edgeHandleLiftDoorBottomThresholdM) {
     return maxDoorBottom + CORNER_WING_DIMENSIONS.connector.edgeHandleLiftExtraM;
   }
@@ -172,7 +179,9 @@ export function __clampHandleAbsYForPart(
   segBottomY: number,
   segTopY: number
 ): number {
-  const pad = __isLongEdgeHandleVariantForPart(cfg, partId) ? CORNER_WING_DIMENSIONS.connector.edgeHandleLongInsetM : CORNER_WING_DIMENSIONS.connector.edgeHandleShortInsetM;
+  const pad = __isLongEdgeHandleVariantForPart(cfg, partId)
+    ? CORNER_WING_DIMENSIONS.connector.edgeHandleLongInsetM
+    : CORNER_WING_DIMENSIONS.connector.edgeHandleShortInsetM;
   let y = absY;
   const minY = segBottomY + pad;
   const maxY = segTopY - pad;

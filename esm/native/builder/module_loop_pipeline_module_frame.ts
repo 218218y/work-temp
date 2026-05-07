@@ -1,4 +1,7 @@
-import { DRAWER_DIMENSIONS, CARCASS_SHELL_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
+import {
+  DRAWER_DIMENSIONS,
+  CARCASS_SHELL_DIMENSIONS,
+} from '../../shared/wardrobe_dimension_tokens_shared.js';
 import { resolveModuleDepthProfile } from './module_loop_pipeline_module_depth.js';
 
 import type { ModuleLoopRuntime } from './module_loop_pipeline_runtime.js';
@@ -103,7 +106,11 @@ export function resolveModuleVerticalMetrics(
   const availableInternalHeight = effectiveTopY - effectiveBottomY;
   const fullInternalHeight = effectiveTopY - internalStartY;
   const internalTotalH = Math.max(runtime.woodThick, frame.moduleCabinetBodyHeight - 2 * runtime.woodThick);
-  const localSplitLineY = runtime.startY + runtime.woodThick + CARCASS_SHELL_DIMENSIONS.drawerSplitGridLineIndex * (internalTotalH / CARCASS_SHELL_DIMENSIONS.drawerGridDivisions);
+  const localSplitLineY =
+    runtime.startY +
+    runtime.woodThick +
+    CARCASS_SHELL_DIMENSIONS.drawerSplitGridLineIndex *
+      (internalTotalH / CARCASS_SHELL_DIMENSIONS.drawerGridDivisions);
   const gridDivisions =
     frame.config.isCustom && typeof frame.config.gridDivisions === 'number' && frame.config.gridDivisions > 0
       ? frame.config.gridDivisions

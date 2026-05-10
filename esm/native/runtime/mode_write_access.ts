@@ -3,7 +3,7 @@
 // Goal:
 // - Centralize the mode write seams.
 // - Prefer App.actions.mode.* surfaces when installed (state_api/kernel install).
-// - Keep store-backed fallbacks for minimal harnesses.
+// - Keep store-backed compatibility routes for minimal harnesses.
 //
 // Policy:
 // - Mode transitions are transient UI flow control (no history/autosave/persist/build by default).
@@ -20,7 +20,7 @@ import {
   asRecord,
   getSliceNamespace,
   getWriteStore,
-  patchSliceWithStoreFallback,
+  patchSliceCanonical,
 } from './slice_write_access.js';
 
 type ModeWriteAppLike = {
@@ -70,7 +70,7 @@ function normalizeOpts(opts: unknown): ModeActionOptsLike {
 export function patchMode(App: unknown, patch: unknown, meta?: ActionMetaLike): unknown {
   const mdPatch = asModePatch(patch);
   const m = metaTransient(App, meta, 'mode:patch');
-  return patchSliceWithStoreFallback(App, 'mode', mdPatch, m, { storeWriter: 'setModePatch' });
+  return patchSliceCanonical(App, 'mode', mdPatch, m, { storeWriter: 'setModePatch' });
 }
 
 export function setModePrimary(

@@ -9,26 +9,17 @@ function read(rel) {
   return fs.readFileSync(path.join(ROOT, rel), 'utf8');
 }
 
-test('[stage4-ui-build-reactivity] state_api interactive ui commits use root store.patch and not store.setUi helper defaults', () => {
+test('[stage4-ui-build-reactivity] interactive UI commits preserve root patch build semantics', () => {
   const src = read('esm/native/kernel/state_api_install_support.ts');
 
-  assert.match(src, /const commitFilteredSlicePatch = <N extends SlicePatchNamespace>\(/);
-  assert.match(src, /if \(namespace === 'ui' && typeof store\.patch === 'function'\) \{/);
+  assert.match(src, /const patchUiThroughRootCommit = \(filtered: UiSlicePatch, meta: ActionMetaLike\): unknown =>/);
+  assert.match(src, /store\.patch\?\.\(\{ ui: filtered \}, meta\)/);
+  assert.match(src, /if \(namespace === 'ui' && hasRootCommitWriter\(\)\) \{/);
   assert.match(
     src,
-    /const payload: PatchPayload = \{ ui: (?:filtered as UiSlicePatch|readSlicePatchValue\('ui', filtered\)) \};/
+    /const onlyMeta = filteredKeys\.length === 1 && typeof filteredPayload\.meta !== 'undefined';/
   );
-  assert.match(src, /return store\.patch\(payload, meta\);/);
-  assert.match(
-    src,
-    /const commitUiPatch = \(patch: UiSlicePatch, meta: ActionMetaLike\): unknown =>\s*commitFilteredSlicePatch\('ui', patch, meta\);/
-  );
-
-  // Guard against regressing back to helper-default ui leaf writes as the first-choice interactive route.
-  assert.doesNotMatch(
-    src,
-    /const commitUiPatch = \(patch: UiSlicePatch, meta: ActionMetaLike\): unknown =>\s*patchSliceWithDedicatedWriter\(App, 'ui', patch, meta/
-  );
+  assert.match(src, /if \(!onlyMeta && typeof store\.patch === 'function'\) \{/);
 });
 
 test('[stage4-ui-build-reactivity] render loop visual helper no longer carries unused doors-runtime DI', () => {

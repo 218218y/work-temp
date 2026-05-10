@@ -22,7 +22,7 @@ import type {
 import { getAllSliceNamespaces, readSlicePatchValue } from '../runtime/slice_write_access_shared.js';
 import { asRecord as asObj } from '../runtime/record.js';
 import { snapshotStoreValueEqual, uiSnapshotValueEqual } from './kernel_snapshot_store_shared.js';
-import { asPatchPayload, hasMultipleDefinedRootSlices, hasOnlyUiSlice } from './state_api_shared.js';
+import { asPatchPayload } from './state_api_shared.js';
 
 const CONFIG_REPLACE_KEY = `${'__'}replace`;
 
@@ -237,18 +237,18 @@ export function createStateApiInstallSupport(App: AppContainer, storeInput: unkn
     return ui || {};
   };
 
-  const commitFilteredSlicePatch = <N extends SlicePatchNamespace>(
+  const hasRootCommitWriter = (): boolean => typeof store.patch === 'function';
+
+  const patchUiThroughRootCommit = (filtered: UiSlicePatch, meta: ActionMetaLike): unknown =>
+    store.patch?.({ ui: filtered }, meta);
+
+  const dispatchFilteredSlicePatch = <N extends SlicePatchNamespace>(
     namespace: N,
-    patchIn: SlicePatchValueMap[N],
+    filtered: SlicePatchValueMap[N],
     meta: ActionMetaLike
   ): unknown => {
-    const root = readRootSnapshot();
-    const filtered = filterSlicePatchAgainstRoot(root, namespace, patchIn);
-    if (!filtered) return undefined;
-
-    if (namespace === 'ui' && typeof store.patch === 'function') {
-      const payload: PatchPayload = { ui: readSlicePatchValue('ui', filtered) };
-      return store.patch(payload, meta);
+    if (namespace === 'ui' && hasRootCommitWriter()) {
+      return patchUiThroughRootCommit(readSlicePatchValue('ui', filtered), meta);
     }
 
     return patchSliceWithDedicatedWriter(
@@ -258,6 +258,18 @@ export function createStateApiInstallSupport(App: AppContainer, storeInput: unkn
       meta,
       INTERNAL_SLICE_WRITE_OPTS[namespace]
     );
+  };
+
+  const commitFilteredSlicePatch = <N extends SlicePatchNamespace>(
+    namespace: N,
+    patchIn: SlicePatchValueMap[N],
+    meta: ActionMetaLike
+  ): unknown => {
+    const root = readRootSnapshot();
+    const filtered = filterSlicePatchAgainstRoot(root, namespace, patchIn);
+    if (!filtered) return undefined;
+
+    return dispatchFilteredSlicePatch(namespace, filtered, meta);
   };
 
   const commitUiPatch = (patch: UiSlicePatch, meta: ActionMetaLike): unknown =>
@@ -290,11 +302,11 @@ export function createStateApiInstallSupport(App: AppContainer, storeInput: unkn
       if (filtered) filteredPayload[namespace] = filtered;
     }
 
-    if (!Object.keys(filteredPayload).length) return undefined;
+    const filteredKeys = Object.keys(filteredPayload);
+    if (!filteredKeys.length) return undefined;
 
-    const onlyUi = hasOnlyUiSlice(filteredPayload);
-    const hasManySlices = hasMultipleDefinedRootSlices(filteredPayload);
-    if ((onlyUi || hasManySlices) && typeof store.patch === 'function') {
+    const onlyMeta = filteredKeys.length === 1 && typeof filteredPayload.meta !== 'undefined';
+    if (!onlyMeta && typeof store.patch === 'function') {
       return store.patch(filteredPayload, meta);
     }
 

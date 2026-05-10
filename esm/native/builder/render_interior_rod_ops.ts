@@ -80,9 +80,9 @@ function isRodArgs(value: unknown): value is RenderInteriorRodArgs {
   return isRecord(value);
 }
 
-function readFiniteNumber(value: unknown, fallback = 0): number {
+function readFiniteNumber(value: unknown, defaultValue = 0): number {
   const next = Number(value);
-  return Number.isFinite(next) ? next : fallback;
+  return Number.isFinite(next) ? next : defaultValue;
 }
 
 function readOptionalFiniteNumber(value: unknown): number | null {
@@ -128,8 +128,7 @@ export function createBuilderRenderInteriorRodOps(deps: RenderInteriorOpsDeps) {
   const __matCache = deps.matCache;
   const __renderOpsHandleCatch = deps.renderOpsHandleCatch;
 
-  // Stage 3G-6: Centralized rod + hanger + hanging-clothes rendering.
-  // Moves the legacy createRod closure out of BuilderCore.
+  // Centralized rod, hanger, and hanging-clothes rendering.
 
   function createRodWithContents(args: RenderInteriorRodArgs | unknown) {
     const safeArgs = isRodArgs(args) ? args : {};

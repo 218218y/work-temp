@@ -1,10 +1,5 @@
 import type { AppContainer } from '../../../../types';
 
-import {
-  clearNotesExportTransform,
-  getNotesExportTransform,
-  setNotesExportTransform,
-} from '../../services/api.js';
 import type { ExportCanvasWorkflowDeps } from './export_canvas_workflow_shared.js';
 import {
   captureFrontNotesTransform,
@@ -61,26 +56,29 @@ export function createExportDualImageWorkflow(
     const titleHeight = 120;
     const gap = 20;
 
-    const { preRef, postRef, notesTransform } = captureFrontNotesTransform(App, deps, {
-      camera,
-      controls,
-      renderer,
-      scene,
-      width,
-      height,
-    });
-    setNotesExportTransform(App, notesTransform);
+    const captureNotesTransformForCurrentFrame = () => {
+      const { preRef, postRef, notesTransform } = captureFrontNotesTransform(App, deps, {
+        camera,
+        controls,
+        renderer,
+        scene,
+        width,
+        height,
+      });
 
-    if (notesEnabled && !getNotesExportTransform(App)) {
-      try {
-        console.warn('[WardrobePro][export] notes transform missing (open/closed export)', {
-          preRef,
-          postRef,
-        });
-      } catch (err) {
-        deps._exportReportThrottled(App, 'export.notesTransformMissing.warn', err, { throttleMs: 5000 });
+      if (notesEnabled && !notesTransform) {
+        try {
+          console.warn('[WardrobePro][export] notes transform missing (open/closed export)', {
+            preRef,
+            postRef,
+          });
+        } catch (err) {
+          deps._exportReportThrottled(App, 'export.notesTransformMissing.warn', err, { throttleMs: 5000 });
+        }
       }
-    }
+
+      return notesTransform;
+    };
 
     const createComposite = async (includeLogo: boolean): Promise<HTMLCanvasElement> => {
       const compositeCanvas = _createDomCanvas(App, width, height * 2 + gap + titleHeight);
@@ -93,24 +91,28 @@ export function createExportDualImageWorkflow(
         source: 'export.composite',
       });
 
-      _setDoorsOpenForExport(App, false);
-      _setBodyDoorStatusForNotes(App, false);
-      _renderSceneForExport(App, renderer, scene, camera);
-      ctx.drawImage(_getRendererCanvasSource(renderer), 0, titleHeight);
+      const restoreOriginalCameraForPanel = () => {
+        restoreViewportCameraPose(App, {
+          position: { x: originalCamPos.x, y: originalCamPos.y, z: originalCamPos.z },
+          target: { x: originalTarget.x, y: originalTarget.y, z: originalTarget.z },
+        });
+      };
 
-      if (notesEnabled) {
-        await _renderAllNotesToCanvas(App, ctx, width, height, titleHeight, getNotesExportTransform(App));
-      }
+      const renderPanel = async (open: boolean, imageY: number) => {
+        _setDoorsOpenForExport(App, open);
+        _setBodyDoorStatusForNotes(App, open);
+        restoreOriginalCameraForPanel();
+        const notesTransform = captureNotesTransformForCurrentFrame();
+        _renderSceneForExport(App, renderer, scene, camera);
+        ctx.drawImage(_getRendererCanvasSource(renderer), 0, imageY);
 
-      _setDoorsOpenForExport(App, true);
-      _setBodyDoorStatusForNotes(App, true);
-      _renderSceneForExport(App, renderer, scene, camera);
-      const secondImageY = titleHeight + height + gap;
-      ctx.drawImage(_getRendererCanvasSource(renderer), 0, secondImageY);
+        if (notesEnabled) {
+          await _renderAllNotesToCanvas(App, ctx, width, height, imageY, notesTransform);
+        }
+      };
 
-      if (notesEnabled) {
-        await _renderAllNotesToCanvas(App, ctx, width, height, secondImageY, getNotesExportTransform(App));
-      }
+      await renderPanel(false, titleHeight);
+      await renderPanel(true, titleHeight + height + gap);
 
       return compositeCanvas;
     };
@@ -120,7 +122,7 @@ export function createExportDualImageWorkflow(
       finalCanvas.toDataURL();
       _handleCanvasExport(App, finalCanvas, 'wardrobe-design-open-closed.png', {
         mode: 'clipboard',
-        fallback: 'none',
+        clipboardFailureMode: 'none',
         toastClipboardSuccess: 'ייצוא פתוח/סגור הועתק ללוח בהצלחה!',
       });
     } catch (err) {
@@ -130,11 +132,10 @@ export function createExportDualImageWorkflow(
       const finalCanvasWithoutLogo = await createComposite(false);
       _handleCanvasExport(App, finalCanvasWithoutLogo, 'wardrobe-design-open-closed.png', {
         mode: 'clipboard',
-        fallback: 'none',
+        clipboardFailureMode: 'none',
         toastClipboardSuccess: 'ייצוא פתוח/סגור הועתק ללוח בהצלחה!',
       });
     } finally {
-      clearNotesExportTransform(App);
       _setBodyDoorStatusForNotes(App, originalOpenState);
       doorsSetOpen(originalOpenState);
       restoreViewportCameraPose(App, {

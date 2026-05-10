@@ -3,28 +3,57 @@ import { getComputedStyleMaybe } from './notes_export_shared.js';
 import { type NoteImageDrawArgs, type NotePlainTextDrawArgs } from './notes_export_render_shared.js';
 
 const NOTE_EDITOR_EXPORT_STYLE_PROPS = [
+  'background-color',
+  'border-bottom-color',
+  'border-bottom-style',
+  'border-bottom-width',
+  'border-left-color',
+  'border-left-style',
+  'border-left-width',
+  'border-right-color',
+  'border-right-style',
+  'border-right-width',
+  'border-top-color',
+  'border-top-style',
+  'border-top-width',
+  'box-sizing',
   'color',
   'direction',
+  'display',
   'font-family',
+  'font-feature-settings',
+  'font-kerning',
   'font-size',
+  'font-stretch',
   'font-style',
   'font-variant',
+  'font-variant-caps',
   'font-weight',
+  'hyphens',
   'letter-spacing',
   'line-height',
-  'padding-top',
-  'padding-right',
+  'overflow-wrap',
   'padding-bottom',
   'padding-left',
+  'padding-right',
+  'padding-top',
+  'tab-size',
   'text-align',
   'text-decoration',
+  'text-decoration-color',
+  'text-decoration-line',
+  'text-decoration-style',
+  'text-decoration-thickness',
+  'text-indent',
+  'text-rendering',
+  'text-shadow',
   'text-transform',
   'unicode-bidi',
+  'vertical-align',
   'white-space',
   'word-break',
-  'overflow-wrap',
+  'word-spacing',
   'word-wrap',
-  'box-sizing',
 ] as const;
 
 type StyleWritable = CSSStyleDeclaration & Record<string, unknown>;
@@ -84,7 +113,7 @@ function readLineHeightPx(style: CSSStyleDeclaration | null | undefined, fontSiz
   return Math.max(1, fontSizePx * 1.2);
 }
 
-function applyEditorComputedExportStyle(
+function copyEditorComputedExportStyleProps(
   source: HTMLElement,
   cloned: HTMLElement
 ): CSSStyleDeclaration | null {
@@ -94,6 +123,15 @@ function applyEditorComputedExportStyle(
     const value = readCssValue(cs, prop);
     if (value) setStyleValue(cloned, prop, value);
   }
+
+  return cs;
+}
+
+function applyEditorComputedExportStyle(
+  source: HTMLElement,
+  cloned: HTMLElement
+): CSSStyleDeclaration | null {
+  const cs = copyEditorComputedExportStyleProps(source, cloned);
 
   const isRtl = String(cloned.dir || readCssValue(cs, 'direction') || 'rtl').toLowerCase() === 'rtl';
   setStyleValue(cloned, 'display', 'block');
@@ -110,6 +148,29 @@ function applyEditorComputedExportStyle(
   if (!readCssValue(cs, 'font-size')) setStyleValue(cloned, 'font-size', '14px');
 
   return cs;
+}
+
+function copyEditorChildrenComputedExportStyleTree(source: HTMLElement, cloned: HTMLElement): void {
+  const sourceChildren = Array.from(source.children || []);
+  const clonedChildren = Array.from(cloned.children || []);
+  const childCount = Math.min(sourceChildren.length, clonedChildren.length);
+
+  for (let i = 0; i < childCount; i += 1) {
+    const sourceChild = asHTMLElement(sourceChildren[i]);
+    const clonedChild = asHTMLElement(clonedChildren[i]);
+    if (!sourceChild || !clonedChild) continue;
+    copyEditorComputedExportStyleProps(sourceChild, clonedChild);
+    copyEditorChildrenComputedExportStyleTree(sourceChild, clonedChild);
+  }
+}
+
+function applyEditorComputedExportStyleTree(
+  source: HTMLElement,
+  cloned: HTMLElement
+): CSSStyleDeclaration | null {
+  const rootStyle = applyEditorComputedExportStyle(source, cloned);
+  copyEditorChildrenComputedExportStyleTree(source, cloned);
+  return rootStyle;
 }
 
 function wrapLineByCanvas(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
@@ -268,7 +329,7 @@ export function drawEditorAsImageAxisAligned({
         return;
       }
 
-      const cs = applyEditorComputedExportStyle(editor, cloned);
+      const cs = applyEditorComputedExportStyleTree(editor, cloned);
       const isRtl = String(cloned.dir || readCssValue(cs, 'direction') || 'rtl').toLowerCase() === 'rtl';
       cloned.style.width = `${srcWCss}px`;
       cloned.style.height = `${srcHCss}px`;

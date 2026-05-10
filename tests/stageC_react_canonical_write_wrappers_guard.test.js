@@ -115,7 +115,7 @@ test('[stageC] react UI wrappers prefer semantic UI namespace methods when insta
   ]);
 });
 
-test('[stageC] react UI/runtime wrappers fall back to canonical slice writers with normalized patches', () => {
+test('[stageC] react UI/runtime wrappers use canonical slice writers with normalized patches', () => {
   const state = createStoreState();
   const { calls, store } = createStoreRecorder(state);
   const App = { actions: {}, store };
@@ -143,18 +143,54 @@ test('[stageC] react UI/runtime wrappers fall back to canonical slice writers wi
   assert.deepEqual(
     calls.map(call => ({ op: call.op, payload: call.payload ?? call.patch })),
     [
-      { op: 'store.patch', payload: { ui: { activeTab: 'design' } } },
-      { op: 'store.patch', payload: { ui: { notesEnabled: true } } },
-      { op: 'store.patch', payload: { ui: { showContents: true, showHanger: false } } },
-      { op: 'store.patch', payload: { ui: { showHanger: true, showContents: false } } },
-      { op: 'store.patch', payload: { ui: { currentFloorType: 'tile' } } },
-      { op: 'store.patch', payload: { runtime: { globalClickMode: true } } },
-      { op: 'store.patch', payload: { runtime: { sketchMode: false } } },
+      { op: 'store.setUi', payload: { activeTab: 'design' } },
+      { op: 'store.setUi', payload: { notesEnabled: true } },
+      { op: 'store.setUi', payload: { showContents: true, showHanger: false } },
+      { op: 'store.setUi', payload: { showHanger: true, showContents: false } },
+      { op: 'store.setUi', payload: { currentFloorType: 'tile' } },
+      { op: 'store.setRuntime', payload: { globalClickMode: true } },
+      { op: 'store.setRuntime', payload: { sketchMode: false } },
     ]
   );
 });
 
-test('[stageC] react config wrappers route through semantic config seams before generic scalar/map fallbacks', () => {
+test('[stageC] react UI/runtime wrappers keep root store.patch support for minimal stores', () => {
+  const state = createStoreState();
+  /** @type {Array<Record<string, unknown>>} */
+  const calls = [];
+  const App = {
+    actions: {},
+    store: {
+      getState() {
+        return state;
+      },
+      patch(payload, meta) {
+        calls.push({ op: 'store.patch', payload, meta });
+        if (payload && typeof payload === 'object') {
+          if (payload.ui && typeof payload.ui === 'object') Object.assign(state.ui, payload.ui);
+          if (payload.runtime && typeof payload.runtime === 'object')
+            Object.assign(state.runtime, payload.runtime);
+        }
+        return payload;
+      },
+    },
+  };
+
+  setUiActiveTab(App, 'shop', { source: 'react:tab:minimal' });
+  setRuntimeSketchMode(App, true, { source: 'react:sketchMode:minimal' });
+
+  assert.deepEqual(state.ui, { activeTab: 'shop' });
+  assert.deepEqual(state.runtime, { sketchMode: true });
+  assert.deepEqual(
+    calls.map(call => ({ op: call.op, payload: call.payload })),
+    [
+      { op: 'store.patch', payload: { ui: { activeTab: 'shop' } } },
+      { op: 'store.patch', payload: { runtime: { sketchMode: true } } },
+    ]
+  );
+});
+
+test('[stageC] react config wrappers route through semantic config seams before generic scalar/map defaults', () => {
   /** @type {Array<Record<string, unknown>>} */
   const calls = [];
   const state = createStoreState();
@@ -187,8 +223,8 @@ test('[stageC] react config wrappers route through semantic config seams before 
   ]);
 
   calls.length = 0;
-  const fallbackApp = { actions: {}, store };
-  setCfgHandlesMap(fallbackApp, { door_1: 'bar' }, { source: 'react:handles' });
+  const minimalApp = { actions: {}, store };
+  setCfgHandlesMap(minimalApp, { door_1: 'bar' }, { source: 'react:handles' });
 
   assert.deepEqual(state.config.handlesMap, { door_1: 'bar' });
   assert.deepEqual(calls, []);

@@ -40,7 +40,7 @@ export type ResolvedWriteContext = {
   store: SliceWriteStoreLike | null;
   rootPatchActionSource: ActionsNamespaceLike | null;
   rootPatchAction: BoundRootPatchAction | null;
-  liveMetaTouchSource: SliceNamespaceSurface | null;
+  liveMetaTouchSource: unknown;
   liveMetaTouchAction: BoundMetaTouchAction | null;
   namespaces: Partial<Record<SlicePatchNamespace, NamespaceCacheEntry | undefined>>;
 };
@@ -111,7 +111,7 @@ function refreshResolvedWriteContext(context: ResolvedWriteContext, App: unknown
     resolvedActions &&
     isSliceNamespaceSurface(resolvedActions.meta) &&
     typeof resolvedActions.meta.touch === 'function'
-      ? resolvedActions.meta
+      ? resolvedActions.meta.touch
       : null;
   if (context.liveMetaTouchSource !== liveMetaTouchSource) {
     context.liveMetaTouchSource = liveMetaTouchSource;

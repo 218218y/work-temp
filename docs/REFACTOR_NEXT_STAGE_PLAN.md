@@ -57,6 +57,16 @@ The fixtures cover two important import cases:
 
 This keeps project compatibility at the project ingress layer and gives future import work behavior coverage without adding runtime fallback paths.
 
+## Legacy/default vocabulary burn-down
+
+The cache/storage runtime slice is complete: storage access, storage install, boot seed storage shape, Cloud Sync storage shape, and the Three.js geometry-cache contracts now use explicit default-value naming instead of `fallback` terminology for normal defaults.
+
+This did not remove compatibility behavior blindly. The canonical `App.services.storage` and render-cache seams remain unchanged, while the legacy/fallback audit now has fewer false-positive hot files. Stage 42 now asserts that these storage and geometry-cache files stay out of the categorized inventory.
+
+The next legacy-risk slice is also complete: old base-key `doorStyleMap` payloads are canonicalized to the `_full` key shape at map ingress, project/config snapshot normalization, and runtime map normalization. Door-style resolution no longer performs a live base-key compatibility lookup during render/hover. Stale historical `legacy` provenance comments were also removed from platform/boot/service shell files so the audit queue now points at real runtime-risk candidates instead of retired-script history.
+
+The module-structure/runtime-selector slice is complete as well: `calculateModuleStructure` now rejects stale explicit structure signatures whose door-count sum no longer matches the current wardrobe door count, so builder/kernel/canvas-picking callers share one canonical rule instead of relying on local cleanup. The library-preset signature path reuses that same feature helper, and the `ui.raw` selector owners now use precise tolerant/canonical wording plus `defaultValue` parameter names so the legacy audit no longer misclassifies normal scalar defaults as live compatibility paths.
+
 ## CSS cascade ratchet hardening
 
 The CSS cascade hardening slice is complete: `npm run check:css-style` now reads explicit limits from `tools/wp_css_style_budget.json` instead of embedding budget numbers inside the audit script.
@@ -70,7 +80,7 @@ The current ratchet covers:
 
 Future CSS work should lower these budgets after cleanup. Increasing a budget is allowed only when a deliberate product/design decision accepts the extra cascade debt.
 
-The first CSS cleanup slice is complete: `css/react_styles.css` no longer uses `transition: all`; each affected rule now names the properties it animates, and `tools/wp_css_style_budget.json` locks `transitionAll` at 0. The z-index cleanup slice is also complete: every `z-index` declaration now uses a shared `--wp-z-*` layer token, and `zIndexTokenless` is locked at 0. The `!important` burn-down removed control/button, tooltip/quick-actions, notes overlay, and PDF sketch cascade force by making each interactive state win through normal CSS order. The `!important` budget is now locked at 1, leaving only the legacy sidebar quarantine rule. Remaining CSS cleanup should focus on total `z-index`, `box-shadow`, and replacing the final legacy-sidebar force only when the legacy DOM mount path is retired.
+The first CSS cleanup slice is complete: `css/react_styles.css` no longer uses `transition: all`; each affected rule now names the properties it animates, and `tools/wp_css_style_budget.json` locks `transitionAll` at 0. The z-index cleanup slice is also complete: every `z-index` declaration now uses a shared `--wp-z-*` layer token, and `zIndexTokenless` is locked at 0. The `!important` burn-down removed control/button, tooltip/quick-actions, notes overlay, and PDF sketch cascade force by making each interactive state win through normal CSS order. The shadow cleanup slice moved React UI elevations/rings into shared `--wp-r-shadow-*` tokens and now locks tokenless `box-shadow` at 0. The `!important` budget is locked at 1, leaving only the legacy sidebar quarantine rule. Remaining CSS cleanup should focus on total `z-index` and replacing the final legacy-sidebar force only when the legacy DOM mount path is retired.
 
 ## Cloud Sync offline/reconnect behavior hardening
 

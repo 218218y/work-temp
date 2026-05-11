@@ -1,12 +1,12 @@
-import type { AppContainer, UnknownRecord } from '../../../types';
+import type { AppContainer } from '../../../types';
 
 import { readConfigScalarOrDefaultFromApp } from '../runtime/config_selectors.js';
 import { getDrawersArray, getRenderSlot, setRenderSlot } from '../runtime/render_access.js';
-import { asRecord, readFiniteNumber, readFiniteNumberOrNull } from '../runtime/render_runtime_primitives.js';
+import { readFiniteNumber, readFiniteNumberOrNull } from '../runtime/render_runtime_primitives.js';
 import { getDrawerModuleKey } from '../runtime/doors_runtime_support.js';
 
 import type { DebugLogFn, MotionFrameState } from './render_loop_motion_shared.js';
-import { asDrawerMotion, asRecordOrNull, moveDrawerGroupPosition } from './render_loop_motion_shared.js';
+import { asDrawerMotion, moveDrawerGroupPosition } from './render_loop_motion_shared.js';
 
 export function updateRenderLoopDrawerMotions(
   App: AppContainer,
@@ -41,8 +41,6 @@ export function updateRenderLoopDrawerMotions(
     const d = asDrawerMotion(drawers[i]);
     if (!d) continue;
     const group = d.group;
-    const userData = asRecord<UnknownRecord>(asRecordOrNull(group)?.userData, {});
-    const isSketchExtDrawer = !!(userData && userData['__wpSketchExtDrawer'] === true);
     let isInternal = typeof wardrobeType !== 'undefined' && wardrobeType === 'sliding';
     if (!isInternal) {
       if (typeof d.isInternal === 'undefined') d.isInternal = !!(d.id && String(d.id).includes('int'));
@@ -61,7 +59,8 @@ export function updateRenderLoopDrawerMotions(
       shouldOpen = !!(matchesOpenModule && frame.timeSinceToggle > frame.delayTime);
     }
 
-    if (frame.sketchExtDrawersEditActive && isSketchExtDrawer) {
+    const forceClosedBySketchExternalDrawerEdit = frame.sketchExtDrawersEditActive && !isInternal;
+    if (forceClosedBySketchExternalDrawerEdit) {
       shouldOpen = false;
       try {
         d.isOpen = false;
@@ -84,7 +83,11 @@ export function updateRenderLoopDrawerMotions(
       } catch {
         // ignore
       }
-    } else if (frame.forcedOpenDrawerId != null && d.id === frame.forcedOpenDrawerId) {
+    } else if (
+      !forceClosedBySketchExternalDrawerEdit &&
+      frame.forcedOpenDrawerId != null &&
+      d.id === frame.forcedOpenDrawerId
+    ) {
       shouldOpen = true;
     }
 

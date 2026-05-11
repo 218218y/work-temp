@@ -237,29 +237,6 @@ export function createStateApiInstallSupport(App: AppContainer, storeInput: unkn
     return ui || {};
   };
 
-  const hasRootCommitWriter = (): boolean => typeof store.patch === 'function';
-
-  const patchUiThroughRootCommit = (filtered: UiSlicePatch, meta: ActionMetaLike): unknown =>
-    store.patch?.({ ui: filtered }, meta);
-
-  const dispatchFilteredSlicePatch = <N extends SlicePatchNamespace>(
-    namespace: N,
-    filtered: SlicePatchValueMap[N],
-    meta: ActionMetaLike
-  ): unknown => {
-    if (namespace === 'ui' && hasRootCommitWriter()) {
-      return patchUiThroughRootCommit(readSlicePatchValue('ui', filtered), meta);
-    }
-
-    return patchSliceWithDedicatedWriter(
-      App,
-      namespace,
-      filtered,
-      meta,
-      INTERNAL_SLICE_WRITE_OPTS[namespace]
-    );
-  };
-
   const commitFilteredSlicePatch = <N extends SlicePatchNamespace>(
     namespace: N,
     patchIn: SlicePatchValueMap[N],
@@ -269,7 +246,18 @@ export function createStateApiInstallSupport(App: AppContainer, storeInput: unkn
     const filtered = filterSlicePatchAgainstRoot(root, namespace, patchIn);
     if (!filtered) return undefined;
 
-    return dispatchFilteredSlicePatch(namespace, filtered, meta);
+    if (namespace === 'ui' && typeof store.patch === 'function') {
+      const payload: PatchPayload = { ui: readSlicePatchValue('ui', filtered) };
+      return store.patch(payload, meta);
+    }
+
+    return patchSliceWithDedicatedWriter(
+      App,
+      namespace,
+      filtered,
+      meta,
+      INTERNAL_SLICE_WRITE_OPTS[namespace]
+    );
   };
 
   const commitUiPatch = (patch: UiSlicePatch, meta: ActionMetaLike): unknown =>

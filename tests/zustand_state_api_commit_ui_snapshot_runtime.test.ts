@@ -5,7 +5,7 @@ import { installStateApi } from '../esm/native/kernel/state_api.ts';
 
 type AnyRecord = Record<string, unknown>;
 
-test('[state-api] commitUiSnapshot commits through root patch to preserve build-aware UI metadata', () => {
+test('[state-api] commitUiSnapshot commits through the canonical root patch path when the store exposes patch', () => {
   const calls: Array<{ via: string; payload: AnyRecord; meta: AnyRecord }> = [];
 
   const App: AnyRecord = {
@@ -47,7 +47,7 @@ test('[state-api] commitUiSnapshot commits through root patch to preserve build-
   assert.equal((calls[0].meta as AnyRecord).source, 'test:uiSnap');
 });
 
-test('[state-api] commitUiSnapshot does not call actions.ui.patch and uses one root UI commit', () => {
+test('[state-api] commitUiSnapshot does not call actions.ui.patch or store.setUi when store.patch exists', () => {
   let uiPatchCalled = 0;
   let storeSetUiCalled = 0;
   const calls: Array<{ via: string; payload: AnyRecord; meta: AnyRecord }> = [];
@@ -93,37 +93,7 @@ test('[state-api] commitUiSnapshot does not call actions.ui.patch and uses one r
   assert.equal(out as any, undefined);
 });
 
-test('[state-api] commitUiSnapshot keeps root patch support for minimal stores without setUi', () => {
-  const calls: Array<{ via: string; payload: AnyRecord; meta: AnyRecord }> = [];
-
-  const App: AnyRecord = {
-    actions: {},
-    store: {
-      getState: () => ({ ui: {}, config: {}, runtime: {}, meta: { version: 0 } }),
-      patch: (payload: AnyRecord, meta: AnyRecord) => {
-        calls.push({ via: 'store.patch', payload, meta });
-        return 'store.patch';
-      },
-      subscribe: () => () => undefined,
-    },
-  };
-
-  installStateApi(App as any);
-
-  const out = (App.actions as any).commitUiSnapshot(
-    { raw: { height: 240 }, notesEnabled: false },
-    { source: 'test:uiSnap:minimal-store' }
-  );
-
-  assert.equal(out, 'store.patch');
-  assert.equal(calls.length, 1);
-  assert.equal(calls[0].via, 'store.patch');
-  assert.equal((calls[0].payload as AnyRecord).ui.raw.height, 240);
-  assert.equal((calls[0].payload as AnyRecord).ui.notesEnabled, false);
-  assert.equal((calls[0].meta as AnyRecord).source, 'test:uiSnap:minimal-store');
-});
-
-test('[state-api] applyConfig commits through the dedicated config writer without legacy cfg surface routing', () => {
+test('[state-api] applyConfig commits through the dedicated config writer (no legacy cfg surface fallback)', () => {
   const calls: AnyRecord[] = [];
   const App: AnyRecord = {
     actions: {},

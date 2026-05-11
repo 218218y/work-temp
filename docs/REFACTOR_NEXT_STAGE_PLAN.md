@@ -67,6 +67,12 @@ The next legacy-risk slice is also complete: old base-key `doorStyleMap` payload
 
 The module-structure/runtime-selector slice is complete as well: `calculateModuleStructure` now rejects stale explicit structure signatures whose door-count sum no longer matches the current wardrobe door count, so builder/kernel/canvas-picking callers share one canonical rule instead of relying on local cleanup. The library-preset signature path reuses that same feature helper, and the `ui.raw` selector owners now use precise tolerant/canonical wording plus `defaultValue` parameter names so the legacy audit no longer misclassifies normal scalar defaults as live compatibility paths.
 
+The latest audit hygiene slice was widened on 2026-05-11: the scanner now covers camelCase/PascalCase compatibility vocabulary, so the inventory is intentionally larger but more honest. The current generated Stage 42 inventory is **515** categorized occurrences across **167** files, with the important queues still clean: `runtime-default: 0`, `legacy-runtime-risk: 0`, and `unknown: 0`.
+
+The second 2026-05-11 cleanup slice removed avoidable legacy vocabulary from live prefixed-map alias paths, cornice-envelope helpers, and internal renderer-lighting helper names without changing behavior. Split/groove map writers still clear unprefixed alias keys for persisted-data safety, but the code now names that seam as unprefixed-alias compatibility rather than a live legacy path. The cornice builder and dimension tokens likewise use current envelope naming; only normal cornice domain defaults remain in that file's audit inventory. The same cleanup renamed internal renderer-lighting helpers so the Three.js `useLegacyLights` compatibility remains visible only where it is actually an external renderer API seam, not repeated through local variable names.
+
+Future legacy/default work should not rename terms mechanically. Start from the current categorized inventory and burn down only entries where the wording points at a real runtime risk, a stale public contract, or an adapter seam that has an owner-backed replacement. Framework-default entries should remain excluded from runtime-risk burn-down unless they stop being framework API names.
+
 ## CSS cascade ratchet hardening
 
 The CSS cascade hardening slice is complete: `npm run check:css-style` now reads explicit limits from `tools/wp_css_style_budget.json` instead of embedding budget numbers inside the audit script.
@@ -116,6 +122,17 @@ The dated root workmaps and the root `new refactor_workmap` draft were removed a
 Stage 74 is a planning and control-plane stage, not another automatic file split.
 
 The codebase has already completed many ownership splits. At this point, continuing by line count alone would make the project worse: more files, more imports, and more guard noise without better ownership. Future stages must prove that they remove a real ownership mix or improve a guard that protects behavior.
+
+## Post-closeout maintenance lanes
+
+The 2026-05-11 closeout keeps Stage 80 as the end of the numbered refactor track and treats the remaining work as maintenance lanes instead of new wrapper-heavy stages. The active lanes are:
+
+1. keep `check:legacy-fallbacks` broad enough to see camelCase/PascalCase compatibility/default vocabulary, then classify every occurrence instead of hiding it;
+2. keep UI typecheck coverage explicit for both `.ts` and `.tsx` surfaces while the lean lane remains TS-only by design;
+3. keep `types/*.ts` and `types/*.js` paired so runtime stub files cannot silently drift from the typed source surface;
+4. keep root documentation limited to active pointers and move useful policy into living docs, not historical stage logs.
+
+These lanes do not justify Stage 81 by themselves. They are control-plane hardening work that should reduce future confusion without adding runtime indirection.
 
 ## Professional split gate
 

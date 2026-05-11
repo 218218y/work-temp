@@ -18,6 +18,8 @@ import {
   DEFAULT_WIDTH,
   HINGED_DEFAULT_DEPTH,
   BASE_LEG_DIMENSIONS,
+  CARCASS_BASE_DIMENSIONS,
+  CHEST_MODE_DIMENSIONS,
 } from '../../shared/wardrobe_dimension_tokens_shared.js';
 
 export function createDefaultState(opts?: { noneMode?: string }): RootStateLike {
@@ -34,6 +36,9 @@ export function createDefaultState(opts?: { noneMode?: string }): RootStateLike 
         depth: HINGED_DEFAULT_DEPTH,
         doors: DEFAULT_HINGED_DOORS,
         chestDrawersCount: DEFAULT_CHEST_DRAWERS_COUNT,
+        chestCommodeMirrorHeightCm: CHEST_MODE_DIMENSIONS.commode.defaultMirrorHeightCm,
+        chestCommodeMirrorWidthCm: CHEST_MODE_DIMENSIONS.activeDefaults.widthCm,
+        chestCommodeMirrorWidthManual: false,
         stackSplitLowerHeight: DEFAULT_STACK_SPLIT_LOWER_HEIGHT,
         stackSplitLowerDepth: HINGED_DEFAULT_DEPTH,
         stackSplitLowerWidth: DEFAULT_WIDTH,
@@ -60,6 +65,7 @@ export function createDefaultState(opts?: { noneMode?: string }): RootStateLike 
       baseType: 'plinth',
       baseLegStyle: 'tapered',
       baseLegColor: 'black',
+      basePlinthHeightCm: CARCASS_BASE_DIMENSIONS.plinth.heightM * 100,
       baseLegHeightCm: BASE_LEG_DIMENSIONS.defaults.heightCm,
       baseLegWidthCm: BASE_LEG_DIMENSIONS.defaults.taperedWidthCm,
       // Sliding wardrobes: top/bottom rails finish (default requested: nickel).
@@ -89,6 +95,7 @@ export function createDefaultState(opts?: { noneMode?: string }): RootStateLike 
       removeDoorsEnabled: false,
       cornerMode: false,
       isChestMode: false,
+      chestCommodeEnabled: false,
       lightingControl: false,
 
       // UI-only state (ephemeral, not persisted). Kept here to avoid detached uiState globals.

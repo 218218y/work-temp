@@ -87,8 +87,8 @@ function dispatchRootPatchWithResolvedContext(
   };
 
   for (const target of targets) {
-    if (!hasRootPatchDispatchSeamForTarget(context, target)) continue;
-    return dispatchRootPatchTarget(context, target, readRootPayload, meta);
+    const out = dispatchRootPatchTarget(context, target, readRootPayload, meta);
+    if (out !== undefined) return out;
   }
 
   return undefined;
@@ -117,7 +117,9 @@ export function patchSliceWithResolvedContext<N extends SlicePatchNamespace>(
 
   for (const target of targets) {
     if (!hasSliceDispatchTargetSeam(context, namespace, opts, target)) continue;
-    return dispatchSliceTarget({ context, namespace, payload, meta, opts, target, readRootPayload });
+    const out = dispatchSliceTarget({ context, namespace, payload, meta, opts, target, readRootPayload });
+    if (target === 'storeWriter') return out;
+    if (out !== undefined) return out;
   }
 
   return undefined;
@@ -131,7 +133,9 @@ export function touchMetaWithResolvedContext(
 ): unknown {
   for (const target of targets) {
     if (!hasMetaTouchDispatchTargetSeam(context, target)) continue;
-    return dispatchMetaTouchTarget(context, target, meta);
+    const out = dispatchMetaTouchTarget(context, target, meta);
+    if (target === 'metaStoreWriter') return out;
+    if (out !== undefined) return out;
   }
 
   return undefined;

@@ -269,6 +269,8 @@ export const CARCASS_INTERIOR_DIMENSIONS = Object.freeze({
 export const CARCASS_BASE_DIMENSIONS = Object.freeze({
   plinth: Object.freeze({
     heightM: 0.08,
+    heightMinCm: 1,
+    heightMaxCm: 60,
     widthClearanceM: 0.04,
     fallbackWidthClearanceM: 0.02,
     depthClearanceM: 0.05,
@@ -381,9 +383,9 @@ export const CARCASS_CORNICE_DIMENSIONS = Object.freeze({
     miterEpsilonZM: 0.0005,
     baseSealEpsilonM: 0.003,
     baseBandEpsilonM: 1e-6,
-    legacyEnvelopeProfileZM: 0.02,
-    legacyEnvelopeTopRadiusPadM: 0.12,
-    legacyEnvelopeDepthPadM: 0.08,
+    envelopeProfileZM: 0.02,
+    envelopeTopRadiusPadM: 0.12,
+    envelopeDepthPadM: 0.08,
   }),
 });
 
@@ -1412,6 +1414,18 @@ export const CHEST_MODE_DIMENSIONS = Object.freeze({
     depthCm: 40,
     drawersCount: WARDROBE_LIMITS.chestDrawers.min,
     baseType: 'legs',
+  }),
+  commode: Object.freeze({
+    defaultMirrorHeightCm: 70,
+    minMirrorHeightCm: 30,
+    maxMirrorHeightCm: 180,
+    minMirrorWidthCm: WARDROBE_LIMITS.width.chestMinCm,
+    maxMirrorWidthCm: WARDROBE_LIMITS.width.maxCm,
+    backPanelThicknessM: 0.018,
+    mirrorThicknessM: 0.003,
+    mirrorInsetM: 0.03,
+    backPanelYOffsetM: 0.002,
+    mirrorSurfaceLiftM: 0.0015,
   }),
   drawerBox: Object.freeze({
     panelThicknessM: 0.015,

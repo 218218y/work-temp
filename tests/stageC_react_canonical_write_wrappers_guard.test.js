@@ -154,7 +154,7 @@ test('[stageC] react UI/runtime wrappers use canonical slice writers with normal
   );
 });
 
-test('[stageC] react UI/runtime wrappers keep root store.patch support for minimal stores', () => {
+test('[stageC] react UI/runtime wrappers keep root store.patch fallback for minimal stores', () => {
   const state = createStoreState();
   /** @type {Array<Record<string, unknown>>} */
   const calls = [];
@@ -190,7 +190,7 @@ test('[stageC] react UI/runtime wrappers keep root store.patch support for minim
   );
 });
 
-test('[stageC] react config wrappers route through semantic config seams before generic scalar/map defaults', () => {
+test('[stageC] react config wrappers route through semantic config seams before generic scalar/map fallbacks', () => {
   /** @type {Array<Record<string, unknown>>} */
   const calls = [];
   const state = createStoreState();
@@ -223,8 +223,8 @@ test('[stageC] react config wrappers route through semantic config seams before 
   ]);
 
   calls.length = 0;
-  const minimalApp = { actions: {}, store };
-  setCfgHandlesMap(minimalApp, { door_1: 'bar' }, { source: 'react:handles' });
+  const fallbackApp = { actions: {}, store };
+  setCfgHandlesMap(fallbackApp, { door_1: 'bar' }, { source: 'react:handles' });
 
   assert.deepEqual(state.config.handlesMap, { door_1: 'bar' });
   assert.deepEqual(calls, []);

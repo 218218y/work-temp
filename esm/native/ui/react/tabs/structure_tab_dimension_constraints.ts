@@ -25,6 +25,7 @@ import {
   WARDROBE_SLIDING_DOORS_MIN,
   WARDROBE_WIDTH_MAX,
   WARDROBE_WIDTH_MIN,
+  CHEST_MODE_DIMENSIONS,
 } from '../../../services/api.js';
 
 export type StructureDimInputBounds = {
@@ -42,6 +43,8 @@ export type StructureDimensionKey =
   | 'cellDimsWidth'
   | 'cellDimsHeight'
   | 'cellDimsDepth'
+  | 'chestCommodeMirrorHeightCm'
+  | 'chestCommodeMirrorWidthCm'
   | 'stackSplitLowerHeight'
   | 'stackSplitLowerDepth'
   | 'stackSplitLowerWidth'
@@ -104,6 +107,10 @@ export function readStructureDimensionBounds(args: StructureDimensionContext): S
       return { min: WARDROBE_CELL_HEIGHT_MIN, max: WARDROBE_CELL_HEIGHT_MAX };
     case 'cellDimsDepth':
       return { min: WARDROBE_CELL_DEPTH_MIN, max: WARDROBE_CELL_DEPTH_MAX };
+    case 'chestCommodeMirrorHeightCm':
+      return readStructureChestCommodeMirrorBounds('height');
+    case 'chestCommodeMirrorWidthCm':
+      return readStructureChestCommodeMirrorBounds('width');
     case 'stackSplitLowerHeight': {
       const overallHeight = finitePositiveOr(args.height, WARDROBE_HEIGHT_MAX);
       return {
@@ -149,6 +156,20 @@ export function readStructureChestDrawersBounds(): StructureDimInputBounds {
     min: WARDROBE_CHEST_DRAWERS_MIN,
     max: WARDROBE_CHEST_DRAWERS_MAX,
     integer: true,
+  };
+}
+
+export function readStructureChestCommodeMirrorBounds(key: 'height' | 'width'): StructureDimInputBounds {
+  const commode = CHEST_MODE_DIMENSIONS.commode;
+  if (key === 'height') {
+    return {
+      min: commode.minMirrorHeightCm,
+      max: commode.maxMirrorHeightCm,
+    };
+  }
+  return {
+    min: commode.minMirrorWidthCm,
+    max: commode.maxMirrorWidthCm,
   };
 }
 

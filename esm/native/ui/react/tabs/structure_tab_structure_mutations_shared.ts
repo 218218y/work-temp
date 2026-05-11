@@ -12,6 +12,8 @@ export type StructureTabNumericKey =
   | 'cellDimsWidth'
   | 'cellDimsHeight'
   | 'cellDimsDepth'
+  | 'chestCommodeMirrorHeightCm'
+  | 'chestCommodeMirrorWidthCm'
   | 'stackSplitLowerHeight'
   | 'stackSplitLowerDepth'
   | 'stackSplitLowerWidth'
@@ -21,6 +23,7 @@ export type StructureTabStackSplitField = 'depth' | 'width' | 'doors';
 
 export type DisplayedValueReader = (key: StructureTabNumericKey) => number;
 export type StructureRawBooleanKey =
+  | 'chestCommodeMirrorWidthManual'
   | 'stackSplitLowerDepthManual'
   | 'stackSplitLowerWidthManual'
   | 'stackSplitLowerDoorsManual';

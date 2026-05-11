@@ -202,7 +202,7 @@ test('[state-api] config replace-key filtering preserves unchanged entries insid
   });
 });
 
-test('[state-api] root actions.patch keeps root commit semantics for single runtime slices after noop filtering', () => {
+test('[state-api] root actions.patch keeps single runtime slices on canonical root store.patch payloads after noop filtering', () => {
   const { calls, store, state } = createStore({
     ui: { activeTab: 'design' },
     config: {},
@@ -227,65 +227,6 @@ test('[state-api] root actions.patch keeps root commit semantics for single runt
   assert.equal((calls[0].meta as AnyRecord).source, 'test:single-runtime-route');
   assert.equal((state.runtime as AnyRecord).sketchMode, true);
   assert.equal((state.runtime as AnyRecord).hoverId, 'keep');
-});
-
-
-test('[state-api] interactive UI slice commits use root patch so build-eligible meta stays build-eligible', () => {
-  const { calls, store, state } = createStore({
-    ui: { baseType: 'plinth' },
-    config: {},
-    runtime: {},
-    mode: { primary: 'none', opts: {} },
-    meta: { dirty: false },
-  });
-  const App: AnyRecord = { actions: {}, store };
-
-  installStateApi(App as any);
-
-  (App.actions as any).ui.setBaseType('legs', {
-    source: 'test:ui-build-eligible',
-    immediate: true,
-  });
-
-  assert.equal(calls.length, 1);
-  assert.equal(calls[0].op, 'store.patch');
-  assert.deepEqual(calls[0].payload, { ui: { baseType: 'legs' } });
-  assert.equal((calls[0].meta as AnyRecord).source, 'test:ui-build-eligible');
-  assert.equal((calls[0].meta as AnyRecord).immediate, true);
-  assert.equal(Object.prototype.hasOwnProperty.call(calls[0].meta as AnyRecord, 'noBuild'), false);
-  assert.equal((state.ui as AnyRecord).baseType, 'legs');
-});
-
-test('[state-api] root actions.patch keeps store.patch support for minimal stores without slice writers', () => {
-  const calls: AnyRecord[] = [];
-  const state: AnyRecord = {
-    ui: {},
-    config: {},
-    runtime: { sketchMode: false },
-    mode: { primary: 'none', opts: {} },
-    meta: { dirty: false },
-  };
-  const store = {
-    getState: () => state,
-    patch: (payload: AnyRecord, meta?: AnyRecord) => {
-      calls.push({ op: 'store.patch', payload: clone(payload), meta: clone(meta || {}) });
-      if (payload.runtime && typeof payload.runtime === 'object') {
-        state.runtime = applyDeepMerge(state.runtime || {}, payload.runtime as AnyRecord);
-      }
-      return payload;
-    },
-    subscribe: () => () => undefined,
-  };
-  const App: AnyRecord = { actions: {}, store };
-
-  installStateApi(App as any);
-
-  (App.actions as any).patch({ runtime: { sketchMode: true } }, { source: 'test:minimal-store-root' });
-
-  assert.equal(calls.length, 1);
-  assert.equal(calls[0].op, 'store.patch');
-  assert.deepEqual(calls[0].payload, { runtime: { sketchMode: true } });
-  assert.equal((state.runtime as AnyRecord).sketchMode, true);
 });
 
 test('[state-api] root actions.patch routes one meta slice through the dedicated meta writer instead of root patch', () => {

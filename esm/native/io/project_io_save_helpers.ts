@@ -133,10 +133,14 @@ export function buildDefaultProjectDataSnapshot(
       height: readFiniteNumber(raw.height),
       depth: readFiniteNumber(raw.depth),
       chestDrawersCount: readFiniteNumber(raw.chestDrawersCount),
+      chestCommodeMirrorHeightCm: readFiniteNumber(raw.chestCommodeMirrorHeightCm),
+      chestCommodeMirrorWidthCm: readFiniteNumber(raw.chestCommodeMirrorWidthCm),
+      chestCommodeMirrorWidthManual: !!raw.chestCommodeMirrorWidthManual,
 
       baseType: ui.baseType,
       baseLegStyle: ui.baseLegStyle,
       baseLegColor: ui.baseLegColor,
+      basePlinthHeightCm: readFiniteNumber(ui.basePlinthHeightCm),
       baseLegHeightCm: readFiniteNumber(ui.baseLegHeightCm),
       baseLegWidthCm: readFiniteNumber(ui.baseLegWidthCm),
       slidingTracksColor: ui.slidingTracksColor === 'black' ? 'black' : 'nickel',
@@ -176,6 +180,7 @@ export function buildDefaultProjectDataSnapshot(
       multiColor: !!ui.multiColorEnabled,
       handleControl: !!ui.handleControl,
       chestMode: !!ui.isChestMode,
+      chestCommode: !!ui.chestCommodeEnabled,
       cornerMode: !!ui.cornerMode,
       removeDoors: !!ui.removeDoorsEnabled,
       hingeDirection: !!ui.hingeDirection,
@@ -189,6 +194,10 @@ export function buildDefaultProjectDataSnapshot(
 
     chestSettings: {
       drawersCount: readFiniteNumber(raw.chestDrawersCount),
+      commodeEnabled: !!ui.chestCommodeEnabled,
+      mirrorHeightCm: readFiniteNumber(raw.chestCommodeMirrorHeightCm),
+      mirrorWidthCm: readFiniteNumber(raw.chestCommodeMirrorWidthCm),
+      mirrorWidthManual: !!raw.chestCommodeMirrorWidthManual,
       bodyColor: color,
     },
 

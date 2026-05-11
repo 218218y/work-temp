@@ -350,28 +350,16 @@ test('[slice-write-access] repeated meta touch refreshes cached meta namespace a
     },
   } satisfies AnyRecord;
 
-  const first = touchMetaCanonical(
-    App,
-    { source: 'first-touch' },
-    { allowRootStorePatch: true }
-  );
+  const first = touchMetaCanonical(App, { source: 'first-touch' }, { allowRootStorePatch: true });
 
   metaNamespace.touch = ensureMetaActionsNamespace({ meta: {} }).touch;
-  const second = touchMetaCanonical(
-    App,
-    { source: 'second-touch' },
-    { allowRootStorePatch: true }
-  );
+  const second = touchMetaCanonical(App, { source: 'second-touch' }, { allowRootStorePatch: true });
 
   metaNamespace.touch = (meta?: AnyRecord) => {
     calls.push({ op: 'meta.touch:third', meta });
     return { via: 'meta.touch:third' };
   };
-  const third = touchMetaCanonical(
-    App,
-    { source: 'third-touch' },
-    { allowRootStorePatch: true }
-  );
+  const third = touchMetaCanonical(App, { source: 'third-touch' }, { allowRootStorePatch: true });
 
   assert.deepEqual(first, { via: 'meta.touch:first' });
   assert.deepEqual(second, { via: 'store.patch' });
@@ -476,7 +464,7 @@ test('[slice-write-access] dispatchCanonicalPatchPayload uses explicit meta touc
   assert.deepEqual(calls, [{ op: 'meta.touch', meta: { source: 'touch' } }]);
 });
 
-test('[slice-write-access] dispatchCanonicalPatchPayload treats root action patch as terminal when it returns void', () => {
+test('[slice-write-access] dispatchCanonicalPatchPayload falls through from root action patch to root store patch when action returns undefined', () => {
   const calls: AnyRecord[] = [];
   const App = {
     actions: {
@@ -496,19 +484,24 @@ test('[slice-write-access] dispatchCanonicalPatchPayload treats root action patc
   const out = dispatchCanonicalPatchPayload(
     App,
     { ui: { activeTab: 'doors' }, config: { width: 120 } },
-    { source: 'root-action' },
+    { source: 'root-fallback' },
     {
       allowRootActionPatch: true,
       allowRootStorePatch: true,
     }
   );
 
-  assert.equal(out, undefined);
+  assert.deepEqual(out, { via: 'store.patch' });
   assert.deepEqual(calls, [
     {
       op: 'actions.patch',
       patch: { ui: { activeTab: 'doors' }, config: { width: 120 } },
-      meta: { source: 'root-action' },
+      meta: { source: 'root-fallback' },
+    },
+    {
+      op: 'store.patch',
+      patch: { ui: { activeTab: 'doors' }, config: { width: 120 } },
+      meta: { source: 'root-fallback' },
     },
   ]);
 });
@@ -741,12 +734,7 @@ test('[slice-write-access] dispatchCanonicalPatchPayload skips stub meta.touch a
     },
   } satisfies AnyRecord;
 
-  const out = dispatchCanonicalPatchPayload(
-    App,
-    {},
-    { source: 'touch-stub' },
-    { allowRootStorePatch: true }
-  );
+  const out = dispatchCanonicalPatchPayload(App, {}, { source: 'touch-stub' }, { allowRootStorePatch: true });
   assert.deepEqual(out, { via: 'store.patch' });
   assert.deepEqual(calls, [{ op: 'store.patch', patch: {}, meta: { source: 'touch-stub' } }]);
 });
@@ -929,11 +917,7 @@ test('[slice-write-access] canonical dispatch fails closed on empty single-slice
   } satisfies AnyRecord;
 
   assert.equal(
-    hasCanonicalPatchDispatch(
-      App,
-      { ui: {} },
-      { allowRootActionPatch: true, allowRootStorePatch: true }
-    ),
+    hasCanonicalPatchDispatch(App, { ui: {} }, { allowRootActionPatch: true, allowRootStorePatch: true }),
     false
   );
   assert.equal(
@@ -1059,7 +1043,7 @@ test('[slice-write-access] getWriteAppLike/getWriteActions/getWriteStore stay al
   assert.equal(getWriteAppLike(App)?.store, nextStore);
 });
 
-test('[slice-write-access] touchMetaCanonical treats root action patch as terminal when namespace and store-meta seams are skipped', () => {
+test('[slice-write-access] touchMetaCanonical reuses the canonical root patch dispatch order when namespace and store-meta seams are skipped', () => {
   const calls: AnyRecord[] = [];
   const App = {
     actions: {
@@ -1084,7 +1068,7 @@ test('[slice-write-access] touchMetaCanonical treats root action patch as termin
 
   const out = touchMetaCanonical(
     App,
-    { source: 'touch:root-action' },
+    { source: 'touch:root-fallback' },
     {
       skipNamespaceTouch: true,
       allowRootActionPatch: true,
@@ -1092,9 +1076,10 @@ test('[slice-write-access] touchMetaCanonical treats root action patch as termin
     }
   );
 
-  assert.equal(out, undefined);
+  assert.deepEqual(out, { via: 'store.patch' });
   assert.deepEqual(calls, [
-    { op: 'actions.patch', patch: {}, meta: { source: 'touch:root-action' } },
+    { op: 'actions.patch', patch: {}, meta: { source: 'touch:root-fallback' } },
+    { op: 'store.patch', patch: {}, meta: { source: 'touch:root-fallback' } },
   ]);
 });
 

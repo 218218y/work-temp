@@ -12,7 +12,7 @@
 import { computeExternalDrawersOpsForModule } from './pure_api.js';
 import { DRAWER_DIMENSIONS } from '../../shared/wardrobe_dimension_tokens_shared.js';
 import { requireBuilderRenderOps } from '../runtime/builder_service_access.js';
-import { reportErrorViaPlatform } from '../runtime/platform_access.js';
+import { reportError } from '../runtime/errors.js';
 import { asRecord } from '../runtime/record.js';
 import type {
   UnknownRecord,
@@ -85,21 +85,8 @@ function isObjectRecord(value: unknown): value is UnknownRecord {
   return !!value && typeof value === 'object' && !Array.isArray(value);
 }
 
-function safeReportError(
-  App: AppContainer | null | undefined,
-  error: unknown,
-  meta: Record<string, unknown>
-): void {
-  try {
-    if (App && reportErrorViaPlatform(App, error, meta)) return;
-  } catch {
-    // ignore platform reporting errors
-  }
-  try {
-    console.warn('[WardrobePro][builder] external drawers pipeline warning:', meta, error);
-  } catch {
-    // ignore console failures in hostile runtimes
-  }
+function safeReportError(App: AppContainer, error: unknown, meta: Record<string, unknown>): void {
+  reportError(App, error, meta);
 }
 
 function asMutableDrawerOpList(ops: ExternalDrawersOpsLike): MutableExternalDrawerOpLike[] {

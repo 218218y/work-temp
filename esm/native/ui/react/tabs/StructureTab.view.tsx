@@ -56,7 +56,11 @@ function StructureTabInner(props: { active: boolean }) {
     commitCornerHeight,
     commitCornerDepth,
     toggleChestMode,
+    toggleChestCommode,
     setChestDrawersCount,
+    setChestCommodeMirrorHeight,
+    setChestCommodeMirrorWidth,
+    setChestCommodeMirrorWidthManual,
   } = useStructureTabCornerChestActions({
     app,
     meta,
@@ -72,6 +76,10 @@ function StructureTabInner(props: { active: boolean }) {
     isManualWidth: state.isManualWidth,
     baseType: state.baseType,
     preChestState: state.preChestState,
+    chestCommodeEnabled: state.chestCommodeEnabled,
+    chestCommodeMirrorHeightCm: state.chestCommodeMirrorHeightCm,
+    chestCommodeMirrorWidthCm: state.chestCommodeMirrorWidthCm,
+    chestCommodeMirrorWidthManual: state.chestCommodeMirrorWidthManual,
   });
 
   const dimensionsSectionVisible = !state.isLibraryMode && !state.isChestMode;
@@ -132,6 +140,7 @@ function StructureTabInner(props: { active: boolean }) {
         baseType={state.baseType}
         baseLegStyle={state.baseLegStyle}
         baseLegColor={state.baseLegColor}
+        basePlinthHeightCm={state.basePlinthHeightCm}
         baseLegHeightCm={state.baseLegHeightCm}
         baseLegWidthCm={state.baseLegWidthCm}
         isChestMode={state.isChestMode}
@@ -149,6 +158,7 @@ function StructureTabInner(props: { active: boolean }) {
         onSetBaseType={workflows.setBaseType}
         onSetBaseLegStyle={workflows.setBaseLegStyle}
         onSetBaseLegColor={workflows.setBaseLegColor}
+        onSetBasePlinthHeightCm={workflows.setBasePlinthHeightCm}
         onSetBaseLegHeightCm={workflows.setBaseLegHeightCm}
         onSetBaseLegWidthCm={workflows.setBaseLegWidthCm}
         onSetSlidingTracksColor={workflows.setSlidingTracksColor}
@@ -176,12 +186,20 @@ function StructureTabInner(props: { active: boolean }) {
       <StructureChestSection
         isChestMode={state.isChestMode}
         chestDrawersCount={state.chestDrawersCount}
+        chestCommodeEnabled={state.chestCommodeEnabled}
+        chestCommodeMirrorHeightCm={state.chestCommodeMirrorHeightCm}
+        chestCommodeMirrorWidthCm={state.chestCommodeMirrorWidthCm}
+        chestCommodeMirrorWidthManual={state.chestCommodeMirrorWidthManual}
         width={state.width}
         height={state.height}
         depth={state.depth}
         onToggleChestMode={toggleChestMode}
+        onToggleChestCommode={toggleChestCommode}
         onSetRaw={workflows.setRaw}
         onSetChestDrawersCount={setChestDrawersCount}
+        onSetChestCommodeMirrorHeight={setChestCommodeMirrorHeight}
+        onSetChestCommodeMirrorWidth={setChestCommodeMirrorWidth}
+        onSetChestCommodeMirrorWidthManual={setChestCommodeMirrorWidthManual}
       />
 
       <StructureLibrarySection

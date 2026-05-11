@@ -3,6 +3,10 @@ import { setManualWidth } from '../actions/room_actions.js';
 import {
   setCfgPreChestState,
   setUiBaseType,
+  setUiChestCommodeEnabled,
+  setUiChestCommodeMirrorHeightCm,
+  setUiChestCommodeMirrorWidthCm,
+  setUiChestCommodeMirrorWidthManual,
   setUiChestDrawersCount,
   setUiChestMode,
   setUiDepth,
@@ -28,8 +32,23 @@ import {
 import type { StructureTabCornerChestActionsArgs } from './structure_tab_corner_chest_actions_controller_contracts.js';
 import {
   normalizeStructureDimensionValue,
+  readStructureChestCommodeMirrorBounds,
   readStructureChestDrawersBounds,
 } from './structure_tab_dimension_constraints.js';
+
+function readDefaultCommodeMirrorWidthCm(width: unknown): number {
+  return (
+    normalizeStructureDimensionValue(width, readStructureChestCommodeMirrorBounds('width')) ??
+    CHEST_MODE_DIMENSIONS.activeDefaults.widthCm
+  );
+}
+
+function readDefaultCommodeMirrorHeightCm(value: unknown): number {
+  return (
+    normalizeStructureDimensionValue(value, readStructureChestCommodeMirrorBounds('height')) ??
+    CHEST_MODE_DIMENSIONS.commode.defaultMirrorHeightCm
+  );
+}
 
 export function createStructureTabChestActionsController(args: StructureTabCornerChestActionsArgs) {
   const toggleChestMode = (next: boolean) => {
@@ -37,16 +56,21 @@ export function createStructureTabChestActionsController(args: StructureTabCorne
 
     if (next) {
       const metaOn: ActionMetaLike = { source: 'react:structure:chest:on', immediate: true, noBuild: true };
+      const chestRawPatch: UnknownRecord = {
+        doors: CHEST_MODE_DIMENSIONS.activeDefaults.doorsCount,
+        width: CHEST_MODE_DIMENSIONS.activeDefaults.widthCm,
+        height: CHEST_MODE_DIMENSIONS.activeDefaults.heightCm,
+        depth: CHEST_MODE_DIMENSIONS.activeDefaults.depthCm,
+        chestDrawersCount: CHEST_MODE_DIMENSIONS.activeDefaults.drawersCount,
+      };
+      if (args.chestCommodeEnabled && !args.chestCommodeMirrorWidthManual) {
+        chestRawPatch.chestCommodeMirrorWidthCm = CHEST_MODE_DIMENSIONS.activeDefaults.widthCm;
+      }
+
       const uiPatch: UnknownRecord = {
         isChestMode: true,
         baseType: 'legs',
-        raw: {
-          doors: CHEST_MODE_DIMENSIONS.activeDefaults.doorsCount,
-          width: CHEST_MODE_DIMENSIONS.activeDefaults.widthCm,
-          height: CHEST_MODE_DIMENSIONS.activeDefaults.heightCm,
-          depth: CHEST_MODE_DIMENSIONS.activeDefaults.depthCm,
-          chestDrawersCount: CHEST_MODE_DIMENSIONS.activeDefaults.drawersCount,
-        },
+        raw: chestRawPatch,
       };
       commitStructureStatePatchWithRecompute({
         app: args.app,
@@ -86,6 +110,9 @@ export function createStructureTabChestActionsController(args: StructureTabCorne
           setUiHeight(args.app, CHEST_MODE_DIMENSIONS.activeDefaults.heightCm, metaOn);
           setUiDepth(args.app, CHEST_MODE_DIMENSIONS.activeDefaults.depthCm, metaOn);
           setUiChestDrawersCount(args.app, CHEST_MODE_DIMENSIONS.activeDefaults.drawersCount, metaOn);
+          if (args.chestCommodeEnabled && !args.chestCommodeMirrorWidthManual) {
+            setUiChestCommodeMirrorWidthCm(args.app, CHEST_MODE_DIMENSIONS.activeDefaults.widthCm, metaOn);
+          }
         },
         errorLine: 'L3293',
       });
@@ -174,8 +201,128 @@ export function createStructureTabChestActionsController(args: StructureTabCorne
     });
   };
 
+  const toggleChestCommode = (nextOn: boolean) => {
+    const actionMeta: ActionMetaLike = {
+      source: nextOn ? 'react:structure:chest:commode:on' : 'react:structure:chest:commode:off',
+      immediate: true,
+      noBuild: true,
+    };
+    const mirrorHeight = readDefaultCommodeMirrorHeightCm(args.chestCommodeMirrorHeightCm);
+    const mirrorWidthManual = !!args.chestCommodeMirrorWidthManual;
+    const mirrorWidth = readDefaultCommodeMirrorWidthCm(
+      nextOn && !mirrorWidthManual
+        ? args.width
+        : args.chestCommodeMirrorWidthCm || args.width || CHEST_MODE_DIMENSIONS.activeDefaults.widthCm
+    );
+    const uiPatch: UnknownRecord = nextOn
+      ? {
+          chestCommodeEnabled: true,
+          raw: {
+            chestCommodeMirrorHeightCm: mirrorHeight,
+            chestCommodeMirrorWidthCm: mirrorWidth,
+            chestCommodeMirrorWidthManual: mirrorWidthManual,
+          },
+        }
+      : { chestCommodeEnabled: false };
+
+    commitStructureStatePatchWithRecompute({
+      app: args.app,
+      source: actionMeta.source || 'react:structure:chest:commode',
+      meta: actionMeta,
+      uiPatch,
+      statePatch: { ui: uiPatch },
+      mutate: () => {
+        setUiChestCommodeEnabled(args.app, nextOn, actionMeta);
+        if (!nextOn) return;
+        setUiChestCommodeMirrorHeightCm(args.app, mirrorHeight, actionMeta);
+        setUiChestCommodeMirrorWidthCm(args.app, mirrorWidth, actionMeta);
+        setUiChestCommodeMirrorWidthManual(args.app, mirrorWidthManual, actionMeta);
+      },
+      errorLine: 'L3424',
+    });
+  };
+
+  const setChestCommodeMirrorHeight = (nn: number) => {
+    const next = readDefaultCommodeMirrorHeightCm(nn);
+    const actionMeta: ActionMetaLike = {
+      source: 'react:structure:chest:commode:mirror-height',
+      immediate: true,
+      noBuild: true,
+    };
+    const uiPatch: UnknownRecord = { raw: { chestCommodeMirrorHeightCm: next } };
+    commitStructureStatePatchWithRecompute({
+      app: args.app,
+      source: 'react:structure:chest:commode:mirror-height',
+      meta: actionMeta,
+      uiPatch,
+      statePatch: { ui: uiPatch },
+      mutate: () => {
+        setUiChestCommodeMirrorHeightCm(args.app, next, actionMeta);
+      },
+      errorLine: 'L3447',
+    });
+  };
+
+  const setChestCommodeMirrorWidth = (nn: number) => {
+    const next = readDefaultCommodeMirrorWidthCm(nn);
+    const actionMeta: ActionMetaLike = {
+      source: 'react:structure:chest:commode:mirror-width',
+      immediate: true,
+      noBuild: true,
+    };
+    const uiPatch: UnknownRecord = {
+      raw: { chestCommodeMirrorWidthCm: next, chestCommodeMirrorWidthManual: true },
+    };
+    commitStructureStatePatchWithRecompute({
+      app: args.app,
+      source: 'react:structure:chest:commode:mirror-width',
+      meta: actionMeta,
+      uiPatch,
+      statePatch: { ui: uiPatch },
+      mutate: () => {
+        setUiChestCommodeMirrorWidthCm(args.app, next, actionMeta);
+        setUiChestCommodeMirrorWidthManual(args.app, true, actionMeta);
+      },
+      errorLine: 'L3469',
+    });
+  };
+
+  const setChestCommodeMirrorWidthManual = (nextManual: boolean) => {
+    const manual = !!nextManual;
+    const actionMeta: ActionMetaLike = {
+      source: manual
+        ? 'react:structure:chest:commode:mirror-width:manual'
+        : 'react:structure:chest:commode:mirror-width:auto',
+      immediate: true,
+      noBuild: true,
+    };
+    const autoWidth = readDefaultCommodeMirrorWidthCm(
+      args.width || CHEST_MODE_DIMENSIONS.activeDefaults.widthCm
+    );
+    const rawPatch: UnknownRecord = manual
+      ? { chestCommodeMirrorWidthManual: true }
+      : { chestCommodeMirrorWidthManual: false, chestCommodeMirrorWidthCm: autoWidth };
+    const uiPatch: UnknownRecord = { raw: rawPatch };
+    commitStructureStatePatchWithRecompute({
+      app: args.app,
+      source: actionMeta.source || 'react:structure:chest:commode:mirror-width-mode',
+      meta: actionMeta,
+      uiPatch,
+      statePatch: { ui: uiPatch },
+      mutate: () => {
+        setUiChestCommodeMirrorWidthManual(args.app, manual, actionMeta);
+        if (!manual) setUiChestCommodeMirrorWidthCm(args.app, autoWidth, actionMeta);
+      },
+      errorLine: 'L3487',
+    });
+  };
+
   return {
     toggleChestMode,
+    toggleChestCommode,
     setChestDrawersCount,
+    setChestCommodeMirrorHeight,
+    setChestCommodeMirrorWidth,
+    setChestCommodeMirrorWidthManual,
   };
 }

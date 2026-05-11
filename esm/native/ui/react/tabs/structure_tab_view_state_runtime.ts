@@ -6,8 +6,10 @@ import {
   normalizeBaseLegStyle,
   normalizeBaseLegWidthCm,
 } from '../../../features/base_leg_support.js';
+import { normalizeBasePlinthHeightCm } from '../../../features/base_plinth_support.js';
 import {
   DEFAULT_CHEST_DRAWERS_COUNT,
+  CHEST_MODE_DIMENSIONS,
   DEFAULT_CORNER_DOORS,
   DEFAULT_CORNER_WIDTH,
   DEFAULT_HEIGHT,
@@ -93,9 +95,21 @@ export function readStructureTabBaseUiState(ui: StructureTabUiSnapshot): Structu
     depth,
     doors: readUiRawIntFromSnapshot(ui, 'doors', DEFAULT_HINGED_DOORS),
     chestDrawersCount: readUiRawIntFromSnapshot(ui, 'chestDrawersCount', DEFAULT_CHEST_DRAWERS_COUNT),
+    chestCommodeMirrorHeightCm: readUiRawNumberFromSnapshot(
+      ui,
+      'chestCommodeMirrorHeightCm',
+      CHEST_MODE_DIMENSIONS.commode.defaultMirrorHeightCm
+    ),
+    chestCommodeMirrorWidthCm: readUiRawNumberFromSnapshot(
+      ui,
+      'chestCommodeMirrorWidthCm',
+      readUiRawNumberFromSnapshot(ui, 'width', DEFAULT_WIDTH)
+    ),
+    chestCommodeMirrorWidthManual: !!readUiRawScalarFromSnapshot(ui, 'chestCommodeMirrorWidthManual'),
     baseType: normalizeStructureTabBaseType(ui.baseType),
     baseLegStyle: normalizeBaseLegStyle(ui.baseLegStyle),
     baseLegColor: normalizeBaseLegColor(ui.baseLegColor),
+    basePlinthHeightCm: normalizeBasePlinthHeightCm(ui.basePlinthHeightCm),
     baseLegHeightCm: normalizeBaseLegHeightCm(ui.baseLegHeightCm),
     baseLegWidthCm: normalizeBaseLegWidthCm(ui.baseLegWidthCm, getDefaultBaseLegWidthCm(ui.baseLegStyle)),
     slidingTracksColor: normalizeStructureTabSlidingTracksColor(ui.slidingTracksColor),
@@ -109,6 +123,7 @@ export function readStructureTabBaseUiState(ui: StructureTabUiSnapshot): Structu
     cornerHeight: asFiniteNumber(ui.cornerHeight, DEFAULT_HEIGHT),
     cornerDepth: asFiniteNumber(ui.cornerDepth, depth),
     isChestMode: !!ui.isChestMode,
+    chestCommodeEnabled: !!ui.chestCommodeEnabled,
   };
 }
 

@@ -58,6 +58,8 @@ export function commitStructureRawValue(args: {
   doors: number;
   structureSelectRaw: string;
   singleDoorPosRaw: string;
+  chestCommodeEnabled?: boolean;
+  chestCommodeMirrorWidthManual?: boolean;
 }): void {
   const {
     app,
@@ -74,6 +76,8 @@ export function commitStructureRawValue(args: {
     doors,
     structureSelectRaw,
     singleDoorPosRaw,
+    chestCommodeEnabled = false,
+    chestCommodeMirrorWidthManual = false,
   } = args;
   const perfMetricName = readStructurePerfMetricName(key);
   const runWithPerf = (task: () => void): void => {
@@ -124,7 +128,7 @@ export function commitStructureRawValue(args: {
         setUiCellDimsDepth(app, value, meta.uiOnlyImmediate('react:structure:cellDimsDepth'));
       }
     } catch (err) {
-      structureTabReportNonFatal('commitStructureRawValue.cellDims', err);
+      structureTabReportNonFatal(app, 'commitStructureRawValue.cellDims', err);
     }
     return;
   }
@@ -148,7 +152,7 @@ export function commitStructureRawValue(args: {
         },
       });
     } catch (err) {
-      structureTabReportNonFatal('commitStructureRawValue.stackSplitLowerDoors', err);
+      structureTabReportNonFatal(app, 'commitStructureRawValue.stackSplitLowerDoors', err);
     }
     return;
   }
@@ -165,7 +169,7 @@ export function commitStructureRawValue(args: {
           treatManualWidth = false;
         }
       } catch (err) {
-        structureTabReportNonFatal('commitStructureRawValue.autoFixManualWidth', err);
+        structureTabReportNonFatal(app, 'commitStructureRawValue.autoFixManualWidth', err);
       }
     }
 
@@ -248,7 +252,7 @@ export function commitStructureRawValue(args: {
         },
       });
     } catch (err) {
-      structureTabReportNonFatal('commitStructureRawValue.doors', err);
+      structureTabReportNonFatal(app, 'commitStructureRawValue.doors', err);
     }
     return;
   }
@@ -260,7 +264,12 @@ export function commitStructureRawValue(args: {
         ? { stackSplitLowerWidthManual: true }
         : {};
 
-  const uiPatch = buildRawUiPatch({ [key]: value, ...extraLowerManual });
+  const extraChestCommodeAuto: StructureRawPatch =
+    key === 'width' && isChestMode && chestCommodeEnabled && !chestCommodeMirrorWidthManual
+      ? { chestCommodeMirrorWidthCm: value }
+      : {};
+
+  const uiPatch = buildRawUiPatch({ [key]: value, ...extraLowerManual, ...extraChestCommodeAuto });
   const source = `react:structure:${key}`;
   const m = meta.noBuildImmediate(source);
   const statePatch: Record<string, unknown> = { ui: uiPatch };
@@ -292,6 +301,6 @@ export function commitStructureRawValue(args: {
       });
     });
   } catch (err) {
-    structureTabReportNonFatal('commitStructureRawValue.scalar', err);
+    structureTabReportNonFatal(app, 'commitStructureRawValue.scalar', err);
   }
 }

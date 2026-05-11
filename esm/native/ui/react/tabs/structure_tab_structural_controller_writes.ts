@@ -3,6 +3,7 @@ import {
   setUiBaseLegHeightCm,
   setUiBaseLegWidthCm,
   setUiBaseLegStyle,
+  setUiBasePlinthHeightCm,
   setUiBaseType,
   setUiSlidingTracksColor,
 } from '../actions/store_actions.js';
@@ -30,6 +31,7 @@ export function createStructureTabStructuralWriteController(
   | 'setBaseType'
   | 'setBaseLegStyle'
   | 'setBaseLegColor'
+  | 'setBasePlinthHeightCm'
   | 'setBaseLegHeightCm'
   | 'setBaseLegWidthCm'
   | 'setSlidingTracksColor'
@@ -78,6 +80,8 @@ export function createStructureTabStructuralWriteController(
         doors: args.doors,
         structureSelectRaw: args.structureSelectRaw,
         singleDoorPosRaw: args.singleDoorPosRaw,
+        chestCommodeEnabled: args.chestCommodeEnabled,
+        chestCommodeMirrorWidthManual: args.chestCommodeMirrorWidthManual,
       });
     },
 
@@ -136,6 +140,13 @@ export function createStructureTabStructuralWriteController(
 
     setBaseLegColor(next) {
       setUiBaseLegColor(args.app, next, { source: 'react:structure:baseLegColor', immediate: true });
+    },
+
+    setBasePlinthHeightCm(next) {
+      setUiBasePlinthHeightCm(args.app, next, {
+        source: 'react:structure:basePlinthHeightCm',
+        immediate: true,
+      });
     },
 
     setBaseLegHeightCm(next) {
